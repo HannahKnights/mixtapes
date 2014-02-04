@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140204120800) do
 
   create_table "mixtapes", force: true do |t|
     t.string   "title"
-    t.text     "song1"
+    t.text     "song 1"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

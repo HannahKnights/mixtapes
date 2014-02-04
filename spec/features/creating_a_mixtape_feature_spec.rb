@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "creating a mixtape" do 
 
   before do
-    user=create(:user)
+    user = create(:user)
+    
     login_as user, scope: :user
   end
 
