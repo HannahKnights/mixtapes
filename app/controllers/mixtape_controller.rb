@@ -1,0 +1,2 @@
+class MixtapeController < ApplicationController
+end
