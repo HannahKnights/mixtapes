@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 
-describe 'click login via facebook' do
+describe 'logging in' do
 
   before do
     user = create(:user)
@@ -11,16 +11,17 @@ describe 'click login via facebook' do
       provider: 'facebook',
       uid: user.uid,
       info: {
-        email: user.email
+        email: user.email,
+        name: user.name,
+        location: user.location
       }
     }
   end
 
-  it 'should login a user' do
+  it 'a user can log in via Facebook' do
 
     visit '/users/sign_up'
     click_link 'Sign in with Facebook'
-
     expect('Signed in successfully.')
 
   end
