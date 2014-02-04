@@ -21,7 +21,7 @@ describe 'click login via facebook' do
     visit '/users/sign_up'
     click_link 'Sign in with Facebook'
 
-    page.should display_flash_message('Signed in successfully.')
+    expect('Signed in successfully.')
 
   end
 
