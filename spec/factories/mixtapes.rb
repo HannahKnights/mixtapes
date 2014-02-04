@@ -3,6 +3,5 @@
 FactoryGirl.define do
   factory :mixtape do
     title "MyString"
-    song1 "MyText"
   end
 end
