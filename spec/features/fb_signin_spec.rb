@@ -26,4 +26,3 @@ describe 'click login via facebook' do
   end
 
 end
-
