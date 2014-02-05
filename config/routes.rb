@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'omniauth_callbacks'} 
-  root "mixtapes#index"
-  resources :mixtapes
+  root "welcome#index"
+  resources :mixtapes do
+    resources :tracks
+  end
   
 
 
