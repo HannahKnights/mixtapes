@@ -29,4 +29,7 @@ class User < ActiveRecord::Base
     ((Time.now - dob)/(60*60*24*365)).floor
   end  
 
+  def update_with_password(params, *options)
+    update_attributes(params, *options)
+  end
 end
