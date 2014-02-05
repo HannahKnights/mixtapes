@@ -33,6 +33,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.5)
     arel (5.0.0)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
@@ -88,6 +89,10 @@ GEM
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
+    koala (1.8.0)
+      addressable
+      faraday
+      multi_json
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -205,6 +210,7 @@ DEPENDENCIES
   heroku_secrets!
   jbuilder (~> 1.2)
   jquery-rails
+  koala
   omniauth-facebook
   pg
   rails (= 4.1.0.beta1)

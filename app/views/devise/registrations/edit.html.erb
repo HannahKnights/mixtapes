@@ -12,10 +12,15 @@
   <div><%= f.label :email %><br />
   <%= f.text_field :email %></div>
 
+  <div>
+  <% resource.photos.each do |photo| %>
+    <%= image_tag photo.image_url, class: 'profile_picture' %>
+  <% end %></div>
 
-  <div><%= f.label :image_url %> <br />
+  <!-- <div><%= f.label :image_url %> <br />
   <%= f.text_field :image_url %></div>
-
+ -->
+ 
   <div><%= f.submit "Update" %></div>
 <% end %>
 
