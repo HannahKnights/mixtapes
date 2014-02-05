@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :photos
 
   def self.find_for_facebook_oauth(auth)
+
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       unless user.persisted?
         #Creating a user from fb details
@@ -20,7 +21,8 @@ class User < ActiveRecord::Base
         user.birthday = auth.extra.raw_info.birthday
         user.location = auth.info.location
         user.auth_token = auth.credentials.token
-        # user.image_url = auth.info.image
+        #A litle conversion... should I make this a method elsewhere?
+        user.male = (auth.extra.raw_info.gender == 'male' ? true : false)
         user.save!
         #Creating a profile image from fb image_url
         profile_image = Photo.create
@@ -46,6 +48,7 @@ class User < ActiveRecord::Base
     # profile = @graph.get_connections("me", "music")
     # raise profile.inspect
   end
+
 
   def age
     dob = self.birthday
