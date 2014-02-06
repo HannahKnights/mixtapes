@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   has_one :mixtape
-
   has_many :photos
 
   def self.find_for_facebook_oauth(auth)
@@ -34,19 +33,6 @@ class User < ActiveRecord::Base
 
     end
 
-    # puts '>>> id of user'
-    # puts id
-    # user = User.last
-    # puts '>>> id user.last'
-    # puts user.id
-
-    # # raise auth[:credentials][:token]
-
-    # oauth_access_token = auth[:credentials][:token]
-    # @graph = Koala::Facebook::API.new(oauth_access_token)
-
-    # profile = @graph.get_connections("me", "music")
-    # raise profile.inspect
   end
 
 
@@ -74,13 +60,15 @@ class User < ActiveRecord::Base
   def profile_pictures
     graph = Koala::Facebook::API.new(self.auth_token)
     albums = graph.get_connections("me", "albums")
+    albums
     pp = []
     albums.each do |alb|
       alb['name'] == 'Profile Pictures' ?  (pp << alb) : nil
      end
+    pp
     album_id = pp[0]['id']
     # pp = graph.get_connections(album['ALBUM_ID'], "photos"])
-    photos = graph.get_connections('me', 'album'[album_id], 'photos')
+    photos = graph.get_connections("#{album_id}", 'photos')
     photos
   end
 
