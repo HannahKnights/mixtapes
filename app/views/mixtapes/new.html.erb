@@ -1,1 +1,6 @@
 <%= render 'form', button_text: 'Create Mixtape' %>
+
+<%= form_for @track, remote: true do |track| %>
+  <%= track.text_field :artist, placeholder: 'Enter artist' %>
+  <%= track.submit 'Copy track to mixtape' %>
+<% end %>
