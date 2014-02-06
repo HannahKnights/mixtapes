@@ -9,14 +9,20 @@
   <%= form.button 'Add Track to Mixtape' %>
 <% end %>
 
-<br>
-<p></p>
 <%= render 'form', button_text: 'Create Mixtape' %>
-  
-  <h3><%= @mixtape.id %> <%= @mixtape.title %></h3>
 
-  <h4 class='artist_name'>Artist name goes here</h4>
-  <h4 class='song_title'>Song name goes here</h4>
+<h3><%= @mixtape.id %> <%= @mixtape.title %></h3>
+<h3 class='artist_name'>{{artist}}</h3>
+<h3 class='song_title'>{{song}}</h3>
+
+
+<div class="tracklisting">
+    <script type='text/template' id='playlist-template'>
+      <h3>{{artist}}</h3>
+      <h3>{{song}}</h3>
+    </script>
+</div>  
+
 
 
 

@@ -55,6 +55,7 @@ gem 'haml-rails'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 
+gem 'mustache-js-rails'
 gem 'websocket-rails'
 
 group :development, :test do

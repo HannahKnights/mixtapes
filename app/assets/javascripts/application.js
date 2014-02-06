@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require mustache
+//= require jquery.mustache
 //= require websocket_rails/main
 //= require_tree .
