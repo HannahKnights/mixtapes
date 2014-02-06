@@ -1,22 +1,14 @@
 <h3>Add A Song</h3>
-<%= form_for [@mixtape, @track] do |form| %>
-  <%= form.label :artist %>
-  <%= form.text_field :artist %>
-<br>
-  <%= form.label :song %>
-  <%= form.text_field :song %>
+<%= render 'add_track_form' %>
 
-  <%= form.button 'Add Track to Mixtape' %>
-<% end %>
+<%= render 'mixtape_name_form', button_text: 'Create Mixtape' %>
 
-<%= render 'form', button_text: 'Create Mixtape' %>
-
-<h3><%= @mixtape.id %> <%= @mixtape.title %></h3>
+<h3>{{title}}</h3>
 
 <div class="track-listing">
 </div>  
 
 <script type='text/template' id='playlist-template'>
-  <h3 class='artist'>{{artist}}</h3>
-  <h3>{{song}}</h3>
+  <h3>{{song}}</h3> <h4>{{artist}}</h4>
+  
 </script>

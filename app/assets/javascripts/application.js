@@ -16,4 +16,7 @@
 //= require mustache
 //= require jquery.mustache
 //= require websocket_rails/main
+//= require angular
 //= require_tree .
+
+angular.module('mixtapes',[])

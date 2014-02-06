@@ -15,4 +15,11 @@ class TracksController < ApplicationController
     render json: @track
   end
 
+  def destroy
+    @mixtape = Mixtape.find params[:mixtape_id]
+    @track = Track.find params[:id]
+    @track.destroy
+    redirect_to edit_mixtape_path @mixtape
+  end
+
 end
