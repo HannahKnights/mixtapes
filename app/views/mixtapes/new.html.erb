@@ -12,18 +12,11 @@
 <%= render 'form', button_text: 'Create Mixtape' %>
 
 <h3><%= @mixtape.id %> <%= @mixtape.title %></h3>
-<h3 class='artist_name'>{{artist}}</h3>
-<h3 class='song_title'>{{song}}</h3>
 
-
-<div class="tracklisting">
-    <script type='text/template' id='playlist-template'>
-      <h3>{{artist}}</h3>
-      <h3>{{song}}</h3>
-    </script>
+<div class="track-listing">
 </div>  
 
-
-
-
-
+<script type='text/template' id='playlist-template'>
+  <h3 class='artist'>{{artist}}</h3>
+  <h3>{{song}}</h3>
+</script>

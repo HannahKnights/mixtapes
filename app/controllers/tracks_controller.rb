@@ -12,7 +12,7 @@ class TracksController < ApplicationController
     @track.mixtapes << @mixtape
 
     @track.save
-    render json: @track.to_json
+    render json: @track
   end
 
 end
