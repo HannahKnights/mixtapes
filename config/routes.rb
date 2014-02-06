@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'omniauth_callbacks'} 
-  
-  root "mixtapes#index"
+
+  root "welcome#index"
   
   resources :mixtapes do
     resources :tracks
   end
+  
+  post "/mixtapes/:mixtape_id/tracks/:id(.:format)"    =>  "tracks#destroy"
+  
+  # delete "/mixtapes/:id/delete_track/:track_id" => "mixtapes#delete_track"
   
 
 

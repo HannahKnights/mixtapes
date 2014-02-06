@@ -35,7 +35,6 @@ gem 'sdoc',          group: :doc, require: false
 gem 'spring',        group: :development
 
 gem 'devise'
-
 gem 'omniauth-facebook'
 
 gem 'heroku_secrets', :git => 'https://github.com/alexpeattie/heroku_secrets'
@@ -54,10 +53,16 @@ gem 'heroku_secrets', :git => 'https://github.com/alexpeattie/heroku_secrets'
 
 gem 'haml-rails'
 
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
+
+gem 'mustache-js-rails'
+gem 'websocket-rails'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'poltergeist'
   gem 'thin'
   gem 'factory_girl_rails'
   gem 'poltergeist'

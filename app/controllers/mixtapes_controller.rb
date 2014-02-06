@@ -1,10 +1,10 @@
 class MixtapesController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :mixtape_must_be_unique, only: [:new, :create]
+  # before_action :authenticate_user!
+  # before_action :mixtape_must_be_unique, only: [:new, :create]
 
   def new
-    @mixtape = Mixtape.new
+    @mixtape = Mixtape.create
     @track = Track.new
   end
 
@@ -23,17 +23,27 @@ class MixtapesController < ApplicationController
     @mixtape = Mixtape.find params[:id]
   end
 
+  def delete_track
+    mixtape = Mixtape.find params[:id]
+    puts mixtape
+    track = mixtape.tracks.find params[:track_id]
+    render 'new'
+  end
+
   def index
     @mixtapes = Mixtape.all 
   end
 
   def edit
     @mixtape = Mixtape.find params[:id]
+    # @tracks = @mixtape.tracks
+    @track = Track.new
   end
 
   def update
     @mixtape = Mixtape.find params[:id]
-    @mixtape.update params[:mixtape].permit(:title)
+    @mixtape.user = current_user
+    @mixtape.update params[:mixtape].permit(:title, :user)
     redirect_to '/mixtapes'
   end
 

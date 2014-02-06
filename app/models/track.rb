@@ -1,5 +1,3 @@
 class Track < ActiveRecord::Base
-
-  has_many :mixtapes
-  
+  has_and_belongs_to_many :mixtapes
 end

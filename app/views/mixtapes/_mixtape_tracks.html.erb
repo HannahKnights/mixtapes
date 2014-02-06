@@ -1,0 +1,6 @@
+<ul>
+  <% @mixtape.tracks.each do |track| %>
+  <li><%=track.artist%> - <%=track.song%></li>
+  <%= link_to 'Delete Track', mixtape_track_path(@mixtape, track), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</ul>

@@ -6,8 +6,5 @@
   <h2>
   <%= mixtape.title %>
   </h2>
-  <%= button_to 'Edit Title', edit_mixtape_path(mixtape), method: 'get' %>
-  <%= link_to 'Add tracks', new_mixtape_track_path(mixtape) %>
+  <%= button_to 'Edit Mixtape', edit_mixtape_path(mixtape), method: 'get' %> 
 <% end %>
-<br/>
-<%= link_to 'New mixtape', new_mixtape_path %>
