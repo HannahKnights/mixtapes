@@ -60,4 +60,5 @@ group :development, :test do
   gem 'capybara'
   gem 'thin'
   gem 'factory_girl_rails'
+  gem 'poltergeist'
 end
