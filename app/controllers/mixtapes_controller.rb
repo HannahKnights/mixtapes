@@ -1,7 +1,7 @@
 class MixtapesController < ApplicationController
 
   # before_action :authenticate_user!
-  # before_action :mixtape_must_be_unique, only: [:new, :create]
+  before_action :mixtape_must_be_unique, only: [:new, :create]
 
   def new
     @mixtape = Mixtape.create
