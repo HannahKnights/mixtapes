@@ -19,3 +19,8 @@
   width: 200px;
   height: 200px;
 }
+
+.fb_picture {
+  width: 300px;
+  height: auto;
+}
