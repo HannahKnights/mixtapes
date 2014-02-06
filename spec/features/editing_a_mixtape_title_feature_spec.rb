@@ -12,7 +12,7 @@ describe 'editing a mixtape' do
 
   it "should let a user edit their own mixtape" do
     visit '/mixtapes'
-    click_button 'Edit Title'
+    click_button 'Edit Mixtape'
     fill_in 'Title', with: 'A new title'
     click_button 'Save Changes'
 
