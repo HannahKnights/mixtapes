@@ -1,8 +1,18 @@
 <h3>Add More Tracks</h3>
 
-
+<%= render 'add_track_form' %>
 
 <%= render 'mixtape_name_form', button_text: 'Save Changes' %>
 
 <h1>{{title}}</h1>
-<%= render 'tracks/tracks' %>
+
+
+<%= render 'mixtape_tracks' %>
+
+<div class="track-listing">
+</div>  
+
+<script type='text/template' id='playlist-template'>
+  <h3>{{song}}</h3> <h4>{{artist}}</h4>
+
+</script>

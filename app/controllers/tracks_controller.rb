@@ -18,8 +18,17 @@ class TracksController < ApplicationController
   def destroy
     @mixtape = Mixtape.find params[:mixtape_id]
     @track = Track.find params[:id]
-    @track.destroy
-    redirect_to edit_mixtape_path @mixtape
+    @mixtape.tracks.delete(@track)
+    render json: { status: 'success' }
+  end
+
+  def update
+    @mixtape = Mixtape.find params[:id]
+    @track = Track.new(params[:track].permit(:artist, :song))
+    @track.mixtapes << @mixtape
+
+    @track.save
+    render json: @track
   end
 
 end

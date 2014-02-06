@@ -23,12 +23,21 @@ class MixtapesController < ApplicationController
     @mixtape = Mixtape.find params[:id]
   end
 
+  def delete_track
+    mixtape = Mixtape.find params[:id]
+    puts mixtape
+    track = mixtape.tracks.find params[:track_id]
+    render 'new'
+  end
+
   def index
     @mixtapes = Mixtape.all 
   end
 
   def edit
     @mixtape = Mixtape.find params[:id]
+    # @tracks = @mixtape.tracks
+    @track = Track.new
   end
 
   def update
