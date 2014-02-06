@@ -13,29 +13,38 @@
   <%= f.text_field :email %></div>
 
   <h3>Current Profile Picture</h3>
-  <div>
+  
   <% resource.photos.each do |photo| %>
-    <%= image_tag photo.image_url, class: 'profile_picture' %>
-  <% end %></div>
+  <div>
+    <%= link_to(photos_path(id: photo.id), method: :delete, :remote => true)  do %>
+      <%= image_tag photo.image_url, class: 'profile_picture' %>
+    <% end %>
+  </div>
+  <% end %>
 
   <h3>Pick a Picture</h3>
 
 
   <% resource.profile_pictures.each do |photo| %>
     <div>
-    <%= image_tag photo['images'][0]['source'], class: 'fb_picture' %>
+    <%= link_to(photos_path(image_url: photo['images'][0]['source']), method: :post, :remote => true)  do %>
+      <%= image_tag photo['images'][0]['source'], class: 'fb_picture' %>
+    <% end %>
     </div>
   <% end %>
 
   <% resource.tagged_pictures.each do |photo| %>
     <div>
-    <%= image_tag photo, class: 'fb_picture' %>
+    <%= image_submit_tag photo, class: 'fb_picture' %>
     </div>
   <% end %>
 
 
   <div><%= f.submit "Update" %></div>
 <% end %>
+
+
+<%# button_to 'Update Pictures', new_user_photos_path(resource), :method => :get %>
 
 
 
@@ -50,13 +59,19 @@
 
 <script>
 
+  function saveImageToPhoto(imagesource) {
+
+    console.log( imagesource )
+
+  };
+
 
 $(window).load (function() {
 
 
   $('.fb_picture').click (function() { 
-    
-    console.log( $(this).attr('src') ) 
+
+    saveImageToPhoto( $(this).attr('src') ) 
 
   });
   
