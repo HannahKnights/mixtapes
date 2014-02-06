@@ -14,43 +14,65 @@
 
   <h3>Current Profile Picture</h3>
   
+  <div id='user-profile'>
+
   <% resource.photos.each do |photo| %>
-  <div>
-    <%= link_to(photos_path(id: photo.id), method: :delete, :remote => true)  do %>
-      <%= image_tag photo.image_url, class: 'profile_picture' %>
+
+    <div class='profile-pictures-container'>
+  
+    <%= link_to(photos_path(id: photo.id), method: :delete, :remote => true, class: 'image-deleter')  do %>
+      
+      <%= image_tag photo.image_url, class: 'profile-picture' %>
+    
     <% end %>
+
+    </div>
+ 
+  <% end %>
+
+ </div>
+
+ <button id='more_images'>Select from more images</button>
+
+  <div id='fb-selection'>
+
+    <h3>Pick a Picture</h3>
+
+    <% resource.profile_pictures.each do |photo| %>
+    
+    <div class='select-pictures-container'>
+    
+      <%= link_to(photos_path(image_url: photo['images'][0]['source']), method: :post, :remote => true, class: 'image-adder')  do %>
+
+        <%= image_tag photo['images'][0]['source'], class: 'fb_picture' %>
+      
+      <% end %>
+    
+    <% end %>
+
+    <% resource.tagged_pictures.each do |photo| %>
+      
+      <%= link_to(photos_path(image_url: photo), method: :post, :remote => true, class: 'image-adder') do %>
+        
+        <%= image_tag photo, class: 'fb_picture' %>
+      
+      <% end %>
+
+    </div>
+    
+    <% end %>
+  
   </div>
-  <% end %>
-
-  <h3>Pick a Picture</h3>
 
 
-  <% resource.profile_pictures.each do |photo| %>
-    <div>
-    <%= link_to(photos_path(image_url: photo['images'][0]['source']), method: :post, :remote => true)  do %>
-      <%= image_tag photo['images'][0]['source'], class: 'fb_picture' %>
-    <% end %>
-    </div>
-  <% end %>
-
-  <% resource.tagged_pictures.each do |photo| %>
-    <div>
-    <%= image_submit_tag photo, class: 'fb_picture' %>
-    </div>
-  <% end %>
-
-
-  <div><%= f.submit "Update" %></div>
+  <div>
+  <%= f.submit "Update" %>
+  </div>
 <% end %>
 
 
-<%# button_to 'Update Pictures', new_user_photos_path(resource), :method => :get %>
 
-
-
-
-
-<h3>Cancel my account</h3>
+<h4>Cancel my account</h4>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 
@@ -59,24 +81,26 @@
 
 <script>
 
-  function saveImageToPhoto(imagesource) {
 
-    console.log( imagesource )
+$(document).ready(function(){
 
-  };
+  $('#fb-selection').hide();
 
-
-$(window).load (function() {
-
-
-  $('.fb_picture').click (function() { 
-
-    saveImageToPhoto( $(this).attr('src') ) 
-
+  $('#more_images').click (function(event) {
+    event.preventDefault();
+    $('#fb-selection').slideDown();
   });
-  
-});
 
+  $('.image-deleter').on('ajax:complete', function() {
+    $(this).remove();
+  });
+
+  $('.image-adder').on('ajax:complete', function() {
+    $('#user-profile').append($(this));
+  });
+
+
+});
 
 
 </script>

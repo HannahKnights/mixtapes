@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   def tagged_pictures
     graph = Koala::Facebook::API.new(self.auth_token)
     albums = graph.get_connections("me", "photos")
-    albums.map {|image| image['source']}
+    albums.first(5).map {|image| image['source']}
   end
 
   def profile_pictures

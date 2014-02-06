@@ -12,8 +12,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find_by id: params[:id]
     @photo.destroy
-
-    redirect_to ('/users/edit')
+    render json: { status: 'success' }
   end
 
 end
