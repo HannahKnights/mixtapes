@@ -5,6 +5,7 @@ class MixtapesController < ApplicationController
 
   def new
     @mixtape = Mixtape.new
+    @track = Track.new
   end
 
   def create
