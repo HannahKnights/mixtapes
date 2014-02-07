@@ -34,7 +34,20 @@
 
  <button id='more_images'>Select from more images</button>
 
-  <div id='fb-selection'>
+
+  <div><%= f.submit "Update" %></div>
+<% end %>
+
+
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+
+<%= link_to "Back", :back %>
+
+
+  <div class='fb-selection'>
 
     <h3>Pick a Picture</h3>
 
@@ -64,19 +77,9 @@
   
   </div>
 
-
-  <div>
-  <%= f.submit "Update" %>
-  </div>
-<% end %>
+  
 
 
-
-<h4>Cancel my account</h4>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
-
-<%= link_to "Back", :back %>
 
 
 <script>
@@ -84,11 +87,12 @@
 
 $(document).ready(function(){
 
-  $('#fb-selection').hide();
+  $('.fb-selection').hide();
+
 
   $('#more_images').click (function(event) {
     event.preventDefault();
-    $('#fb-selection').slideDown();
+    $('.fb-selection').slideDown();
   });
 
   $('.image-deleter').on('ajax:complete', function() {
@@ -96,6 +100,7 @@ $(document).ready(function(){
   });
 
   $('.image-adder').on('ajax:complete', function() {
+    $(this).addClass('profile-picture');
     $('#user-profile').append($(this));
   });
 

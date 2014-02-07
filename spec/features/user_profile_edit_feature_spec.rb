@@ -6,18 +6,23 @@ require 'spec_helper'
 describe 'editing my profile page' do
 
   before do
+
     @user = create(:user)
 
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = {
-      provider: 'facebook',
-      uid: @user.uid,
-      info: {
-        email: @user.email,
-        name: @user.name,
-        location: @user.location
-      }
-    }
+    # OmniAuth.config.test_mode = true
+    # OmniAuth.config.mock_auth[:facebook] = {
+    #   provider: 'facebook',
+    #   uid: @user.uid,
+    #   info: {
+    #     email: @user.email,
+    #     name: @user.name,
+    #     location: @user.location,
+    #     name: @user.name
+    #   },
+    #   credentials: {
+    #     auth_token: @user.auth_token
+    #   }
+    # }
 
     login_as @user
 

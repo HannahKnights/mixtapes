@@ -23,7 +23,7 @@ describe User do
 
   it 'should know age through birthday' do
 
-    expect(@user.age).to eq 24
+    expect(@user.age).to eq 33
 
   end
 

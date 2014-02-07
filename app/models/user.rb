@@ -7,34 +7,46 @@ class User < ActiveRecord::Base
   has_one :mixtape
   has_many :photos
 
-  def self.find_for_facebook_oauth(auth)
 
+  def self.find_for_facebook_oauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       unless user.persisted?
-        #Creating a user from fb details
-        user.provider = auth.provider
-        user.uid = auth.uid
-        user.email = auth.info.email
-        user.password = Devise.friendly_token[0,20]
-        user.name = auth.info.name
-        user.birthday = auth.extra.raw_info.birthday
-        user.location = auth.info.location
-        user.auth_token = auth.credentials.token
-        #A litle conversion... should I make this a method elsewhere?
-        user.male = (auth.extra.raw_info.gender == 'male' ? true : false)
-        user.save!
-        #Creating a profile image from fb image_url
-        profile_image = Photo.create
-        profile_image.image_url = auth.info.image
-        profile_image.user_id = user.id        
-        profile_image.save!
-
+        new_user = user.profile_assignment(auth)
+        new_user.save!
+        new_user.profile_photo_assignment
+        new_user.recent_photo_assignment
       end
-
     end
-
   end
 
+  def profile_assignment(auth)
+    self.provider = auth.provider
+    self.uid = auth.uid
+    self.email = auth.info.email
+    self.password = Devise.friendly_token[0,20]
+    self.name = auth.info.name
+    self.birthday = auth.extra.raw_info.birthday
+    self.location = auth.info.location
+    self.auth_token = auth.credentials.token
+    self.male = (auth.extra.raw_info.gender == 'male' ? true : false)
+    self
+  end
+
+  def profile_photo_assignment
+    profile_pictures.each do |profile_picture|
+      new_photo = self.photos.create
+      new_photo.image_url = profile_picture
+      new_photo.save!
+    end
+  end
+
+  def recent_photo_assignment
+    tagged_pictures.each do |tagged_picture|
+      new_photo = self.photos.create
+      new_photo.image_url = tagged_picture
+      new_photo.save!
+    end
+  end
 
   def age
     dob = self.birthday
@@ -54,26 +66,21 @@ class User < ActiveRecord::Base
   def tagged_pictures
     graph = Koala::Facebook::API.new(self.auth_token)
     albums = graph.get_connections("me", "photos")
-    albums.first(5).map {|image| image['source']}
+    albums.map {|image| image['source']}
   end
 
   def profile_pictures
     graph = Koala::Facebook::API.new(self.auth_token)
-    albums = graph.get_connections("me", "albums")
-    albums
-    pp = []
-    albums.each do |alb|
-      alb['name'] == 'Profile Pictures' ?  (pp << alb) : nil
+    profile_album = []
+    graph.get_connections("me", "albums").each do |album|
+      album['name'] == 'Profile Pictures' ?  (profile_album << album) : nil
      end
-    pp
-    album_id = pp[0]['id']
-    # pp = graph.get_connections(album['ALBUM_ID'], "photos"])
-    photos = graph.get_connections("#{album_id}", 'photos')
-    photos
+    profile_photos = graph.get_connections("#{profile_album[0]['id']}", 'photos')
+    profile_photos.map { |photo| photo['images'][0]['source']}
   end
-
 
   def update_with_password(params, *options)
     update_attributes(params, *options)
   end
+
 end
