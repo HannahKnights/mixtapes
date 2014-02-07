@@ -19,13 +19,6 @@
   </div><!--row -->
 </div> <!--container -->
 
-<br>
-<%= @mixtape.id %>
-<br>
-<%= @mixtape.tracks.inspect %>
-
 <script type='text/template' id='playlist-template'>
   <%= render 'track' %>
 </script>
-
-<%= link_to 'Show Tracks', mixtape_tracks_path(@mixtape) %>
