@@ -11,6 +11,7 @@ class MixtapesController < ApplicationController
       session[:mixtape_id] = @mixtape.id
     end
 
+    @tracks = @mixtape.tracks
     @track = Track.new
   end
 
@@ -40,9 +41,7 @@ class MixtapesController < ApplicationController
   end
 
   def edit
-    @mixtape = Mixtape.find params[:id]
-    # @tracks = @mixtape.tracks
-    @track = Track.new
+    redirect_to new_mixtape_path
   end
 
   def update

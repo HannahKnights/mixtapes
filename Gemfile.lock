@@ -115,6 +115,7 @@ GEM
     multi_json (1.8.4)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    mustache (0.99.5)
     mustache-js-rails (0.0.6)
       railties (>= 3.1)
     nokogiri (1.6.1)
@@ -240,6 +241,7 @@ DEPENDENCIES
   heroku_secrets!
   jbuilder (~> 1.2)
   jquery-rails
+  mustache
   mustache-js-rails
   omniauth-facebook
   pg

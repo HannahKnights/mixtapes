@@ -12,7 +12,7 @@ class TracksController < ApplicationController
     @track.mixtapes << @mixtape
 
     @track.save
-    render json: @track
+    render json: @track.as_json.merge(mixtape_id: @mixtape.id)
   end
 
   def destroy
@@ -21,6 +21,16 @@ class TracksController < ApplicationController
     @mixtape.tracks.delete(@track)
     render json: { status: 'success' }
   end
+
+  # def index
+  #   @mixtape = Mixtape.find params[:mixtape_id]
+  #   @tracks = Track.all
+
+  #   respond_to do |format|
+  #     format.html
+  #     format.json { render json: @tracks }
+  #   end
+  # end
 
   def update
     @mixtape = Mixtape.find params[:id]

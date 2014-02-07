@@ -8,14 +8,10 @@
 
 <h3>{{title}}</h3>
 <div class="track-listing">
+  <% @tracks.each do |track| %>
+    <%= render 'track', mustache: track.as_json %>
+  <% end %>
 </div>  
 <script type='text/template' id='playlist-template'>
-
-  <div class='track'>
-    <h3>{{song}}</h3> <h4>{{artist}}</h4>
-    {{id}}
-
-    <a class="delete-track" href="/mixtapes/<%= @mixtape.id %>/tracks/{{{id}}}">Delete</a>
-  </div>
-
+  <%= render 'track' %>
 </script>

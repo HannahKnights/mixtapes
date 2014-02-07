@@ -25,12 +25,12 @@ describe 'editing a mixtape' do
   context "Tracks" do
 
     it 'should have existing tracks' do
-      expect(page).to have_content "Sir Duke"
+      expect(page).to have_content "Brown Sugar"
     end
 
     it 'should allow a track to be deleted' do
       click_link "Delete"
-      expect(page).to_not have_content "Sir Duke"
+      expect(page).to_not have_content "Brown Sugar"
     end
 
     it 'should allow a track to be added' do
