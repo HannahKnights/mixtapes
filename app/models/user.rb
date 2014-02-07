@@ -33,9 +33,10 @@ class User < ActiveRecord::Base
   end
 
   def profile_photo_assignment
-    profile_pictures.each do |profile_picture|
+    profile_pictures.each_with_index do |profile_photo, index|
       new_photo = self.photos.create
-      new_photo.image_url = profile_picture
+      new_photo.image_url = profile_photo
+      index < 5 ? new_photo.profile_picture = true : nil
       new_photo.save!
     end
   end
@@ -46,6 +47,23 @@ class User < ActiveRecord::Base
       new_photo.image_url = tagged_picture
       new_photo.save!
     end
+  end
+
+  def profile_pictures
+    # raise self.inspect
+    graph = Koala::Facebook::API.new(self.auth_token)
+    profile_album = []
+    graph.get_connections("me", "albums").each do |album|
+      album['name'] == 'Profile Pictures' ?  (profile_album << album) : nil
+     end
+    profile_photos = graph.get_connections("#{profile_album[0]['id']}", 'photos')
+    profile_photos.map { |photo| photo['images'][0]['source']}
+  end
+
+  def tagged_pictures
+    graph = Koala::Facebook::API.new(self.auth_token)
+    albums = graph.get_connections("me", "photos")
+    albums.map {|image| image['source']}
   end
 
   def age
@@ -63,21 +81,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def tagged_pictures
-    graph = Koala::Facebook::API.new(self.auth_token)
-    albums = graph.get_connections("me", "photos")
-    albums.map {|image| image['source']}
-  end
-
-  def profile_pictures
-    graph = Koala::Facebook::API.new(self.auth_token)
-    profile_album = []
-    graph.get_connections("me", "albums").each do |album|
-      album['name'] == 'Profile Pictures' ?  (profile_album << album) : nil
-     end
-    profile_photos = graph.get_connections("#{profile_album[0]['id']}", 'photos')
-    profile_photos.map { |photo| photo['images'][0]['source']}
-  end
 
   def update_with_password(params, *options)
     update_attributes(params, *options)

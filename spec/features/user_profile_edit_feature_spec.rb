@@ -1,31 +1,39 @@
 require 'spec_helper'
-
+require 'hashie'
 
 
 
 describe 'editing my profile page' do
 
   before do
+    @test_users = Koala::Facebook::TestUsers.new(:app_id => Rails.application.secrets.facebook_key, :secret => Rails.application.secrets.facebook_secret)
+    access_token =  @test_users.list.first["access_token"]
 
-    @user = create(:user)
+    @user = build(:user)
 
-    # OmniAuth.config.test_mode = true
-    # OmniAuth.config.mock_auth[:facebook] = {
-    #   provider: 'facebook',
-    #   uid: @user.uid,
-    #   info: {
-    #     email: @user.email,
-    #     name: @user.name,
-    #     location: @user.location,
-    #     name: @user.name
-    #   },
-    #   credentials: {
-    #     auth_token: @user.auth_token
-    #   }
-    # }
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:facebook] = {
+      provider: 'facebook',
+      uid: @user.uid,
+      info: {
+        email: @user.email,
+        name: @user.name,
+        location: @user.location,
+        name: @user.name
+      },
+      extra: {
+        raw_info: {
+          birthday: @user.birthday,
+          gender: 'male'
+        }
+      },
+      credentials: {
+        token: access_token
+      }
+    }
 
+    @user = User.find_for_facebook_oauth(Hashie::Mash.new(OmniAuth.config.mock_auth[:facebook]))
     login_as @user
-
     visit '/users/edit'
 
   end
@@ -34,19 +42,19 @@ describe 'editing my profile page' do
 
     it 'a user can update their name' do
 
-      expect(@user.name).to eq 'Joe Bloggs'
-      fill_in 'Name', with: 'John Smith'
+      expect(@user.name).to eq 'Gary Oldman'
+      fill_in 'Name', with: 'Gary Newman'
       click_button 'Update'
-      expect(@user.reload.name).to eq 'John Smith'
+      expect(@user.reload.name).to eq 'Gary Newman'
 
     end
 
-    it 'a user can update their name' do
+    it 'a user can update their email address' do
 
-      expect(@user.email).to eq 'test@test.com'
-      fill_in 'Email', with: 'fake@fake.com'
+      expect(@user.email).to eq 'gary_ggqwrri_oldman@tfbnw.net'
+      fill_in 'Email', with: 'gary_oldman@tfbnw.net'
       click_button 'Update' 
-      expect(@user.reload.email).to eq 'fake@fake.com'
+      expect(@user.reload.email).to eq 'gary_oldman@tfbnw.net'
 
     end
 
@@ -59,14 +67,12 @@ describe 'editing my profile page' do
 
     end
 
-    it 'a user can update their picture' do
+    it 'a user has a profile picture' do
 
-      expect(@user.image_url).to eq ''
-      click_button 'Change Picture'
-      click_button 'Update' 
-      expect(@user.reload.image_url).to eq 'new'
+      within(:css, '.profile-pictures-container') { expect(page).to have_css 'img.profile-picture' }
 
     end
+
 
   end
 

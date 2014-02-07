@@ -21,8 +21,12 @@
     <div class='profile-pictures-container'>
   
     <%= link_to(photos_path(id: photo.id), method: :delete, :remote => true, class: 'image-deleter')  do %>
+
+      <% if photo.profile_picture == true %>
       
-      <%= image_tag photo.image_url, class: 'profile-picture' %>
+        <%= image_tag photo.image_url, class: 'profile-picture' %>
+
+      <% end %>
     
     <% end %>
 
@@ -40,45 +44,35 @@
 
 
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
-
-<%= link_to "Back", :back %>
 
 
   <div class='fb-selection'>
 
     <h3>Pick a Picture</h3>
 
-    <% resource.profile_pictures.each do |photo| %>
-    
+    <% resource.photos.each do |photo| %>
+
     <div class='select-pictures-container'>
-    
-      <%= link_to(photos_path(image_url: photo['images'][0]['source']), method: :post, :remote => true, class: 'image-adder')  do %>
 
-        <%= image_tag photo['images'][0]['source'], class: 'fb_picture' %>
-      
-      <% end %>
-    
-    <% end %>
+      <%= link_to(photos_path(image_url: photo['image_url']), method: :patch, :remote => true, class: 'image-adder') do %>
 
-    <% resource.tagged_pictures.each do |photo| %>
-      
-      <%= link_to(photos_path(image_url: photo), method: :post, :remote => true, class: 'image-adder') do %>
-        
-        <%= image_tag photo, class: 'fb_picture' %>
-      
+        <%= image_tag photo['image_url'], class: 'fb_picture' %>
+
       <% end %>
 
-    </div>
-    
+    <div>
+
     <% end %>
-  
+
   </div>
 
   
 
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+
+<%= link_to "Back", :back %>
 
 
 
@@ -95,11 +89,11 @@ $(document).ready(function(){
     $('.fb-selection').slideDown();
   });
 
-  $('.image-deleter').on('ajax:complete', function() {
+  $('.image-deleter').on('ajax:success', function() {
     $(this).remove();
   });
 
-  $('.image-adder').on('ajax:complete', function() {
+  $('.image-adder').on('ajax:success', function() {
     $(this).addClass('profile-picture');
     $('#user-profile').append($(this));
   });
