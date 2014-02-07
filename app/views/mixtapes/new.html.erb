@@ -3,11 +3,12 @@
     <h3>Add A Song</h3>
     <%= render 'add_track_form' %>
 
-    <%= render 'mixtape_name_form', button_text: 'Create Mixtape' %>
+    <%= render 'mixtape_name_form', button_text: 'RECORD TAPE' %>
   </div>
 </div> <!--container -->
 
 <%= @mixtape.id %>
+<%= @mixtape.tracks.inspect %>
 
 <h3>{{title}}</h3>
 <div class="track-listing">

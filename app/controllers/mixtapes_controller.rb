@@ -1,10 +1,16 @@
 class MixtapesController < ApplicationController
 
   # before_action :authenticate_user!
-  before_action :mixtape_must_be_unique, only: [:new, :create]
+  # before_action :mixtape_must_be_unique, only: [:new, :create]
 
   def new
-    @mixtape = Mixtape.create
+    if session[:mixtape_id]
+      @mixtape = Mixtape.find session[:mixtape_id]
+    else
+      @mixtape = Mixtape.create
+      session[:mixtape_id] = @mixtape.id
+    end
+
     @track = Track.new
   end
 
@@ -25,7 +31,6 @@ class MixtapesController < ApplicationController
 
   def delete_track
     mixtape = Mixtape.find params[:id]
-    puts mixtape
     track = mixtape.tracks.find params[:track_id]
     render 'new'
   end
@@ -49,11 +54,11 @@ class MixtapesController < ApplicationController
 
   private
 
-  def mixtape_must_be_unique
-    if current_user.mixtape
-      flash[:alert] = 'Only one mixtape allowed!'
-      redirect_to mixtapes_path and return
-    end
-  end
+  # def mixtape_must_be_unique
+  #   if current_user.mixtape 
+  #     flash[:alert] = 'Only one mixtape allowed!'
+  #     redirect_to mixtapes_path and return
+  #   end
+  # end
 
 end
