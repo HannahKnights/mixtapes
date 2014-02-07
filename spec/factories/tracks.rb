@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :track do
+    artist "The Rolling Stones"
+    song "Brown Sugar"
   end
 end

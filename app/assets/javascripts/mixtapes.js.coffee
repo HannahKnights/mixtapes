@@ -18,4 +18,3 @@ $(document).ready ->
       $('.track-listing').append(trackHTML)
       $('#track_song').val("")
       $('#track_artist').val("")
-

@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :mixtape do
-    title "Love Beats"
+    title "My Awesome Mixtape"
+    :track
   end
 end
