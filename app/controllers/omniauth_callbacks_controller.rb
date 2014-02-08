@@ -1,6 +1,12 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def facebook
+    # Sending through a mixtape id
+    puts 'Hello this is the session id'
+    puts session[:mixtape_id]
+    puts '_____________________'
+    mixtape_id = session[:mixtape_id]
+
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.find_for_facebook_oauth(request.env["omniauth.auth"])
 
@@ -11,6 +17,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
     end
+
+    @user.update_attributes( mixtape_id: session[:mixtape_id] )
+    Mixtape.find(session[:mixtape_id]).update_attributes( user_id: @user.id )
   
   end
 
