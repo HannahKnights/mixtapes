@@ -94,8 +94,8 @@ $(document).ready(function(){
   });
 
   $('.image-adder').on('ajax:success', function() {
-    $(this).addClass('profile-picture');
     $('#user-profile').append($(this));
+    $(this).children().addClass('profile-picture');
   });
 
 
