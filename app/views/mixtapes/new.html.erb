@@ -8,7 +8,7 @@
     
     <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), class: 'fb-auth' %>
 
-
+    <h1><%= session[:mixtape_id] %></h1>
 
     </div><!--column left -->
   
@@ -19,7 +19,9 @@
           <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
         <% end %>
 
+    <h1><%= @mixtape.inspect %></h1>
         
+    <h1><%= @mixtape.title %></h1>
 
         
       </div>  

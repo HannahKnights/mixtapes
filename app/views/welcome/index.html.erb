@@ -1,5 +1,13 @@
 <div class="container-fluid">
   <div class="row col-md-1 col-md-offset-5 vertical-align">
+
+    <%= form_for( @mixtape, :url => new_mixtape_path, :welcome => { :action => :post }) do |form| %>
+
+    <%= form.text_field :title %>
+
+    <%= form.submit 'Create Your Mixtape' %>
+
+    <% end %>
     
     <%= link_to "Create Your Mixtape", new_mixtape_path, class: "btn btn-primary btn-lg"%> 
   </div>

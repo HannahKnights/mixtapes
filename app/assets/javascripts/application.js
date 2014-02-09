@@ -20,3 +20,9 @@
 //= require_tree .
 
 angular.module('mixtapes',[])
+
+if(window.opener) {
+    window.opener.location.reload(true);
+    window.close()
+  }
+

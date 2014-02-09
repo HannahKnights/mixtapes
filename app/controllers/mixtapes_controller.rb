@@ -4,11 +4,20 @@ class MixtapesController < ApplicationController
   # before_action :mixtape_must_be_unique, only: [:new, :create]
 
   def new
+
     if session[:mixtape_id]
       @mixtape = Mixtape.find session[:mixtape_id]
     else
       @mixtape = Mixtape.create
       session[:mixtape_id] = @mixtape.id
+    end
+
+    if params[:mixtape] != nil
+      
+      title = params[:mixtape][:title]
+
+      @mixtape.update(title: title)
+    
     end
 
     @tracks = @mixtape.tracks

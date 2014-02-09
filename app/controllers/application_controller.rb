@@ -21,5 +21,6 @@ class ApplicationController < ActionController::Base
   def resource_class
     @devise_mapping.to
   end
+
   
 end

@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   resources :mixtapes do
     resources :tracks
   end
-post "/mixtapes/:mixtape_id/tracks/:id(.:format)"    =>  "tracks#destroy"
+
+  post '/mixtapes/new' => 'mixtapes#new'
+
+  post "/mixtapes/:mixtape_id/tracks/:id(.:format)"    =>  "tracks#destroy"
   # delete "/mixtapes/:id/delete_track/:track_id" => "mixtapes#delete_track"
 
   
