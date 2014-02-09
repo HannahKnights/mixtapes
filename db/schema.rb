@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205195924) do
+ActiveRecord::Schema.define(version: 20140207105709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,16 +21,24 @@ ActiveRecord::Schema.define(version: 20140205195924) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "track_id"
   end
 
-  add_index "mixtapes", ["track_id"], name: "index_mixtapes_on_track_id", using: :btree
   add_index "mixtapes", ["user_id"], name: "index_mixtapes_on_user_id", using: :btree
 
   create_table "mixtapes_tracks", id: false, force: true do |t|
     t.integer "mixtape_id", null: false
     t.integer "track_id",   null: false
   end
+
+  create_table "photos", force: true do |t|
+    t.integer  "user_id"
+    t.string   "image_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "profile_picture"
+  end
+
+  add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
 
   create_table "tracks", force: true do |t|
     t.datetime "created_at"
@@ -55,6 +63,11 @@ ActiveRecord::Schema.define(version: 20140205195924) do
     t.string   "provider"
     t.string   "uid"
     t.integer  "mixtape_id"
+    t.string   "name"
+    t.string   "location"
+    t.string   "birthday"
+    t.string   "auth_token"
+    t.boolean  "male"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

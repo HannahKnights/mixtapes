@@ -4,7 +4,23 @@ class MixtapesController < ApplicationController
   # before_action :mixtape_must_be_unique, only: [:new, :create]
 
   def new
-    @mixtape = Mixtape.create
+
+    if session[:mixtape_id]
+      @mixtape = Mixtape.find session[:mixtape_id]
+    else
+      @mixtape = Mixtape.create
+      session[:mixtape_id] = @mixtape.id
+    end
+
+    if params[:mixtape] != nil
+      
+      title = params[:mixtape][:title]
+
+      @mixtape.update(title: title)
+    
+    end
+
+    @tracks = @mixtape.tracks
     @track = Track.new
   end
 
@@ -25,7 +41,6 @@ class MixtapesController < ApplicationController
 
   def delete_track
     mixtape = Mixtape.find params[:id]
-    puts mixtape
     track = mixtape.tracks.find params[:track_id]
     render 'new'
   end
@@ -35,9 +50,7 @@ class MixtapesController < ApplicationController
   end
 
   def edit
-    @mixtape = Mixtape.find params[:id]
-    # @tracks = @mixtape.tracks
-    @track = Track.new
+    redirect_to new_mixtape_path
   end
 
   def update
@@ -49,11 +62,11 @@ class MixtapesController < ApplicationController
 
   private
 
-  def mixtape_must_be_unique
-    if current_user.mixtape
-      flash[:alert] = 'Only one mixtape allowed!'
-      redirect_to mixtapes_path and return
-    end
-  end
+  # def mixtape_must_be_unique
+  #   if current_user.mixtape 
+  #     flash[:alert] = 'Only one mixtape allowed!'
+  #     redirect_to mixtapes_path and return
+  #   end
+  # end
 
 end

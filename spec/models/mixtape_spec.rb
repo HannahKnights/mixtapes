@@ -1,5 +1,6 @@
 require 'spec_helper'
 
-describe Track do
-  
+describe Mixtape do
+
+
 end

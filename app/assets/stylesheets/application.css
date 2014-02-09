@@ -14,3 +14,24 @@
  *= require_tree .
  *= require_self
  */
+
+
+.profile-picture {
+  width: auto;
+  height: 250px;
+  padding: 20px;
+}
+
+.fb_picture {
+  width: 300px;
+  height: auto;
+  padding: 20px;
+}
+
+.profile-pictures-container {
+  display: inline-block;
+}
+
+.select-pictures-container {
+  display: inline-block;
+}

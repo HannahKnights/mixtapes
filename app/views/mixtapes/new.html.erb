@@ -1,23 +1,54 @@
 <div class="container-fluid">
   <div class="row">
+    <div class="col-md-7">
     <h3>Add A Song</h3>
     <%= render 'add_track_form' %>
 
-    <%= render 'mixtape_name_form', button_text: 'Create Mixtape' %>
-  </div>
+    <%= render 'mixtape_name_form', button_text: 'RECORD TAPE' %>
+    
+    <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), class: 'fb-auth' %>
+
+    <h1><%= session[:mixtape_id] %></h1>
+
+    </div><!--column left -->
+  
+    <div class="col-md-4">
+      <h2>{{title}}</h2>
+      <div class="track-listing">
+        <% @tracks.each do |track| %>
+          <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
+        <% end %>
+
+    <h1><%= @mixtape.inspect %></h1>
+        
+    <h1><%= @mixtape.title %></h1>
+
+        
+      </div>  
+    </div><!--column right -->
+  </div><!--row -->
 </div> <!--container -->
 
-<%= @mixtape.id %>
-
-<h3>{{title}}</h3>
-<div class="track-listing"></div>  
 <script type='text/template' id='playlist-template'>
+  <%= render 'track' %>
+</script>
 
-  <div class='track'>
-    <h3>{{song}}</h3> <h4>{{artist}}</h4>
-    {{id}}
+<script>
 
-    <a class="delete-track" href="/mixtapes/<%= @mixtape.id %>/tracks/{{{id}}}">Delete</a>
-  </div>
+$(document).ready(function() {
+
+  $('a.fb-auth').click(function(e) {
+  var width = 600, height = 400;
+  var left = (screen.width / 2) - (width / 2);
+  var top = (screen.height / 2) - (2 * height / 3);
+  var features = 'modal=yes,location=yes,menubar=no,toolbar=no,status=no,width=' + width + ',height=' + height + ',toolbar=no,titlebar=no,left=' + left + ',top=' + top;
+  var loginWindow = window.open('/users/auth/facebook', '_blank', features);
+  loginWindow.focus();
+  e.preventDefault();
+  return false;
+  });
+
+});
+
 
 </script>
