@@ -34,6 +34,38 @@ describe "New Mixtape" do
 
       expect(page).to have_content 'Sir Duke'
     end
+
+  end
+
+  context "editing after logging in" do
+
+      before do
+        @user = create(:user)
+
+        OmniAuth.config.test_mode = true
+        OmniAuth.config.mock_auth[:facebook] = {
+          provider: 'facebook',
+          uid: @user.uid,
+          info: {
+            email: @user.email,
+            name: @user.name,
+            location: @user.location,
+            birthday: @user.birthday
+          }
+        }
+
+        login_as @user
+
+      end
+
+    it 'should not display "Finish Mixing" button' do
+
+      visit 'mixtapes/new'
+      expect(page).not_to have_button 'Finish Mixing!'
+
+    end
+
+
   end
 
 

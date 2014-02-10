@@ -12,8 +12,6 @@
 
       <% end %>
 
-    <h1><%= session[:mixtape_id] %></h1>
-
     </div><!--column left -->
   
     <div class="col-md-4">
@@ -22,11 +20,6 @@
         <% @tracks.each do |track| %>
           <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
         <% end %>
-
-    <h1><%= @mixtape.inspect %></h1>
-        
-    <h1><%= @mixtape.title %></h1>
-
         
       </div>  
     </div><!--column right -->

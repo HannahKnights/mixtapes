@@ -44,18 +44,22 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
+         
           <li>
             <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
           </li>
           <li>
-            <%= link_to('Manage Your Account', edit_user_registration_path) %>
+          <%= link_to('Profile Page', mixtape_path(session[:mixtape_id]) ) %>
+          </li>
+          <li>
+          <%= link_to('Edit my Mixtape', new_mixtape_path) %>
+          </li>
+          <li>
+            <%= link_to('Edit my Profile', edit_user_registration_path) %>
           </li>
         <% else %>
           <li>
             <%= link_to('Login', new_user_session_path)  %>  
-          </li>
-          <li>
-            <%= link_to('Register', new_user_registration_path)  %>
           </li>
         <%end%>
     </div>
