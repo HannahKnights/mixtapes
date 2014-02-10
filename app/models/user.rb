@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_one :mixtape
   has_many :photos
+  has_many :sent_messages, :class_name => "Message", :foreign_key => "author_id"
+  has_many :received_messages, :class_name => "Message", :foreign_key => "recipient_id"
 
 
   def self.find_for_facebook_oauth(auth)

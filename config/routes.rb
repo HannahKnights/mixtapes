@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => 'omniauth_callbacks'} 
 
 
+  resources :messages
+ 
+
   # resources :users , :only => :none do
   resource :photos
   # end
+
 
   root "welcome#index"
   resources :mixtapes do

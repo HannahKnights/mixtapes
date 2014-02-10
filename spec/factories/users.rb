@@ -11,4 +11,15 @@ FactoryGirl.define do
     location 'London, United Kingdom'
     auth_token 'CAACqowAaUqEBAC3w95TvgRzGQzkG0fs46tWTNKxEe7UowMvJC7SH5z1S4UkBCMAiH8P6ZCUnOFotWgV0PZAIwNjaiOHUuwDKhZCFzZAFDPmccqV9ZArTWUucZCK3Q7C5BZACLOStnBZCyneM0VLA5VpTe4W3nZBXo3slXy5HZBGTPIqv0MOPRuHJeAAI7jhLjiyK8ZD'
   end
+
+  factory :jane, class: "User" do
+    provider 'facebook'
+    uid '100007685170376'
+    email 'jane_ggqwrri_oldman@tfbnw.net'
+    password '1234testing'
+    name 'Jane Oldman'
+    birthday '08/08/1983'
+    location 'London, United Kingdom'
+    auth_token 'CAACqowAaUqEBAC3w95TvgRzGQzkG0fs46tWTNKxEe7UowMvJC7SH5z1S4UkBCMAiH8P6ZCUnOFotWgV0PZAIwNjaiOHUuwDKhZCFzZAFDPmccqV9ZArTWUucZCK3Q7C5BZACLOStnBZCyneM0VLA5VpTe4W3nZBXo3slXy5HZBGTPIqv0MOPRuHJeAAI7jhLjiyK8ZD'
+  end
 end
