@@ -40,16 +40,27 @@ require "spec_helper"
       it "should be able to reply to a message" do
         login_as @user_b, scope: :user
         visit '/messages'
-
-        # within '.message' do
-          click_link 'Reply'
-        # end
-
+        click_link 'Reply'
+    
         expect(find_field('Subject').value).to eq  "RE: I'm a test message"
       end
-
     end
 
+    context "Deleting" do
+      before do
+        login_as @user_a, scope: :user
+        send_message
+      end
+
+      it "should be able to delete a message" do
+        login_as @user_b, scope: :user
+        visit '/messages'
+        click_link 'Delete'
+
+        expect(page).to_not have_content "I'm a test message"
+      end
+    end
+    
   end
 
   def send_message

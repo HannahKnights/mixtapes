@@ -16,6 +16,7 @@
     <h5>
     <%= link_to 'Reply', new_message_path(reply_to: message.id) %>
     </h5>
+    <%= link_to 'Delete', message_path(message), method: :delete, data: { confirm: "Are you sure?"} %>
 
   <% end %>
 </div>

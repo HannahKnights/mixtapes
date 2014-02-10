@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   def new
     if params[:reply_to]
       @reply_to = current_user.received_messages.find(params[:reply_to])
-      
+
       @message = Message.new_reply(@reply_to, current_user)
     else
       @message = Message.new
@@ -11,9 +11,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    
     @message = Message.create message_params
-
     if @message.save
       flash[:notice] = "Your message has been sent"
       redirect_to messages_path
@@ -31,6 +29,11 @@ class MessagesController < ApplicationController
     redirect_to new_message_path
   end
 
+  def destroy
+      @message = current_user.received_messages.find params[:id]
+      @message.destroy
+      redirect_to messages_path
+  end
 
 
 
