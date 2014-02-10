@@ -20,8 +20,7 @@
         <% @tracks.each do |track| %>
           <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
         <% end %>
-        
-
+          
 
 
 

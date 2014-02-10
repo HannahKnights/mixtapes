@@ -9,13 +9,9 @@ class MixtapesController < ApplicationController
 
       user = current_user
 
-      puts '___________________________LOOK____'
-      puts user.id
-
       if Mixtape.where( user_id: user.id ).count > 1
         
         flash[:alert] = 'Ooops! Only one mixtape allowed!'
-
 
         @mixtape = user.mixtape
 
@@ -45,10 +41,10 @@ class MixtapesController < ApplicationController
       
       end
       
+    end
+    
     title = params[:mixtape][:title] if params[:mixtape]
     @mixtape.title = title if title
-
-    end
 
     @tracks = @mixtape.tracks
     @track = Track.new
