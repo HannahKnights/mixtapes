@@ -1,10 +1,17 @@
 class MessagesController < ApplicationController
 
   def new
-    @message = Message.new
+    if params[:reply_to]
+      @reply_to = current_user.received_messages.find(params[:reply_to])
+      
+      @message = Message.new_reply(@reply_to, current_user)
+    else
+      @message = Message.new
+    end
   end
 
   def create
+    
     @message = Message.create message_params
 
     if @message.save
@@ -23,6 +30,9 @@ class MessagesController < ApplicationController
   def show
     redirect_to new_message_path
   end
+
+
+
 
 
   private

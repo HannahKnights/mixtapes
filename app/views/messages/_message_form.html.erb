@@ -1,0 +1,12 @@
+<%= form_for [@message] do |form| %>
+  <%= form.label :recipient %>
+  <%= form.text_field :recipient, value: @message.recipient.try(:name) %>
+  <br>
+  <%= form.label :subject %>
+  <%= form.text_field :subject %>
+  <br>
+  <%= form.label :body%>
+  <%= form.text_area :body %>
+
+  <%= form.button 'Send' %>
+<% end %>

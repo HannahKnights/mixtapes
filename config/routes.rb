@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
 
   resources :messages
- 
 
   # resources :users , :only => :none do
   resource :photos

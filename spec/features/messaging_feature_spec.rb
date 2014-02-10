@@ -41,8 +41,11 @@ require "spec_helper"
         login_as @user_b, scope: :user
         visit '/messages'
 
-        page.all(:css, '.block')[0]
+        # within '.message' do
+          click_link 'Reply'
+        # end
 
+        expect(find_field('Subject').value).to eq  "RE: I'm a test message"
       end
 
     end

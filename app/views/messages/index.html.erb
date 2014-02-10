@@ -5,7 +5,7 @@
 <div class = "message" >
   <% @received_messages.each do |message| %>
     <h3>
-    <%= User.find(message.author_id).name %>
+    <%= message.find_user_name(message) %>
     </h3>
     <h3>
     <%= message.subject %>
@@ -14,8 +14,10 @@
     <%= message.body %>
     </h4>
     <h5>
-    <%= button_to 'Reply', new_message_path(message), recipient: message.author_id, subject: message.subject, body: message.body, method: 'get' %>
+    <%= link_to 'Reply', new_message_path(reply_to: message.id) %>
     </h5>
 
   <% end %>
 </div>
+
+
