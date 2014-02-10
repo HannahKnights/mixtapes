@@ -1,24 +1,35 @@
-<h1>
-  Inbox 
-</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Inbox 
+      <%= link_to "New Message", new_message_path, class: "btn btn-primary pull-right"%></h1>
+    </div> <!--Col -->
+  </div> <!--Row -->
+  <div class="row">
+    <div class="col-md-3">
+      <h3>Conversations</h3>
+        <!-- Code to display all users with whom an interaction has occured -->
+    </div> <!--Col -->
+    <div class="col-md-9">
+      <h3>Interactions</h3>
+      <div class = "message" >
+        <% @received_messages.each do |message| %>
+          <h4> <%= message.find_user_name(message) %> </h4>
+          <h5> <%= message.subject %> </h5>
+          <p> <%= message.body %> </p>
+          <div class="btn-group-xs">
+            <%= link_to 'Reply', new_message_path(reply_to: message.id), class: "btn btn-success" %>
+            <%= link_to 'Delete', message_path(message), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?"} %>
+          </div>
+        <% end %>
+      </div> <!--.messages -->
+    </div> <!--Col -->
+  </div> <!--Row -->
+</div> <!--Container -->
 
-<div class = "message" >
-  <% @received_messages.each do |message| %>
-    <h3>
-    <%= message.find_user_name(message) %>
-    </h3>
-    <h3>
-    <%= message.subject %>
-    </h3>
-    <h4>
-    <%= message.body %>
-    </h4>
-    <h5>
-    <%= link_to 'Reply', new_message_path(reply_to: message.id) %>
-    </h5>
-    <%= link_to 'Delete', message_path(message), method: :delete, data: { confirm: "Are you sure?"} %>
 
-  <% end %>
-</div>
+
+
+
 
 

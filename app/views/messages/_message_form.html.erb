@@ -1,12 +1,35 @@
-<%= form_for [@message] do |form| %>
-  <%= form.label :recipient %>
-  <%= form.text_field :recipient, value: @message.recipient.try(:name) %>
-  <br>
-  <%= form.label :subject %>
-  <%= form.text_field :subject %>
-  <br>
-  <%= form.label :body%>
-  <%= form.text_area :body %>
-
-  <%= form.button 'Send' %>
-<% end %>
+<form class="form-horizontal" role="form">
+  <!-- <div class="row">
+    <div class="col-md-8"> -->
+      <div class="form-group">
+        <%= form_for [@message] do |form| %>
+          <%= form.label :recipient, class: "col-sm-2 control-label" %>
+          <div class="col-sm-8">
+            <%= form.text_field :recipient, value: @message.recipient.try(:name), class: "form-control", placeholder: "Enter name" %>
+          </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :subject, class: "col-sm-2 control-label" %>
+        <div class="col-sm-8">
+          <%= form.text_field :subject, class: "form-control", placeholder: "Subject" %>
+        </div>
+      </div>
+      <div class="form-group">
+          <%= form.label :body, class: "col-sm-2 control-label"%>
+          <div class="col-sm-8">
+            <%= form.text_area :body, class: "form-control", rows: "5", placeholder: "Enter your message here" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-8">
+            <div class="btn-group-sm pull-right">
+              <%= form.button 'Send', class: "btn btn-success"%>
+              <%= link_to "Back to my messages", messages_path, class: "btn btn-primary"%>
+            </div>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    <!-- </div>
+  </div> -->
+</form>
