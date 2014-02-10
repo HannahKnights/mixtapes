@@ -17,6 +17,8 @@
 //= require jquery.mustache
 //= require websocket_rails/main
 //= require angular
+//= require jquery-ui.min
+//= require jquery.tinysort
 //= require_tree .
 
 angular.module('mixtapes',[])
