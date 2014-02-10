@@ -4,9 +4,39 @@
 
 <% @mixtapes.each do |mixtape| %>
 
-  
-  <h2>
-  <%= mixtape.title %>
-  </h2>
-  <%= button_to 'Edit Mixtape', edit_mixtape_path(mixtape), method: 'get' %> 
+  <% if mixtape.user_id != nil && mixtape.user_id != current_user.id %>
+
+    <h2>
+    <%= mixtape.title %>
+    </h2>
+    <% mixtape.tracks.each do |track| %>
+
+      <h3><%= track.artist %></h3>
+
+      <h4><%= track.song %></h4>
+
+    <% end %>
+
+    <% user = User.find(mixtape.user_id) %>
+
+    <%= user.name %>
+
+    <%= user.age %>
+
+    <%= user.location %>
+
+    <%= user.gender %>
+
+    <% user.photos.each do |photo| %>
+
+        <% if photo.profile_picture? %>
+
+          <%= image_tag photo.image_url, class: 'profile-picture' %>
+
+        <% end %>
+
+    <% end %>
+
+  <% end %>
+
 <% end %>
