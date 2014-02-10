@@ -4,21 +4,15 @@ class MixtapesController < ApplicationController
   # before_action :mixtape_must_be_unique, only: [:new, :create]
 
   def new
-
     if session[:mixtape_id]
       @mixtape = Mixtape.find session[:mixtape_id]
     else
       @mixtape = Mixtape.create
       session[:mixtape_id] = @mixtape.id
     end
-
-    if params[:mixtape] != nil
-      
-      title = params[:mixtape][:title]
-
-      @mixtape.update(title: title)
     
-    end
+    title = params[:mixtape][:title] if params[:mixtape]
+    @mixtape.title = title if title
 
     @tracks = @mixtape.tracks
     @track = Track.new
@@ -54,10 +48,10 @@ class MixtapesController < ApplicationController
   end
 
   def update
-    @mixtape = Mixtape.find params[:id]
-    @mixtape.user = current_user
-    @mixtape.update params[:mixtape].permit(:title, :user)
-    redirect_to '/mixtapes'
+    @mixtape = Mixtape.find session[:mixtape_id]
+    @mixtape.update params[:mixtape].permit(:title)
+
+    render json: { status: 'success' }
   end
 
   private

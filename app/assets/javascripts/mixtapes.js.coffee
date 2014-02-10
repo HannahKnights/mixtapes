@@ -18,3 +18,9 @@ $(document).ready ->
       $('.track-listing').append(trackHTML)
       $('#track_song').val("")
       $('#track_artist').val("")
+
+  $('#update_name').on 'submit', (event) ->
+    event.preventDefault()
+    
+    $.ajax method: 'put', url: $(this).attr('action'), data: $(this).serialize(), success: (response) ->
+      console.log(response)
