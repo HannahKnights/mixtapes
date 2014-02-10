@@ -10,7 +10,6 @@ class MixtapesController < ApplicationController
       @mixtape = Mixtape.create
       session[:mixtape_id] = @mixtape.id
     end
-    
     title = params[:mixtape][:title] if params[:mixtape]
     @mixtape.title = title if title
 
@@ -50,7 +49,6 @@ class MixtapesController < ApplicationController
   def update
     @mixtape = Mixtape.find session[:mixtape_id]
     @mixtape.update params[:mixtape].permit(:title)
-
     render json: { status: 'success' }
   end
 

@@ -5,8 +5,12 @@
     <%= render 'add_track_form' %>
 
     <%= render 'mixtape_name_form', button_text: 'Edit Mixtape Title' %>
+
+    <% if !user_signed_in? %>
     
-    <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), class: 'fb-auth' %>
+      <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), id: 'fb-auth', class: 'btn btn-primary btn-lg' %>
+
+      <% end %>
 
     <h1><%= session[:mixtape_id] %></h1>
 
@@ -37,7 +41,7 @@
 
 $(document).ready(function() {
 
-  $('a.fb-auth').click(function(e) {
+  $('a#fb-auth').click(function(e) {
   var width = 600, height = 400;
   var left = (screen.width / 2) - (width / 2);
   var top = (screen.height / 2) - (2 * height / 3);
