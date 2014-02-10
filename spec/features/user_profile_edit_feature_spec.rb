@@ -24,7 +24,7 @@ describe 'editing my profile page' do
       extra: {
         raw_info: {
           birthday: @user.birthday,
-          gender: 'male'
+          # gender: 'male'
         }
       },
       credentials: {
@@ -34,6 +34,10 @@ describe 'editing my profile page' do
 
     @user = User.find_for_facebook_oauth(Hashie::Mash.new(OmniAuth.config.mock_auth[:facebook]))
     login_as @user
+
+    puts @user
+    puts @user.name
+
     click_link 'Edit my Profile'
 
   end

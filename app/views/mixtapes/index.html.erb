@@ -1,78 +1,16 @@
   <link rel="stylesheet" type="text/css" media="all" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
-  
-
-  
-
-<div id="slider"></div>
-<div id='age-range'></div>
- 
-<script>
-
-  sortMatches = function() {
-
-    return $('.matchee-profile').tsort('.match-value', { order: 'desc'});
-
-  }
-
-  $('#slider').slider({
-      range: true,
-      min: 18,
-      max: 100,
-      values: [ 20, 35 ],
-      slide: function( event, ui ) {
-        
-        $('#age-range').html( window.minAge +' - ' + window.maxAge );
-      }
-    });
-
-  $( "#slider" ).on( "slidechange", function( event, ui ) {
-    console.log(window.minAge);
-    console.log(window.maxAge);
-
-  });
-
-
-$(document).ready(function() {
-
-  return sortMatches();
-
-  window.minAge = $('#slider').slider( 'values' )[0];
-  $('#slider').on( 'slidechange', function( event, ui ) {
-      window.minAge = ui.values[0]
-  });
-
-  window.maxAge = $('#slider').slider( 'values' )[1];
-  $('#slider').on( 'slidechange', function( event, ui ) {
-      window.maxAge = ui.values[1]
-  });
-  
-  console.log(window.minAge);
-  console.log(window.maxAge);
-
-});
-
-
-
-</script>
-
-
-
-
 
 <h1>
   My Mixtape Match's
 </h1>
 
+<div id="slider"></div>
+<div id="age-range"></div>
 
-
-  <div id='match-filter'>
-      <form id='preferences'>
-      <input id='colour' type='check_box' >
-      <input id='age' type='range' name='age' min='18' max='100' in: 1...10>
-      </form>
-  </div>
 
 <% user_mix = current_user.mixtape.tracks %>
+
+
 
 
 <% @mixtapes.each do |mixtape| %>
@@ -121,3 +59,49 @@ $(document).ready(function() {
   <% end %>
 
 <% end %>
+
+
+<script>
+  window.minAge = 20;
+
+  window.maxAge = 35;
+  
+  sortMatches = function() {
+    return $('.matchee-profile').tsort('.match-value', { order: 'desc'});
+  };
+
+  $('#slider').slider({
+      range: true,
+      min: 18,
+      max: 100,
+      values: [ 20, 35 ],
+      slide: function( event, ui ) {
+        $('#age-range').html( window.minAge +' - ' + window.maxAge );
+      }
+    });
+
+  $( "#slider" ).on( "slidechange", function( event, ui ) {
+    console.log(window.minAge);
+    console.log(window.maxAge);
+  });
+
+
+$(document).ready(function() {
+
+  sortMatches();
+  
+  $('#slider').on( 'slidechange', function( event, ui ) {
+      window.minAge = ui.values[0]
+  });
+  $('#slider').on( 'slidechange', function( event, ui ) {
+      window.maxAge = ui.values[1]
+  });
+  
+  console.log(window.minAge);
+  console.log(window.maxAge);
+
+});
+
+
+
+</script>

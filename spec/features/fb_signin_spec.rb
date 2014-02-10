@@ -5,7 +5,6 @@ describe 'logging in' do
 
   before do
     user = create(:user)
-
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:facebook] = {
       provider: 'facebook',
