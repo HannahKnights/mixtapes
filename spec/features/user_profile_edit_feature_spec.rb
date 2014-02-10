@@ -34,7 +34,7 @@ describe 'editing my profile page' do
 
     @user = User.find_for_facebook_oauth(Hashie::Mash.new(OmniAuth.config.mock_auth[:facebook]))
     login_as @user
-    visit '/users/edit'
+    click_link 'Edit my Profile'
 
   end
 
