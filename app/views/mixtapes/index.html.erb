@@ -9,7 +9,7 @@
 <%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
 
 
-<% user_mix = current_user.mixtape.tracks %>
+<% user_mix = current_user.mixtape %>
 
 
 <% @mixtapes.each do |mixtape| %>
@@ -20,7 +20,7 @@
   <div class='matchee-profile'>
   
 
-   <div class='match-value'><%= match_rate(user_mix, mixtape.tracks) %></div>
+   <div class='match-value'><%= user_mix.match_rate(mixtape.tracks) %></div>
 
     <h2>
     <%= mixtape.title %>

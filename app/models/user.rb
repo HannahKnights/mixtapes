@@ -96,7 +96,6 @@ class User < ActiveRecord::Base
     end
   end
 
-
   def update_with_password(params, *options)
     update_attributes(params, *options)
   end
