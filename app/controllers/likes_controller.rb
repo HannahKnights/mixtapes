@@ -1,14 +1,9 @@
 class LikesController < ApplicationController
 
   def create
-
-    Like.create( match_mix_id: params[:mixtape_id],
+    Like.where( match_mix_id: params[:mixtape_id],
                  user_mix_id: current_user.mixtape_id,
-                 like: true )
-
+                 like: true ).first_or_create
     render json: { status: 'success' }
-
   end
-
-
 end
