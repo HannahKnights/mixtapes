@@ -20,7 +20,7 @@ describe 'logging in' do
   it 'a user can log in via Facebook' do
 
     visit '/'
-    click_link 'Create Your Mixtape'
+    click_button 'Create Your Mixtape'
     click_link 'FINISH MIXING!'
     expect('Signed in successfully.')
 

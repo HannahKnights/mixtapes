@@ -75,8 +75,25 @@ describe 'editing my profile page' do
       select 'Male', from: 'user_male'
       click_button 'Update' 
       expect(@user.reload.male?).to be true
+
+    end
+
+    it 'a user can update their birthday' do
+
+      expect(@user.birthday).to eq '08/08/1980'
+      fill_in 'Birthday', with: '08/08/1990'
+      click_button 'Update' 
+      expect(@user.reload.birthday).to eq '08/08/1990'
       
     end
+
+    xit 'a user cannot input  update their age in an incorrect format' do
+
+      implement test which requires using rails date_select form to fix
+      
+    end
+
+
 
     it 'a user has a profile picture' do
 

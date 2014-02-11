@@ -9,6 +9,9 @@
   <div><%= f.label :gender  %><br />
   <%= f.select( :male, options_for_select([['Male', true], ['Female', false]], :selected => resource.male)) %></div>
 
+  <div><%= f.label :birthday  %><br />
+  <%= f.text_field :birthday %></div>
+
   <div><%= f.label :location  %><br />
   <%= f.text_field :location %></div>
 
