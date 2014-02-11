@@ -24,7 +24,7 @@ describe 'editing my profile page' do
       extra: {
         raw_info: {
           birthday: @user.birthday,
-          # gender: 'male'
+          gender: @user.male
         }
       },
       credentials: {
@@ -34,9 +34,6 @@ describe 'editing my profile page' do
 
     @user = User.find_for_facebook_oauth(Hashie::Mash.new(OmniAuth.config.mock_auth[:facebook]))
     login_as @user
-
-    puts @user
-    puts @user.name
 
     visit '/'
     click_link 'Edit my Profile'
@@ -70,6 +67,15 @@ describe 'editing my profile page' do
       click_button 'Update' 
       expect(@user.reload.location).to eq 'Sheffield, United Kingdom'
 
+    end
+
+    it 'a user can update their gender' do
+
+      expect(@user.male?).to be false
+      select 'Male', from: 'user_male'
+      click_button 'Update' 
+      expect(@user.reload.male?).to be true
+      
     end
 
     it 'a user has a profile picture' do

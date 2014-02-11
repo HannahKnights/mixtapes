@@ -9,12 +9,7 @@
 <%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
 
 
-
-
-
 <% user_mix = current_user.mixtape.tracks %>
-
-
 
 
 <% @mixtapes.each do |mixtape| %>
