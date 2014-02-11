@@ -1,18 +1,20 @@
-<div id="song-details">
-  <script type="text/template" id="song-details-with-preview-template">
-    <p>{{ artist_name }}</p>
-    <p>{{ title }}</p>
+<script type="text/template" id="song-details-with-preview-template">
+  <div class='details' data-echonest-id="{{ echonest_song_id }}">
+    <p class="artist-name">{{ artist_name }}</p>
+    <p class="track-title">{{ title }}</p>
     <p>{{ duration.minutes }}:{{ duration.seconds }}</p>
     <audio src="{{ preview_url }}" controls>
       <p>Your browser does not support the audio element.</p>
     </audio>
     <img src="{{ release_image }}">
-    <a class="add-track" href="#">Add Track</a>
-  </script>
-  <script type="text/template" id="song-details-without-preview-template">
-    <p>{{ artist_name }}</p>
-    <p>{{ title }}</p>
+    <a class="add-track" href="#" data-song-id="{{ id }}">Add Track</a>
+  </div>
+</script>
+<script type="text/template" id="song-details-without-preview-template">
+  <div class='details'>
+    <p class="artist-name">{{ artist_name }}</p>
+    <p class="track-title">{{ title }}</p>
     <p>{{ duration.minutes }}:{{ duration.seconds }}</p>
-    <a class="add-track" href="#">Add Track</a>
-  </script>
-</div>
+    <a class="add-track" href="#" data-song-id="{{ id }}">Add Track</a>
+  </div>
+</script>
