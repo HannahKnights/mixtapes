@@ -25,7 +25,10 @@
     <h2>
     <%= mixtape.title %>
     </h2>
-    <div class='link'>Like me</div>
+    <div class='link', data-id='<%= mixtape.user_id %>'>
+    <%= button_to 'Like me!', mixtape_likes_path(post, up: true), remote:true %>
+    
+    </div>
     <% mixtape.tracks.each do |track| %>
 
       <h3><%= track.artist %></h3>

@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Inbox <%= link_to "New Message", new_message_path, class: "btn btn-primary pull-right"%></h1>
+    </div> <!--Col -->
+  </div> <!--Row -->
+  <div class="row">
+    <div class="col-md-3">
+      <h3>Conversations</h3>
+        <!-- Code for users with whom an interaction has occured -->
+        <% @correspondents.each do |correspondent| %>
+            <div class="conversation" data-id="<%= current_user.last_message_involving(correspondent).id %>">
+              <h5> <%= correspondent.name %> </h5>
+              <%= render 'message_preview', message: current_user.last_message_involving(correspondent) %>
+            </div>
+        <% end %>
+    </div><!--Col -->
+    <div class="col-md-3">
+      <div class="correspondent-message">
+        
+      </div>
+      <script type="text/template" id="message-template">
+        {{#messages}}
+          <p class="message-time"> {{ created_at}} </p>
+          <div class="{{ from }}">
+            <p class="message-copy"> {{ body }} </p>
+          </div>
+        {{/messages}}
+        <form action='/messages' method='post'>
+          <input type='hidden' name='recipient_id' value='{{ notme_id }}'>
+          <input type='text' name='body'>
+          <button type='submit'>Send</button>
+        </form>
+      </script>
+    </div><!--Col -->
+  </div> <!--Row -->
+</div> <!--Container -->
+
+
+
+
+
+
+

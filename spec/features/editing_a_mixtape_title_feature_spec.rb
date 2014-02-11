@@ -16,7 +16,7 @@ describe 'editing a mixtape' do
 
     it 'should allow a title to be changed' do
       fill_in 'Title', with: "A Great New Name"
-      click_button "Save Changes"
+      click_button "RECORD TAPE"
 
       expect(page).to have_content 'A Great New Name'
     end

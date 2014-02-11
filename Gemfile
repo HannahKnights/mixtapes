@@ -39,7 +39,6 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'koala'
-
 gem 'heroku_secrets', :git => 'https://github.com/alexpeattie/heroku_secrets'
 
 # Use ActiveModel has_secure_password

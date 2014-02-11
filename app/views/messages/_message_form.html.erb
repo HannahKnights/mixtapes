@@ -1,0 +1,22 @@
+  <!-- <div class="row">
+    <div class="col-md-8"> -->
+
+    <%= form_for @message do |form| %>
+      <%= form.label :recipient, class: "col-sm-2 control-label" %>
+     
+
+        <%= hidden_field_tag :recipient_id, @send_to.id %>
+   
+      <%= form.label :body, class: "col-sm-2 control-label"%>
+     
+        <%= text_area_tag :body, '', class: "form-control", rows: "5", placeholder: "Enter your message here" %>
+  
+          <%= form.button 'Send', class: "btn btn-success"%>
+          <%= link_to "Back to my messages", messages_path, class: "btn btn-primary"%>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+    <!-- </div>
+  </div> -->

@@ -9,3 +9,41 @@
   .vertical-align {
     margin-top: 30%
   }
+
+  .tape {
+    background-image: url('../assets/cassette_box.jpg');
+    width: 303px;
+    height: 193px;
+  }
+
+  .create-btn {
+    margin-top: 110px;
+  }
+
+ /*body {
+    background-image: url('../assets/cassette.jpg');
+    background-size: 100%;
+  }*/
+
+  .panel {
+    background-color: rgba(255, 255, 255, 0.94);
+  }
+
+  .header_tape {
+    height: 55px;
+    width: auto;
+    opacity: 0.9;
+  }
+
+  .header_tape:hover {
+    opacity: 1.1;
+  }
+
+  .navbar-brand {
+    padding: 2px;
+    margin-left: 10px;
+  }
+
+  .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+  }

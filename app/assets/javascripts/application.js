@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require typeahead
-//= require turbolinks
 //= require twitter/bootstrap
 //= require mustache
 //= require jquery.mustache
