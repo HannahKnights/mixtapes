@@ -40,7 +40,9 @@
 
   <nav class="navbar navbar-inverse" role="navigation">
     <ul class="nav navbar-nav">
-      <a class="navbar-brand" id="cassette" href="/" ><img src="../assets/mixtapes_logo_alt.png" class="img-responsive header_tape" alt="Responsive image"></a>
+      <a class="navbar-brand" id="cassette" href="/" >
+        <%= image_tag "mixtapes_logo_alt.png", class: "img-responsive header_tape" %>
+      </a>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>

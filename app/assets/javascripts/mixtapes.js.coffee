@@ -15,9 +15,9 @@ $(document).ready ->
         {name: artist.name}
       callback(names)
   $('#track_artist').typeahead null,
-    name: "artists"
-    minLength: 2
-    displayKey: 'name'
+    name: "artists",
+    minLength: 3,
+    displayKey: 'name',
     source: getArtistData
 
   $('#find-songs').click ->
