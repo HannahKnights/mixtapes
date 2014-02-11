@@ -38,6 +38,7 @@ describe 'editing my profile page' do
     puts @user
     puts @user.name
 
+    visit '/'
     click_link 'Edit my Profile'
 
   end

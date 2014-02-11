@@ -11,7 +11,7 @@
  * file per style scope.
  *
  *= require bootstrap_and_overrides
- *= requery jquery-ui
+ *= require jquery-ui
  *= require_tree .
  *= require_self
  */

@@ -1,4 +1,3 @@
-  <link rel="stylesheet" type="text/css" media="all" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
 
 <h1>
   My Mixtape Match's
@@ -6,6 +5,11 @@
 
 <div id="slider"></div>
 <div id="age-range"></div>
+
+<%= select_tag(:gender, options_for_select([['Female', 'f'],['Male', 'm']], :selected => params[:gender])) %>
+
+
+
 
 
 <% user_mix = current_user.mixtape.tracks %>
@@ -42,7 +46,7 @@
 
     <%= user.location %>
 
-    <%= user.gender %>
+    <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
 
     <% user.photos.each do |photo| %>
 
@@ -70,36 +74,50 @@
     return $('.matchee-profile').tsort('.match-value', { order: 'desc'});
   };
 
-  $('#slider').slider({
-      range: true,
-      min: 18,
-      max: 100,
-      values: [ 20, 35 ],
-      slide: function( event, ui ) {
-        $('#age-range').html( window.minAge +' - ' + window.maxAge );
-      }
-    });
-
-  $( "#slider" ).on( "slidechange", function( event, ui ) {
-    console.log(window.minAge);
-    console.log(window.maxAge);
-  });
+  
+  
 
 
 $(document).ready(function() {
 
+  $('#age-range').html( window.minAge +' - ' + window.maxAge );
+
   sortMatches();
   
+  $('#slider').slider({
+      range: true,
+      min: 18,
+      max: 100,
+      values: [ 20, 35 ]
+    });
+
   $('#slider').on( 'slidechange', function( event, ui ) {
-      window.minAge = ui.values[0]
-  });
-  $('#slider').on( 'slidechange', function( event, ui ) {
-      window.maxAge = ui.values[1]
+      window.minAge = ui.values[0];
+      console.log(window.minAge);
   });
   
-  console.log(window.minAge);
-  console.log(window.maxAge);
+  $('#slider').on( 'slidechange', function( event, ui ) {
+      window.maxAge = ui.values[1];
+      console.log(window.maxAge);
+      $('#age-range').html( window.minAge +' - ' + window.maxAge );
+  });
 
+  // var genderSelection = $('#gender').find('option:selected');
+
+  // genderSelection.on( '')
+
+  $('#gender').change( function() {
+    console.log( $(this).find('option:selected').val() )
+  });
+
+  
+
+  // $( "#slider" ).on( "slidechange", function( event, ui ) {
+  //   console.log(window.minAge);
+  //   console.log(window.maxAge);
+  // });
+  
+  
 });
 
 

@@ -49,7 +49,7 @@
         <%= link_to('Match Page', mixtapes_path ) %>
         </li>
         <li>
-        <%= link_to('Profile Page', mixtape_path(session[:mixtape_id]) ) %>
+        <%= link_to('Profile Page', current_user.mixtape ) %>
         </li>
         <li>
         <%= link_to('Edit my Mixtape', new_mixtape_path) %>
