@@ -6,28 +6,27 @@
 
     <%= render 'mixtape_name_form', button_text: 'RECORD TAPE' %>
     
-    <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), class: 'fb-auth' %>
+    <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), class: 'fb-auth', data: { :"mixtape-id" => session[:mixtape_id] } %>
 
     <h1><%= session[:mixtape_id] %></h1>
 
+    <div id="song-details">
+      <%= render 'tracks_with_details' %>
+    </div>
+
     </div><!--column left -->
   
-    <div class="col-md-4">
-      <h2>{{title}}</h2>
+    <div class="col-md-5">
+      <h2>{{ title }}</h2>
       <div class="track-listing">
         <% @tracks.each do |track| %>
           <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
         <% end %>
-
-    <h1><%= @mixtape.inspect %></h1>
-        
-    <h1><%= @mixtape.title %></h1>
-
-        
       </div>  
     </div><!--column right -->
   </div><!--row -->
 </div> <!--container -->
+
 
 <script type='text/template' id='playlist-template'>
   <%= render 'track' %>
