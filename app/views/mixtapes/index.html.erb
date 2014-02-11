@@ -42,7 +42,7 @@
 
     <%= user.name %>
 
-    <%= user.age %>
+    <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
 
     <%= user.location %>
 
@@ -66,6 +66,7 @@
 
 
 <script>
+
   window.minAge = 20;
 
   window.maxAge = 35;
@@ -74,11 +75,42 @@
     return $('.matchee-profile').tsort('.match-value', { order: 'desc'});
   };
 
-  
-  
-
-
 $(document).ready(function() {
+
+  var genderPreference = $(this).find('option:selected').val();
+  var matchee = $('.matchee-profile');
+
+  $.each( matchee, function() {
+      
+    var matcheeGender = $(this).children('.gender').attr('data-attribute');
+
+    if ( genderPreference != matcheeGender ) {
+      $(this).hide();
+    }
+    else
+    {
+      $(this).show();
+    };
+
+  });
+
+  $.each( matchee, function() {
+
+    var matcheeAge = $(this).children('.age').attr('data-attribute');
+    var minAge = window.minAge
+    var maxAge = window.maxAge
+
+    if( minAge < matcheeAge && matcheeAge < maxAge ) {
+      $(this).show(); 
+    } 
+    else
+    {
+      $(this).hide();
+    };
+
+  });
+
+
 
   $('#age-range').html( window.minAge +' - ' + window.maxAge );
 
@@ -93,18 +125,39 @@ $(document).ready(function() {
 
   $('#slider').on( 'slidechange', function( event, ui ) {
       window.minAge = ui.values[0];
-      console.log(window.minAge);
+      // console.log(window.minAge);
   });
   
   $('#slider').on( 'slidechange', function( event, ui ) {
       window.maxAge = ui.values[1];
-      console.log(window.maxAge);
+      // console.log(window.maxAge);
       $('#age-range').html( window.minAge +' - ' + window.maxAge );
   });
 
-  // var genderSelection = $('#gender').find('option:selected');
 
-  // genderSelection.on( '')
+  $('#slider').on( 'slidechange', function() {
+    var minAge = window.minAge;
+    var maxAge = window.maxAge;
+    var matchee = $('.matchee-profile');
+
+    $.each( matchee, function() {
+
+      var matcheeAge = $(this).children('.age').attr('data-attribute');
+      
+      if( minAge <= matcheeAge && matcheeAge <= maxAge ) {
+        $(this).show();
+      } 
+      else
+      {
+        $(this).hide();
+      };
+
+    });
+
+  });
+
+
+
 
   $('#gender').change( function() {
     
@@ -112,6 +165,7 @@ $(document).ready(function() {
     var matchee = $('.matchee-profile');
 
     $.each( matchee, function() {
+      
       var matcheeGender = $(this).children('.gender').attr('data-attribute');
 
       if ( genderPreference != matcheeGender ) {
@@ -122,29 +176,10 @@ $(document).ready(function() {
         $(this).show();
       };
 
-
-      // console.log( $(this).children('.gender').attr('data-attribute') )
     });
-
-
-    // console.log( genderPreference );
-    // console.log( matcheeGender ); 
-    
-    // console.log( $(this).find('option:selected').val() );
-
-
-
-    // $('.matchee-profile').children('.gender').attr('data-attribute')
-
 
   });
 
-
-
-  // $( "#slider" ).on( "slidechange", function( event, ui ) {
-  //   console.log(window.minAge);
-  //   console.log(window.maxAge);
-  // });
   
   
 });
