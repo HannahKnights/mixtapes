@@ -8,10 +8,8 @@
 
     <% if !user_signed_in? %>
     
-      <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), id: 'fb-auth', class: 'btn btn-primary btn-lg', data: { :"mixtape-id" => session[:mixtape_id] } %>
-
-
-      <% end %>
+      <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), id: 'fb-auth', class: 'btn btn-primary btn-lg' %>
+    <% end %>
 
     <div id="song-details">
       <%= render 'tracks_with_details' %>

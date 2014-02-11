@@ -71,7 +71,7 @@ $(document).ready ->
     trackHash = {}
     trackHash.artist = $(this).parent().children('.artist-name').text()
     trackHash.song = $(this).parent().children('.track-title').text()
-    trackHash.mixtape_id = $('.fb-auth').data('mixtape-id')
+    trackHash.mixtape_id = $('#find-songs').data('mixtape-id')
     # trackHash.echonest_id = 
 
     $.ajax(
@@ -81,7 +81,7 @@ $(document).ready ->
         track: {
           artist: trackHash.artist,
           song: trackHash.song
-          mixtape_id: $('.fb-auth').data('mixtape-id')
+          mixtape_id: $('#find-songs').data('mixtape-id')
         }
       }
     ).done (response) ->
