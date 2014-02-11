@@ -68,119 +68,88 @@
 <script>
 
   window.minAge = 20;
-
-  window.maxAge = 35;
-  
-  sortMatches = function() {
-    return $('.matchee-profile').tsort('.match-value', { order: 'desc'});
-  };
-
-$(document).ready(function() {
-
-  var genderPreference = $(this).find('option:selected').val();
-  var matchee = $('.matchee-profile');
-
-  $.each( matchee, function() {
-      
-    var matcheeGender = $(this).children('.gender').attr('data-attribute');
-
-    if ( genderPreference != matcheeGender ) {
-      $(this).hide();
-    }
-    else
-    {
-      $(this).show();
-    };
-
-  });
-
-  $.each( matchee, function() {
-
-    var matcheeAge = $(this).children('.age').attr('data-attribute');
-    var minAge = window.minAge
-    var maxAge = window.maxAge
-
-    if( minAge < matcheeAge && matcheeAge < maxAge ) {
-      $(this).show(); 
-    } 
-    else
-    {
-      $(this).hide();
-    };
-
-  });
-
-
-
-  $('#age-range').html( window.minAge +' - ' + window.maxAge );
-
-  sortMatches();
-  
-  $('#slider').slider({
-      range: true,
-      min: 18,
-      max: 100,
-      values: [ 20, 35 ]
-    });
-
   $('#slider').on( 'slidechange', function( event, ui ) {
       window.minAge = ui.values[0];
-      // console.log(window.minAge);
   });
   
+
+  window.maxAge = 35;
   $('#slider').on( 'slidechange', function( event, ui ) {
       window.maxAge = ui.values[1];
-      // console.log(window.maxAge);
-      $('#age-range').html( window.minAge +' - ' + window.maxAge );
   });
 
-
-  $('#slider').on( 'slidechange', function() {
-    var minAge = window.minAge;
-    var maxAge = window.maxAge;
-    var matchee = $('.matchee-profile');
-
-    $.each( matchee, function() {
-
-      var matcheeAge = $(this).children('.age').attr('data-attribute');
-      
-      if( minAge <= matcheeAge && matcheeAge <= maxAge ) {
-        $(this).show();
-      } 
-      else
-      {
-        $(this).hide();
-      };
-
-    });
-
-  });
-
-
-
-
+  window.genderPreference = $('#gender').find('option:selected').val();
   $('#gender').change( function() {
-    
-    var genderPreference = $(this).find('option:selected').val();
+    window.genderPreference = $(this).find('option:selected').val();
+  });
+
+
+  function filteringMatches() {
+
     var matchee = $('.matchee-profile');
+    var minAge = window.minAge
+    var maxAge = window.maxAge
+    var genderPreference = window.genderPreference
 
     $.each( matchee, function() {
       
       var matcheeGender = $(this).children('.gender').attr('data-attribute');
+      var matcheeAge = $(this).children('.age').attr('data-attribute');
 
-      if ( genderPreference != matcheeGender ) {
-        $(this).hide();
+      if ((matcheeGender == genderPreference) && (minAge <= matcheeAge && matcheeAge <= maxAge)) {
+        $(this).show()
       }
       else
       {
-        $(this).show();
-      };
-
+        $(this).hide()
+      } 
+    
     });
+  
+  };
+
+
+  function sortMatches() {
+    
+    return $('.matchee-profile').tsort('.match-value', { order: 'desc'});
+  
+  };
+
+  function updateAgeRange() {
+
+    $('#age-range').html( window.minAge + ' - ' + window.maxAge )
+
+  };
+
+
+$(document).ready(function() {
+
+  $('#slider').slider( {
+      range: true,
+      min: 18,
+      max: 100,
+      values: [ 20, 35 ]
+  });
+
+  sortMatches();
+
+  filteringMatches();
+
+  updateAgeRange();
+
+  $('#slider').on( 'slidechange', function() {
+
+    filteringMatches();
+    updateAgeRange();
 
   });
 
-  
+  $('#gender').change( function() {
+
+    filteringMatches();
+    updateAgeRange();
+
+  });  
   
 });
 
