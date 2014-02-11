@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-6">
+    <h3>Add More Tracks</h3>
+
+    <%= render 'add_track_form' %>
+
+    <%= render 'mixtape_name_form', button_text: 'Save Changes' %>
+
+    <h1>{{title}}</h1>
+
+    <%- render 'mixtape_tracks' %>
+
+    <!-- <div class="track-listing"></div>   -->
+    <div id="song-details">
+      <%= render 'tracks_with_details' %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="track-listing"></div>  
+      <script type='text/template' id='playlist-template'>
+
+        <div class='track'>
+          <h1>{{ artist }}</h1>
+          <h6>{{ song }}</h6>
+
+          <a class="delete-track" href="/mixtapes/<%= @mixtape.id %>/tracks/{{{id}}}">Delete</a>
+        </div>
+
+      </script>
+
+
+  </div>
+</div>

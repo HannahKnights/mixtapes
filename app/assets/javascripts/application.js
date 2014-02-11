@@ -12,11 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require typeahead
 //= require twitter/bootstrap
 //= require mustache
 //= require jquery.mustache
 //= require websocket_rails/main
 //= require angular
+//= require jquery-ui.min
+//= require jquery.tinysort
 //= require_tree .
 
 angular.module('mixtapes',[])
+
+if(window.opener) {
+    window.opener.location.reload(true);
+    window.close()
+  }
+

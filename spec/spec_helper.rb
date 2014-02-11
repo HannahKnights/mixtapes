@@ -6,6 +6,10 @@ require 'rspec/autorun'
 require 'capybara/rails'
 require 'capybara/poltergeist'
 require 'factory_girl'
+require 'capybara/poltergeist'
+
+# Tell Capybara that when we are running any JS tests to use poltergeist
+Capybara.javascript_driver = :poltergeist
 
 Capybara.javascript_driver = :poltergeist
 

@@ -1,3 +1,31 @@
+<h1>
 <%= @mixtape.title %>
+</h1>
 
-<%= link_to new_messages_path(send_to: @user.id)
+<% @mixtape.tracks.each do |track| %>
+  
+  <h2><%= track.artist %></h2>
+  <h3><%= track.song %></h3>
+
+<% end %>
+
+<% user = current_user %>
+
+<%= user.name %>
+
+<%= user.age %>
+
+<%= user.location %>
+
+<%= user.gender %>
+
+<% user.photos.each do |photo| %>
+
+    <% if photo.profile_picture? %>
+
+      <%= image_tag photo.image_url, class: 'profile-picture' %>
+
+    <% end %>
+
+<% end %>
+

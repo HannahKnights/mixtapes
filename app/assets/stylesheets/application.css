@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require bootstrap_and_overrides
+ *= require jquery-ui
  *= require_tree .
  *= require_self
  */
@@ -36,4 +37,24 @@
   display: inline-block;
 }
 
+#slider { 
+  margin: 10px; 
+} 
+
+div.ui-slider-range.ui-widget-header {
+    background: #0000ff;
+}
+
+.matchee-profile {
+  border-top-color: black;
+  border-top-style: solid;
+  border-top-width: 2px; 
+  border-bottom-color: black;
+  border-bottom-style: solid;
+  border-bottom-width: 2px; 
+  padding-bottom: 50px;
+}
+
+.match-value {
+}
 

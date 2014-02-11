@@ -24,7 +24,7 @@ describe 'editing my profile page' do
       extra: {
         raw_info: {
           birthday: @user.birthday,
-          gender: 'male'
+          gender: @user.male
         }
       },
       credentials: {
@@ -34,7 +34,9 @@ describe 'editing my profile page' do
 
     @user = User.find_for_facebook_oauth(Hashie::Mash.new(OmniAuth.config.mock_auth[:facebook]))
     login_as @user
-    visit '/users/edit'
+
+    visit '/'
+    click_link 'Edit my Profile'
 
   end
 
@@ -66,6 +68,32 @@ describe 'editing my profile page' do
       expect(@user.reload.location).to eq 'Sheffield, United Kingdom'
 
     end
+
+    it 'a user can update their gender' do
+
+      expect(@user.male?).to be false
+      select 'Male', from: 'user_male'
+      click_button 'Update' 
+      expect(@user.reload.male?).to be true
+
+    end
+
+    it 'a user can update their birthday' do
+
+      expect(@user.birthday).to eq '08/08/1980'
+      fill_in 'Birthday', with: '08/08/1990'
+      click_button 'Update' 
+      expect(@user.reload.birthday).to eq '08/08/1990'
+      
+    end
+
+    xit 'a user cannot input  update their age in an incorrect format' do
+
+      implement test which requires using rails date_select form to fix
+      
+    end
+
+
 
     it 'a user has a profile picture' do
 

@@ -5,7 +5,6 @@ describe 'logging in' do
 
   before do
     user = create(:user)
-
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:facebook] = {
       provider: 'facebook',
@@ -20,8 +19,9 @@ describe 'logging in' do
 
   it 'a user can log in via Facebook' do
 
-    visit '/users/sign_up'
-    click_link 'Sign in with Facebook'
+    visit '/'
+    click_button 'Create Your Mixtape'
+    click_link 'FINISH MIXING!'
     expect('Signed in successfully.')
 
   end

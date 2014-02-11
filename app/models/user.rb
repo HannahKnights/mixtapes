@@ -82,7 +82,11 @@ class User < ActiveRecord::Base
     day, month, year = dob.slice(3,2), dob.slice(0,2), dob.slice(6,4)
     dob = Time.new( year, month, day )
     ((Time.now - dob)/(60*60*24*365)).floor
-  end 
+  end
+
+  def gender
+    self.male ? 'Male' : 'Female'
+  end
 
   def music_likes
     graph = Koala::Facebook::API.new(self.auth_token)

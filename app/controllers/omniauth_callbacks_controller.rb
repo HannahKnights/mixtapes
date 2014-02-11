@@ -11,6 +11,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
     end
+
+    if @user.mixtape_id == nil
+      @user.update_attributes( mixtape_id: session[:mixtape_id] )
+      Mixtape.find(session[:mixtape_id]).update_attributes( user_id: @user.id )
+    else
+      session[:mixtape_id] = @user.mixtape_id
+    end
+  
   end
 
 

@@ -1,10 +1,153 @@
+
 <h1>
-  User's Mixtape
+  My Mixtape Match's
 </h1>
 
+<div id="slider"></div>
+<div id="age-range"></div>
+
+<%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
+
+
+<% user_mix = current_user.mixtape.tracks %>
+
+
 <% @mixtapes.each do |mixtape| %>
-  <h2>
-  <%= mixtape.title %>
-  </h2>
-  <%= button_to 'Edit Mixtape', edit_mixtape_path(mixtape), method: 'get' %> 
+  
+  
+  <% if mixtape.user_id != nil && mixtape.user_id != current_user.id %>
+
+  <div class='matchee-profile'>
+  
+
+   <div class='match-value'><%= match_rate(user_mix, mixtape.tracks) %></div>
+
+    <h2>
+    <%= mixtape.title %>
+    </h2>
+    <% mixtape.tracks.each do |track| %>
+
+      <h3><%= track.artist %></h3>
+
+      <h4><%= track.song %></h4>
+
+    <% end %>
+
+    <% user = User.find(mixtape.user_id) %>
+
+    <%= user.name %>
+
+    <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
+
+    <%= user.location %>
+
+    <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
+
+    <% user.photos.each do |photo| %>
+
+        <% if photo.profile_picture? %>
+
+          <%= image_tag photo.image_url, class: 'profile-picture' %>
+
+        <% end %>
+
+    <% end %>
+
+  </div>
+
+  <% end %>
+
 <% end %>
+
+
+<script>
+
+  window.minAge = 20;
+  $('#slider').on( 'slidechange', function( event, ui ) {
+      window.minAge = ui.values[0];
+  });
+  
+
+  window.maxAge = 35;
+  $('#slider').on( 'slidechange', function( event, ui ) {
+      window.maxAge = ui.values[1];
+  });
+
+  window.genderPreference = $('#gender').find('option:selected').val();
+  $('#gender').change( function() {
+    window.genderPreference = $(this).find('option:selected').val();
+  });
+
+
+  function filteringMatches() {
+
+    var matchee = $('.matchee-profile');
+    var minAge = window.minAge
+    var maxAge = window.maxAge
+    var genderPreference = window.genderPreference
+
+    $.each( matchee, function() {
+      
+      var matcheeGender = $(this).children('.gender').attr('data-attribute');
+      var matcheeAge = $(this).children('.age').attr('data-attribute');
+
+      if ((matcheeGender == genderPreference) && (minAge <= matcheeAge && matcheeAge <= maxAge)) {
+        $(this).show()
+      }
+      else
+      {
+        $(this).hide()
+      } 
+    
+    });
+  
+  };
+
+
+  function sortMatches() {
+    
+    return $('.matchee-profile').tsort('.match-value', { order: 'desc'});
+  
+  };
+
+  function updateAgeRange() {
+
+    $('#age-range').html( window.minAge + ' - ' + window.maxAge )
+
+  };
+
+
+$(document).ready(function() {
+
+  $('#slider').slider( {
+      range: true,
+      min: 18,
+      max: 100,
+      values: [ 20, 35 ]
+  });
+
+  sortMatches();
+
+  filteringMatches();
+
+  updateAgeRange();
+
+  $('#slider').on( 'slidechange', function() {
+
+    filteringMatches();
+    updateAgeRange();
+
+  });
+
+  $('#gender').change( function() {
+
+    filteringMatches();
+    updateAgeRange();
+
+  });  
+  
+});
+
+
+
+</script>

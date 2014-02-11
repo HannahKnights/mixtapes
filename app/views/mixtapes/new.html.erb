@@ -7,27 +7,43 @@
         </div>
         <div class="panel-body">
           <%= render 'add_track_form' %>
-          <%= render 'mixtape_name_form', button_text: 'RECORD TAPE' %>
+          <%= render 'mixtape_name_form', button_text: 'Edit Mixtape Title' %>
+          <% if !user_signed_in? %>
+            <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), id: 'fb-auth', class: 'btn btn-primary btn-lg' %>
+            <% end %>
+          <div id="song-details">
+            <%= render 'tracks_with_details' %>
+          </div>
         </div>
       </div>
     </div><!--column left -->
-  
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">{{title}}</h2>
         </div>
         <div class="panel-body track-listing">
-          <% @tracks.each do |track| %>
-            <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
-          <% end %>
-        </div>
+        <% @tracks.each do |track| %>
+          <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
+        <% end %>
       </div>  
     </div><!--column right -->
-
   </div><!--row -->
 </div> <!--container -->
-
 <script type='text/template' id='playlist-template'>
   <%= render 'track' %>
+</script>
+<script>
+$(document).ready(function() {
+  $('a#fb-auth').click(function(e) {
+  var width = 600, height = 400;
+  var left = (screen.width / 2) - (width / 2);
+  var top = (screen.height / 2) - (2 * height / 3);
+  var features = 'modal=yes,location=yes,menubar=no,toolbar=no,status=no,width=' + width + ',height=' + height + ',toolbar=no,titlebar=no,left=' + left + ',top=' + top;
+  var loginWindow = window.open('/users/auth/facebook', '_blank', features);
+  loginWindow.focus();
+  e.preventDefault();
+  return false;
+  });
+});
 </script>

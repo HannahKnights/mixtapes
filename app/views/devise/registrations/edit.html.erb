@@ -6,11 +6,18 @@
   <div><%= f.label :name %><br />
   <%= f.text_field :name, :autofocus => true %></div>
 
+  <div><%= f.label :gender  %><br />
+  <%= f.select( :male, options_for_select([['Male', true], ['Female', false]], :selected => resource.male)) %></div>
+
+  <div><%= f.label :birthday  %><br />
+  <%= f.text_field :birthday %></div>
+
   <div><%= f.label :location  %><br />
   <%= f.text_field :location %></div>
 
   <div><%= f.label :email %><br />
   <%= f.text_field :email %></div>
+
 
   <h3>Current Profile Picture</h3>
   
@@ -33,7 +40,7 @@
     </div>
  
   <% end %>
-
+  
  </div>
 
  <button id='more_images'>Select from more images</button>
@@ -41,10 +48,6 @@
 
   <div><%= f.submit "Update" %></div>
 <% end %>
-
-
-
-
 
   <div class='fb-selection'>
 
@@ -94,8 +97,8 @@ $(document).ready(function(){
   });
 
   $('.image-adder').on('ajax:success', function() {
-    $(this).addClass('profile-picture');
     $('#user-profile').append($(this));
+    $(this).children().addClass('profile-picture');
   });
 
 

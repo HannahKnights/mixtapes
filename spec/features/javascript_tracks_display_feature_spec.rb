@@ -6,6 +6,7 @@ describe 'creating, displaying and adding a track to a mixtape' do
 
     user = create(:user)
     login_as user, scope: :user
+  
   end
 
   it "should create a track with AJAX when I click create track" do
