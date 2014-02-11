@@ -11,16 +11,17 @@
     <%- render 'mixtape_tracks' %>
 
     <!-- <div class="track-listing"></div>   -->
-
-    <%= render 'tracks_with_details' %>
+    <div id="song-details">
+      <%= render 'tracks_with_details' %>
+    </div>
   </div>
   <div class="col-md-6">
     <div class="track-listing"></div>  
       <script type='text/template' id='playlist-template'>
 
         <div class='track'>
-          <h3>{{song}}</h3> <h4>{{artist}}</h4>
-          {{id}}
+          <h1>{{ artist }}</h1>
+          <h6>{{ song }}</h6>
 
           <a class="delete-track" href="/mixtapes/<%= @mixtape.id %>/tracks/{{{id}}}">Delete</a>
         </div>
