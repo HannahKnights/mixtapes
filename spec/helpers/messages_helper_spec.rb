@@ -1,15 +1,13 @@
-require 'spec_helper'
+# require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the MessagesHelper. For example:
-#
-# describe MessagesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
+# module Helpers
+  
+#   def send_message
+#     visit '/messages/new'
+#     fill_in "Recipient", with: 'Jane Oldman'
+#     fill_in "Subject", with: "I'm a test message"
+#     fill_in "Body", with: "Lorem ipsum dollar whatevs"
+#     click_button "Send"
 #   end
+
 # end
-describe MessagesHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
-end

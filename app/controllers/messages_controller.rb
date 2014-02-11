@@ -1,13 +1,15 @@
 class MessagesController < ApplicationController
 
-  def new
-    if params[:reply_to]
-      @reply_to = current_user.received_messages.find(params[:reply_to])
+  skip_before_action :verify_authenticity_token, only: :create
+  # helper_method :current_user
 
-      @message = Message.new_reply(@reply_to, current_user)
-    else
-      @message = Message.new
-    end
+  # def current_user
+  #   User.find 1
+  # end
+
+  def new
+    @send_to = User.find(params[:send_to])
+    @message = Message.new
   end
 
   def create
@@ -21,30 +23,35 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @received_messages = current_user.received_messages
-    @sent_messages = current_user.sent_messages
+    @correspondents = current_user.correspondents
+    @messages = Message.find_by(author_id: current_user.id )
   end 
 
+
   def show
-    redirect_to new_message_path
+    @message = Message.find params[:id]
+    raise unless @message.recipient == current_user || @message.author == current_user
+
+    @notme = [@message.recipient, @message.author].find { |u| u != current_user }
+
+    @conversation = @message.recipient.messages_with(@message.author)
   end
 
   def destroy
-      @message = current_user.received_messages.find params[:id]
-      @message.destroy
+      @message = Message.find params[:id]
+      raise unless @message.recipient == current_user || @message.author == current_user
+
+      @conversation = @message.recipient.messages_with(@message.author)
+      @conversation.each(&:destroy)
       redirect_to messages_path
   end
-
-
-
 
   private
 
     def message_params
       { author: current_user,
-        recipient: User.find_by_name(params[:message][:recipient]), 
-        body: params[:message][:body],
-        subject: params[:message][:subject]
+        recipient: User.find(params[:recipient_id]), 
+        body: params[:body]
       }
     end
 

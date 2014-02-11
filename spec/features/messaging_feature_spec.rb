@@ -1,6 +1,7 @@
 require "spec_helper"
 
 
+
   describe "Messaging" do
 
     before do
@@ -31,20 +32,20 @@ require "spec_helper"
       end
     end
 
-    context "Replying" do
-      before do
-        login_as @user_a, scope: :user
-        send_message
-      end
+    # context "Replying" do
+    #   before do
+    #     login_as @user_a, scope: :user
+    #     send_message
+    #   end
 
-      it "should be able to reply to a message" do
-        login_as @user_b, scope: :user
-        visit '/messages'
-        click_link 'Reply'
+    #   it "should be able to reply to a message" do
+    #     login_as @user_b, scope: :user
+    #     visit '/messages'
+    #     click_link 'Reply'
     
-        expect(find_field('Subject').value).to eq  "RE: I'm a test message"
-      end
-    end
+    #     expect(find_field('Subject').value).to eq  "RE: I'm a test message"
+    #   end
+    # end
 
     context "Deleting" do
       before do
@@ -66,7 +67,8 @@ require "spec_helper"
   def send_message
     visit '/messages/new'
     fill_in "Recipient", with: 'Jane Oldman'
-    fill_in "Subject", with: "I'm a test message"
     fill_in "Body", with: "Lorem ipsum dollar whatevs"
     click_button "Send"
   end
+
+  

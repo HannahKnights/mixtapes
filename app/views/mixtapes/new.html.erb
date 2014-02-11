@@ -1,18 +1,27 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-md-7">
-    <h3>Add A Song</h3>
-    <%= render 'add_track_form' %>
-
-    <%= render 'mixtape_name_form', button_text: 'RECORD TAPE' %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Add A Song</h3>
+        </div>
+        <div class="panel-body">
+          <%= render 'add_track_form' %>
+          <%= render 'mixtape_name_form', button_text: 'RECORD TAPE' %>
+        </div>
+      </div>
     </div><!--column left -->
   
     <div class="col-md-4">
-      <h2>{{title}}</h2>
-      <div class="track-listing">
-        <% @tracks.each do |track| %>
-          <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
-        <% end %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">{{title}}</h2>
+        </div>
+        <div class="panel-body track-listing">
+          <% @tracks.each do |track| %>
+            <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
+          <% end %>
+        </div>
       </div>  
     </div><!--column right -->
 

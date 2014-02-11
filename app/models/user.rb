@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :sent_messages, :class_name => "Message", :foreign_key => "author_id"
   has_many :received_messages, :class_name => "Message", :foreign_key => "recipient_id"
+  has_many :correspondents, -> { uniq }, through: :received_messages, class_name: "User", source: :author 
 
 
   def self.find_for_facebook_oauth(auth)
@@ -19,6 +20,14 @@ class User < ActiveRecord::Base
         new_user.recent_photo_assignment
       end
     end
+  end
+
+  def messages_with(other_user)
+    (received_messages.where(author: other_user) + sent_messages.where(recipient: other_user)).sort_by(&:created_at)
+  end
+
+  def last_message_involving(other_user)
+    messages_with(other_user).last
   end
 
   def profile_assignment(auth)

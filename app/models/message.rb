@@ -10,11 +10,12 @@ class Message < ActiveRecord::Base
 
   def self.new_reply(prev_message, user)    
     new({
-      subject: "RE: #{prev_message.subject}",
-      body: prev_message.body,
       recipient: prev_message.author
     })
   end
 
+  def group_messages(message)
+    message.group_by
+  end
 
 end

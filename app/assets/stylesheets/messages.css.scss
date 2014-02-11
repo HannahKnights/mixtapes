@@ -1,3 +1,21 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.me {
+  text-align: right;
+  background-color: #0067e7;
+}
+
+.them {
+  background-color: #b7b7b7;
+}
+
+p.message-time {
+  text-align: center;
+  font-size: 11px;
+}
+
+.message-copy .me {
+  color: white;
+}
