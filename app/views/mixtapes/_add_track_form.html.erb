@@ -1,9 +1,9 @@
 <%= form_for [@mixtape, @track] do |form| %>
-  <%= form.label :artist %>
-  <%= form.text_field :artist %>
+  <%= form.text_field :artist, placeholder: 'Enter artist' %>
+  <%= form.button 'Find tracks', id: 'find-tracks' %>
   <br>
-  <%= form.label :song %>
-  <%= form.text_field :song %>
+  <%= link_to 'Find songs', '', id: 'find-songs' %>
+  <!-- <%= form.text_field :song, placeholder: 'Enter song' %> -->
 
-  <%= form.button 'Add Track to Mixtape' %>
+  <!-- <%= form.button 'Add Track to Mixtape' %> -->
 <% end %>

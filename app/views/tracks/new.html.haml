@@ -1,0 +1,7 @@
+%h1= @mixtape.title
+= form_for [@mixtape, @tracks], remote: true do |track|
+  = track.text_field :artist, placeholder: 'Enter artist'
+  %br
+  = track.text_field :song, placeholder: 'Enter song'
+  %br
+  = track.submit 'Copy track to mixtape'

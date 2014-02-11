@@ -21,8 +21,10 @@ ActiveRecord::Schema.define(version: 20140207105709) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "track_id"
   end
 
+  add_index "mixtapes", ["track_id"], name: "index_mixtapes_on_track_id", using: :btree
   add_index "mixtapes", ["user_id"], name: "index_mixtapes_on_user_id", using: :btree
 
   create_table "mixtapes_tracks", id: false, force: true do |t|

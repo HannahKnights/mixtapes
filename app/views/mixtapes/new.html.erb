@@ -8,26 +8,29 @@
 
     <% if !user_signed_in? %>
     
-      <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), id: 'fb-auth', class: 'btn btn-primary btn-lg' %>
+      <%= link_to 'FINISH MIXING!', user_omniauth_authorize_path( :facebook ), id: 'fb-auth', class: 'btn btn-primary btn-lg', data: { :"mixtape-id" => session[:mixtape_id] } %>
+
 
       <% end %>
 
+    <div id="song-details">
+      <%= render 'tracks_with_details' %>
+    </div>
+
     </div><!--column left -->
   
-    <div class="col-md-4">
-      <h2>{{title}}</h2>
+    <div class="col-md-5">
+      <h2>{{ title }}</h2>
       <div class="track-listing">
         <% @tracks.each do |track| %>
           <%= render 'track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
         <% end %>
-          
-
-
 
       </div>  
     </div><!--column right -->
   </div><!--row -->
 </div> <!--container -->
+
 
 <script type='text/template' id='playlist-template'>
   <%= render 'track' %>
