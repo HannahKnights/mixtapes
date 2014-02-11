@@ -1,5 +1,5 @@
 class Like < ActiveRecord::Base
 
-  belongs_to :mixtape
+  belongs_to :post
 
 end

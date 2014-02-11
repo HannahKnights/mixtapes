@@ -101,4 +101,19 @@ class User < ActiveRecord::Base
     update_attributes(params, *options)
   end
 
+  def matches
+    my_likes = Like.where( user_mix_id: self.mixtape_id )
+    my_likes != nil ? doublematch(my_likes) : false
+  end
+
+  def doublematch(my_likes)
+    matches = []
+    my_likes.each do |like|
+      if Like.find_by(user_mix_id: like.match_mix_id, match_mix_id: self.mixtape_id) != nil
+        matches << User.find_by(mixtape_id: like.match_mix_id)
+      end
+    end
+    matches
+  end
+
 end

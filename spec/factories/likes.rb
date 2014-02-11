@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :like do
     like false
-    user_id 1
-    match_id 1
+    user_mix_id 1
+    match_mix_id 1
     block false
   end
 end
