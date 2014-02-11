@@ -6,7 +6,7 @@
 <div id="slider"></div>
 <div id="age-range"></div>
 
-<%= select_tag(:gender, options_for_select([['Female', 'f'],['Male', 'm']], :selected => params[:gender])) %>
+<%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
 
 
 
@@ -107,10 +107,39 @@ $(document).ready(function() {
   // genderSelection.on( '')
 
   $('#gender').change( function() {
-    console.log( $(this).find('option:selected').val() )
+    
+    var genderPreference = $(this).find('option:selected').val();
+    var matchee = $('.matchee-profile');
+
+    $.each( matchee, function() {
+      var matcheeGender = $(this).children('.gender').attr('data-attribute');
+
+      if ( genderPreference != matcheeGender ) {
+        $(this).hide();
+      }
+      else
+      {
+        $(this).show();
+      };
+
+
+      // console.log( $(this).children('.gender').attr('data-attribute') )
+    });
+
+
+    // console.log( genderPreference );
+    // console.log( matcheeGender ); 
+    
+    // console.log( $(this).find('option:selected').val() );
+
+
+
+    // $('.matchee-profile').children('.gender').attr('data-attribute')
+
+
   });
 
-  
+
 
   // $( "#slider" ).on( "slidechange", function( event, ui ) {
   //   console.log(window.minAge);
