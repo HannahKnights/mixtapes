@@ -1328,7 +1328,7 @@
                 $.error("missing input");
             }
             this.autoselect = !!o.autoselect;
-            this.minLength = _.isNumber(o.minLength) ? o.minLength : 1;
+            this.minLength = _.isNumber(o.minLength) ? o.minLength : 3;
             this.$node = buildDomStructure(o.input, o.withHint);
             $menu = this.$node.find(".tt-dropdown-menu");
             $input = this.$node.find(".tt-input");
