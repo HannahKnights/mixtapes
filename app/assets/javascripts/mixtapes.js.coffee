@@ -7,7 +7,7 @@ $(document).ready ->
 
   getArtistData = (query, callback) ->
     $.ajax(
-      url: "http://developer.echonest.com/api/v4/artist/search?api_key=HY9AC0F4FNZ59GYBO&format=jsonp&results=5&name=" + query
+      url: "http://developer.echonest.com/api/v4/artist/search?api_key=HY9AC0F4FNZ59GYBO&format=jsonp&results=5&name=" + query + "&sort=hotttnesss-desc"
       dataType: "jsonp"
     ).done (response) ->
       artists = response.response.artists
@@ -37,7 +37,10 @@ $(document).ready ->
       console.log 'Songs found!'
       console.log response
       songs = response.response.songs
-      $.each songs, (index, value) ->
+      filtered = _.uniq songs, (song) ->
+        song.title
+      $.each filtered, (index, value) ->
+        # console.log _.
         if value.tracks[0] is `undefined`
           # value.duration = duration(value.audio_summary.duration)
           # songDetailsWithoutPreview = Mustache.render($("#song-details-without-preview-template").html(), value)
