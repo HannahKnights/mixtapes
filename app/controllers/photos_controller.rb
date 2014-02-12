@@ -7,7 +7,7 @@ class PhotosController < ApplicationController
     if user_photos.where(profile_picture: true).count < 5 && photo.profile_picture != true 
       photo.update_attributes( profile_picture: true )
     else
-      raise[:error] = "Sorry we cannot save that picture!"
+      flash[:error] = "Sorry we cannot save that picture!"
     end
     render json: { status: 'success' }
   end
@@ -18,7 +18,7 @@ class PhotosController < ApplicationController
     if user_photos.where(profile_picture: true).count > 1
       photo.update_attributes( profile_picture: false )
     else
-      raise[:error] = "Sorry you must have more than one picture!"
+      flash[:error] = "Sorry you must have more than one picture!"
     end
     render json: { status: 'success' }
   end

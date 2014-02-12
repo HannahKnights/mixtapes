@@ -1,9 +1,9 @@
 class Mixtape < ActiveRecord::Base
 
 
-belongs_to :user
-has_and_belongs_to_many :tracks
-has_many :likes
+  belongs_to :user
+  has_and_belongs_to_many :tracks
+  has_many :likes, foreign_key: :user_mix_id
 
 
   def match_rate(match_mixtape)
@@ -20,7 +20,20 @@ has_many :likes
     mixtape.map{ |song| song[attribute.to_sym] }
   end
 
+  def blocked?(match_mix)
+    have_blocked?(match_mix) || been_blocked_by?(match_mix)
+  end
 
+  def blocks
+    likes.where(block: true)
+  end
 
+  def have_blocked?(match_mix)
+    blocks.find_by(match_mix: match_mix)
+  end
+
+  def been_blocked_by?(match_mix)
+    match_mix.blocks.find_by(match_mix: self)
+  end
 
 end

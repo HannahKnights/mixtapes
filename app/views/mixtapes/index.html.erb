@@ -14,49 +14,54 @@
 
 
 <% @mixtapes.each do |mixtape| %>
-  
-  
-  <% if mixtape.user_id != nil && mixtape.user_id != current_user.id %>
+
+  <% if mixtape.user && mixtape.user != current_user && !mixtape.blocked?(user_mix) %>
 
   <div class='matchee-profile'>
   
+    <div class='matchee-mix'>
 
-   <div class='match-value'><%= user_mix.match_rate(mixtape.tracks) %></div>
+     <div class='match-value'><%= user_mix.match_rate(mixtape.tracks) %></div>
 
-    <h2>
-    <%= mixtape.title %>
-    </h2>
-    <div class='link', data-id='<%= mixtape.user_id %>'>
-    <%= button_to 'Like me!', mixtape_likes_path( mixtape ), remote:true %>
+      <h2>
+      <%= mixtape.title %>
+      </h2>
+      <div class='link', data-id='<%= mixtape.user_id %>'>
+      <%= button_to 'Like me!', mixtape_likes_path( mixtape , like: true, block: false), remote:true %>
+      <%= button_to 'Dislike!', mixtape_likes_path( mixtape , block: true, like: false), remote: true %>
+      </div>
+
+      <% mixtape.tracks.each do |track| %>
+
+        <h3><%= track.artist %></h3>
+
+        <h4><%= track.song %></h4>
+
+      <% end %>
 
     </div>
-    <% mixtape.tracks.each do |track| %>
 
-      <h3><%= track.artist %></h3>
+      <% user = User.find(mixtape.user_id) %>
 
-      <h4><%= track.song %></h4>
+      <%= user.name %>
 
-    <% end %>
+      <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
 
-    <% user = User.find(mixtape.user_id) %>
+      <%= user.location %>
 
-    <%= user.name %>
+      <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
 
-    <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
+      <%= link_to "New Message", new_message_path(send_to: user) %>
 
-    <%= user.location %>
+      <% user.photos.each do |photo| %>
 
-    <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
+          <% if photo.profile_picture? %>
 
-    <% user.photos.each do |photo| %>
+            <%= image_tag photo.image_url, class: 'profile-picture' %>
 
-        <% if photo.profile_picture? %>
+          <% end %>
 
-          <%= image_tag photo.image_url, class: 'profile-picture' %>
-
-        <% end %>
-
-    <% end %>
+      <% end %>
 
   </div>
 
@@ -162,7 +167,7 @@ $(document).ready(function() {
     filteringMatches();
     updateAgeRange();
 
-  });  
+  }); 
   
 });
 
