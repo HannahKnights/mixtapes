@@ -145,12 +145,29 @@
   };
 
   function showNext(parent, index, length) {
-    if ( index === length ) {
+    if ( index === length - 1 ) {
       var next = 0
     }
     else
     {
       var next = index + 1
+    }
+    parent.children('img').each( function(i) {
+      if ( i === next ) {
+        $(this).show()
+        return false
+      }
+
+    });
+  };
+
+  function showPrevious(parent, index, length) {
+    if ( index === 0 ) {
+      var next = length - 1
+    }
+    else
+    {
+      var next = index - 1
     }
     parent.children('img').each( function(i) {
       if ( i === next ) {
@@ -197,7 +214,7 @@ $(document).ready(function() {
 
     var match_id = $(this).attr('data-attribute');
     var my_match = $('.profile-picture-holder[data-attribute="' + match_id + '"]').children('img') 
-    var length = my_match.length - 1
+    var length = my_match.length
 
     my_match.each( function(index) {
 

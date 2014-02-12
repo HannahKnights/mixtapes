@@ -106,9 +106,14 @@ div.ui-slider-range.ui-widget-header {
 }
 
 .match-value {
+  display: none;
 }
 
 .photo-error {
   display: none;
+}
+
+.photo-nav{
+  display: inline-block;
 }
 
