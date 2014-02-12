@@ -16,6 +16,7 @@
 //= require twitter/bootstrap
 //= require mustache
 //= require jquery.mustache
+//= require underscore.js
 //= require websocket_rails/main
 //= require angular
 //= require jquery-ui.min
