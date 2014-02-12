@@ -5,53 +5,63 @@
 
 <div id="slider"></div>
 <div id="age-range"></div>
+<div id='my_gender' data-attribute='<%= current_user.gender %>'></div>
 
 <%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
 
 
-<% user_mix = current_user.mixtape.tracks %>
+<% user_mix = current_user.mixtape %>
 
 
 <% @mixtapes.each do |mixtape| %>
-  
-  
-  <% if mixtape.user_id != nil && mixtape.user_id != current_user.id %>
+
+  <% if mixtape.user && mixtape.user != current_user && !mixtape.blocked?(user_mix) %>
 
   <div class='matchee-profile'>
   
+    <div class='matchee-mix'>
 
-   <div class='match-value'><%= match_rate(user_mix, mixtape.tracks) %></div>
+     <div class='match-value'><%= user_mix.match_rate(mixtape.tracks) %></div>
 
-    <h2>
-    <%= mixtape.title %>
-    </h2>
-    <% mixtape.tracks.each do |track| %>
+      <h2>
+      <%= mixtape.title %>
+      </h2>
+      <div class='link', data-id='<%= mixtape.user_id %>'>
+      <%= button_to 'Like me!', mixtape_likes_path( mixtape , like: true, block: false), remote:true %>
+      <%= button_to 'Dislike!', mixtape_likes_path( mixtape , block: true, like: false), remote: true %>
+      </div>
 
-      <h3><%= track.artist %></h3>
+      <% mixtape.tracks.each do |track| %>
 
-      <h4><%= track.song %></h4>
+        <h3><%= track.artist %></h3>
 
-    <% end %>
+        <h4><%= track.song %></h4>
 
-    <% user = User.find(mixtape.user_id) %>
+      <% end %>
 
-    <%= user.name %>
+    </div>
 
-    <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
+      <% user = User.find(mixtape.user_id) %>
 
-    <%= user.location %>
+      <%= user.name %>
 
-    <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
+      <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
 
-    <% user.photos.each do |photo| %>
+      <%= user.location %>
 
-        <% if photo.profile_picture? %>
+      <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
 
-          <%= image_tag photo.image_url, class: 'profile-picture' %>
+      <%= link_to "New Message", new_message_path(send_to: user) %>
 
-        <% end %>
+      <% user.photos.each do |photo| %>
 
-    <% end %>
+          <% if photo.profile_picture? %>
+
+            <%= image_tag photo.image_url, class: 'profile-picture' %>
+
+          <% end %>
+
+      <% end %>
 
   </div>
 
@@ -73,7 +83,6 @@
       window.maxAge = ui.values[1];
   });
 
-  window.genderPreference = $('#gender').find('option:selected').val();
   $('#gender').change( function() {
     window.genderPreference = $(this).find('option:selected').val();
   });
@@ -116,6 +125,18 @@
 
   };
 
+  function defaultGenderSetting() {
+
+    if ($('#my_gender').attr('data-attribute') == 'Male') {
+      $('#gender').select('option:selected').val('Female');
+    }
+    else
+    {
+      $('#gender').select('option:selected').val('Male');
+    };
+    window.genderPreference = $('#gender').find('option:selected').val();
+  };
+
 
 $(document).ready(function() {
 
@@ -125,6 +146,8 @@ $(document).ready(function() {
       max: 100,
       values: [ 20, 35 ]
   });
+
+  defaultGenderSetting();
 
   sortMatches();
 
@@ -144,7 +167,7 @@ $(document).ready(function() {
     filteringMatches();
     updateAgeRange();
 
-  });  
+  }); 
   
 });
 

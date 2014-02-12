@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root "welcome#index"
   resources :mixtapes do
     resources :tracks
+    resources :likes
   end
 
   post '/mixtapes/new' => 'mixtapes#new'
