@@ -7,7 +7,7 @@ class MixtapesController < ApplicationController
     if user_signed_in?
       user = current_user
       if Mixtape.where( user_id: user.id ).count > 1
-        flash[:alert] = 'Ooops! Only one mixtape allowed!'
+        flash[:error] = 'Ooops! Only one mixtape allowed!'
         @mixtape = user.mixtape
         session[:mixtape_id] = @mixtape.id
         Mixtape.where(user_id: user.id).last.destroy
@@ -20,11 +20,13 @@ class MixtapesController < ApplicationController
         @mixtape = Mixtape.find session[:mixtape_id]
       else
         @mixtape = Mixtape.create        
-        session[:mixtape_id] = @mixtape.id      
+        session[:mixtape_id] = @mixtape.id 
       end      
     end
+    puts params[:mixtape]
     title = params[:mixtape][:title] if params[:mixtape]
     @mixtape.title = title if title
+    @mixtape.save
     @tracks = @mixtape.tracks
     @track = Track.new
   end
