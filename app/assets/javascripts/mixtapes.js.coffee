@@ -89,6 +89,7 @@ $(document).ready ->
       trackHash.song = $(this).parent().children('.track-title').text()
       trackHash.mixtape_id = $('#find-songs').data('mixtape-id')
       trackHash.echonest_song_id = $(this).data('echonest-song-id')
+      trackHash.preview_url = $(this).parent().children('audio').attr('src')
 
       $.ajax(
         type: 'POST',
@@ -98,7 +99,8 @@ $(document).ready ->
             artist: trackHash.artist,
             song: trackHash.song,
             mixtape_id: $('#find-songs').data('mixtape-id'),
-            echonest_song_id: trackHash.echonest_song_id
+            echonest_song_id: trackHash.echonest_song_id,
+            preview_url: trackHash.preview_url
           }
         }
       ).done (response) ->
