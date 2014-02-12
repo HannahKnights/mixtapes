@@ -10,11 +10,52 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *
  *= require bootstrap_and_overrides
  *= require jquery-ui
  *= require_tree .
  *= require_self
  */
+ 
+@font-face {  
+  font-family: 'hand1';  
+  src: url('Moon Flower.ttf'); 
+} 
+
+@font-face {
+  font-family: 'hand2';  
+  src: url('Moon Flower Bold.ttf');   
+}
+
+@font-face {
+  font-family: 'hand3';  
+  src: url('DJHTRIAL.otf'),
+        url('DJHTRIAL.ttf') format('truetype');     
+}
+
+@font-face {
+  font-family: 'hand4';  
+  src: url('Notera_PersonalUseOnly.ttf');     
+}
+
+@font-face {
+  font-family: 'hand5';  
+  src: url('Signerica_Fat.ttf');     
+}
+
+@font-face {
+  font-family: 'hand6';  
+  src: url('Signerica_Thin.ttf');     
+}
+
+
+h2.cassette {
+  font-family: 'hand4';
+ }
+
+h3.cassette {
+  font-family: 'hand4';
+}
 
 
 .profile-picture {
