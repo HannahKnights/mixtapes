@@ -51,7 +51,12 @@ class MixtapesController < ApplicationController
   end
 
   def index
-    @mixtapes = Mixtape.all 
+    if current_user.mixtape.tracks.empty?
+      flash[:error] = "Please make a mixtape!!"
+      redirect_to new_mixtape_path
+    else
+      @mixtapes = Mixtape.all 
+    end
   end
 
   def edit

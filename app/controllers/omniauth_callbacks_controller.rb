@@ -13,8 +13,15 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if @user.mixtape_id == nil
-      @user.update_attributes( mixtape_id: session[:mixtape_id] )
-      Mixtape.find(session[:mixtape_id]).update_attributes( user_id: @user.id )
+      if session[:mixtape_id] 
+        @user.update_attributes( mixtape_id: session[:mixtape_id] )
+        Mixtape.find(session[:mixtape_id]).update_attributes( user_id: @user.id )
+      else
+        mixtape = Mixtape.create
+        session[:mixtape_id] = mixtape.id
+        @user.update_attributes( mixtape_id: session[:mixtape_id] )
+        Mixtape.find(session[:mixtape_id]).update_attributes( user_id: @user.id )
+      end
     else
       session[:mixtape_id] = @user.mixtape_id
     end
