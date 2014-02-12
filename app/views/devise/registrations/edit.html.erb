@@ -1,3 +1,5 @@
+<div class='photo-error alert fade in alert-danger alert-dismissable'></div>
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
@@ -92,13 +94,20 @@ $(document).ready(function(){
     $('.fb-selection').slideDown();
   });
 
-  $('.image-deleter').on('ajax:success', function() {
+  $('#user-profile').on('ajax:success', '.image-deleter', function() {
     $(this).remove();
+  }).on('ajax:error', function(e, data) {
+    $('.photo-error').show().html(data.responseJSON.message)
   });
 
-  $('.image-adder').on('ajax:success', function() {
+  $('.image-adder').on('ajax:success', function(xhr, photo) {
+    $(this).attr('class', 'image-deleter')
+    $(this).data('method', 'delete')
+    $(this).attr('href', '/photos?id=' + photo.id)
     $('#user-profile').append($(this));
-    $(this).children().addClass('profile-picture');
+    $(this).children().attr('class', 'profile-picture');
+  }).on('ajax:error', function(e, data) {
+    $('.photo-error').show().html(data.responseJSON.message)
   });
 
 
