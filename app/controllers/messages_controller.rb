@@ -14,16 +14,21 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create message_params
-    if @message.save
-      flash[:notice] = "Your message has been sent"
-      redirect_to messages_path
-    else
-      render 'new'
+    WebsocketRails[:messages].trigger 'new', @message.as_json
+    if !request.xhr?
+      flash[:notice] = "Your message was sent" 
+      redirect_to '/mixtapes'
     end
+    # if @message.save
+    #   # flash[:notice] = "Your message has been sent"
+    #   # redirect_to messages_path
+    # else
+    #   render 'new'
+    # end
   end
 
   def index
-    @correspondents = current_user.correspondents
+    @correspondents = current_user.chatees
     @messages = Message.find_by(author_id: current_user.id )
   end 
 

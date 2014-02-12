@@ -1,62 +1,32 @@
-
-<h1>
-  My Mixtape Match's
-</h1>
-
+<h1>My Mixtape Match's</h1>
 <div id="slider"></div>
 <div id="age-range"></div>
-
 <%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
-
-
-<% user_mix = current_user.mixtape.tracks %>
-
-
+<%= user_mix = current_user.mixtape.tracks %>
 <% @mixtapes.each do |mixtape| %>
-  
-  
   <% if mixtape.user_id != nil && mixtape.user_id != current_user.id %>
-
-  <div class='matchee-profile'>
-  
-
-   <div class='match-value'><%= match_rate(user_mix, mixtape.tracks) %></div>
-
-    <h2>
-    <%= mixtape.title %>
-    </h2>
-    <% mixtape.tracks.each do |track| %>
-
-      <h3><%= track.artist %></h3>
-
-      <h4><%= track.song %></h4>
-
-    <% end %>
-
-    <% user = User.find(mixtape.user_id) %>
-
-    <%= user.name %>
-
-    <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
-
-    <%= user.location %>
-
-    <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
-
-    <% user.photos.each do |photo| %>
-
+    <div class='matchee-profile'>
+      <div class='match-value'><%= match_rate(user_mix, mixtape.tracks) %></div>
+      <h2><%= mixtape.title %></h2>
+      <% mixtape.tracks.each do |track| %>
+        <h3><%= track.artist %></h3>
+        <h4><%= track.song %></h4>
+      <% end %>
+      <% user = User.find(mixtape.user_id) %>
+      <%= user.name %>
+      <div class='age' data-attribute='<%= user.age %>'>
+        <%= user.age %>
+      </div>
+      <%= user.location %>
+      <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
+      <%= link_to "New Message", new_message_path(send_to: user) %>
+      <% user.photos.each do |photo| %>
         <% if photo.profile_picture? %>
-
           <%= image_tag photo.image_url, class: 'profile-picture' %>
-
         <% end %>
-
-    <% end %>
-
-  </div>
-
+      <% end %>
+    </div>
   <% end %>
-
 <% end %>
 
 

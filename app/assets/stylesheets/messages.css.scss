@@ -9,13 +9,49 @@
 
 .them {
   background-color: #b7b7b7;
+  text-align: left;
 }
 
-p.message-time {
+.message-holder {
+  min-height: 30px;
+  padding-top: 2px;
+  padding-right: 5px;
+  padding-left: 5px;
+  text-wrap: surpress;
+}
+
+.message-time-main {
   text-align: center;
   font-size: 11px;
 }
 
-.message-copy .me {
+.message-time {
+  font-size: 11px;
+}
+
+.me{
   color: white;
+}
+
+.interaction-list:hover {
+  background-color: #fff6e5;
+}
+
+.selected-message {
+  background-color: #ffd27d;
+}
+
+.selected-message:hover {
+  background-color: #ffd27d;
+}
+
+.correspondent-message {
+  height: 500px;
+  overflow: scroll;
+}
+
+
+.message-previewer {
+  margin-left: 5px;
+  margin-right: 5px;
 }
