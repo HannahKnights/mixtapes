@@ -7,7 +7,7 @@ $(document).ready ->
 
   getArtistData = (query, callback) ->
     $.ajax(
-      url: "http://developer.echonest.com/api/v4/artist/search?api_key=HY9AC0F4FNZ59GYBO&format=jsonp&results=5&name=" + query
+      url: "http://developer.echonest.com/api/v4/artist/search?api_key=HY9AC0F4FNZ59GYBO&format=jsonp&results=5&name=" + query + "&sort=hotttnesss-desc"
       dataType: "jsonp"
     ).done (response) ->
       artists = response.response.artists
@@ -37,7 +37,9 @@ $(document).ready ->
       console.log 'Songs found!'
       console.log response
       songs = response.response.songs
-      $.each songs, (index, value) ->
+      filtered = _.uniq songs, (song) ->
+        song.title.toLowerCase()
+      $.each filtered, (index, value) ->
         if value.tracks[0] is `undefined`
           # value.duration = duration(value.audio_summary.duration)
           # songDetailsWithoutPreview = Mustache.render($("#song-details-without-preview-template").html(), value)
@@ -72,7 +74,7 @@ $(document).ready ->
     trackHash.artist = $(this).parent().children('.artist-name').text()
     trackHash.song = $(this).parent().children('.track-title').text()
     trackHash.mixtape_id = $('#find-songs').data('mixtape-id')
-    # trackHash.echonest_id = 
+    trackHash.echonest_song_id = $(this).data('echonest-song-id')
 
     $.ajax(
       type: 'POST',
@@ -80,8 +82,9 @@ $(document).ready ->
       data: { 
         track: {
           artist: trackHash.artist,
-          song: trackHash.song
-          mixtape_id: $('#find-songs').data('mixtape-id')
+          song: trackHash.song,
+          mixtape_id: $('#find-songs').data('mixtape-id'),
+          echonest_song_id: trackHash.echonest_song_id
         }
       }
     ).done (response) ->

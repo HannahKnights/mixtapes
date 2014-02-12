@@ -1,7 +1,5 @@
 <%= form_for [@mixtape, @track] do |form| %>
   <%= form.text_field :artist, placeholder: 'Enter artist' %>
-  <%= form.button 'Find tracks', id: 'find-tracks' %>
-  <br>
   <%= link_to 'Find songs', '', id: 'find-songs', data: { :"mixtape-id" => session[:mixtape_id] } %>
   <!-- <%= form.text_field :song, placeholder: 'Enter song' %> -->
 
