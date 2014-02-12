@@ -52,16 +52,21 @@
       <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
 
       <%= link_to "New Message", new_message_path(send_to: user) %>
-
+      
+      <div class='profile-picture-holder' data-attribute='<%= user.id %>'>
+      
       <% user.photos.each do |photo| %>
 
           <% if photo.profile_picture? %>
 
-            <%= image_tag photo.image_url, class: 'profile-picture' %>
+            <%= image_tag photo.image_url, class: 'profile-picture matchee' %>
+
+            
 
           <% end %>
 
       <% end %>
+    </div>
 
   </div>
 
@@ -137,6 +142,23 @@
     window.genderPreference = $('#gender').find('option:selected').val();
   };
 
+  function showNext(parent, index, length) {
+    if ( index === length ) {
+      var next = 0
+    }
+    else
+    {
+      var next = index + 1
+    }
+    parent.children('img').each( function(i) {
+      if ( i === next ) {
+        $(this).show()
+        return false
+      }
+
+    });
+  };
+
 
 $(document).ready(function() {
 
@@ -168,6 +190,38 @@ $(document).ready(function() {
     updateAgeRange();
 
   }); 
+
+  $('.profile-picture-holder').click( function() {
+
+    var match_id = $(this).attr('data-attribute');
+    var my_match = $('.profile-picture-holder[data-attribute="' + match_id + '"]').children('img') 
+    var length = my_match.length - 1
+
+    my_match.each( function(index) {
+
+      if ( $(this).attr('style') !== "display: none;" ) {
+        $(this).hide()
+        var hidden = index
+        var parent = $(this).parent()
+        showNext( parent, index, length )
+        return false
+      };
+    });
+  });
+
+  $('.profile-picture-holder').each( function() {
+
+    $(this).children('img').each( function(index) {
+      if ( index === 0 ) {
+        $(this).show()
+      }
+      else
+      {
+        $(this).hide()
+      }
+
+    });
+  });
   
 });
 
