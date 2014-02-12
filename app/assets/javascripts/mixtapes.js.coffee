@@ -1,4 +1,12 @@
 $(document).ready ->
+  currentMixtapeTrackList = ->
+    tracks = []
+    $.each $(".track"), (index, value) ->
+      tracks.push $(this).data("echonest-song-id")
+    return tracks
+
+  console.log currentMixtapeTrackList()
+
   Mustache.compile = (template) ->
     Mustache.parse(template);
 
@@ -68,31 +76,40 @@ $(document).ready ->
 
   $('html').on 'click', '.add-track', (e) ->
     e.preventDefault()
-    console.log 'Adding track to mixtape...'
 
-    trackHash = {}
-    trackHash.artist = $(this).parent().children('.artist-name').text()
-    trackHash.song = $(this).parent().children('.track-title').text()
-    trackHash.mixtape_id = $('#find-songs').data('mixtape-id')
-    trackHash.echonest_song_id = $(this).data('echonest-song-id')
+    currentEchonestSongId = @getAttribute("data-echonest-song-id")
 
-    $.ajax(
-      type: 'POST',
-      url: document.location.origin + $('#new_track').attr('action'),
-      data: { 
-        track: {
-          artist: trackHash.artist,
-          song: trackHash.song,
-          mixtape_id: $('#find-songs').data('mixtape-id'),
-          echonest_song_id: trackHash.echonest_song_id
+    if _.contains(currentMixtapeTrackList(), currentEchonestSongId) is true
+      console.log 'Song already exists!'
+    else
+      console.log 'Adding track to mixtape...'
+
+      trackHash = {}
+      trackHash.artist = $(this).parent().children('.artist-name').text()
+      trackHash.song = $(this).parent().children('.track-title').text()
+      trackHash.mixtape_id = $('#find-songs').data('mixtape-id')
+      trackHash.echonest_song_id = $(this).data('echonest-song-id')
+      trackHash.preview_url = $(this).parent().children('audio').attr('src')
+
+      $.ajax(
+        type: 'POST',
+        url: document.location.origin + $('#new_track').attr('action'),
+        data: { 
+          track: {
+            artist: trackHash.artist,
+            song: trackHash.song,
+            mixtape_id: $('#find-songs').data('mixtape-id'),
+            echonest_song_id: trackHash.echonest_song_id,
+            preview_url: trackHash.preview_url
+          }
         }
-      }
-    ).done (response) ->
-      trackHash.id = response.id
-      console.log 'Track added to mixtape!'
-      console.log trackHash
-      trackDetails = Mustache.render $('#playlist-template').html(), trackHash
-      $(trackDetails).appendTo ".track-listing"
+      ).done (response) ->
+        trackHash.id = response.id
+        console.log 'Track added to mixtape!'
+        console.log trackHash
+        trackDetails = Mustache.render $('#playlist-template').html(), trackHash
+        $(trackDetails).appendTo ".track-listing"
+        currentMixtapeTrackList()
 
   $('#new_track').on 'submit', (event) ->
     event.preventDefault()
