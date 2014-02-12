@@ -98,8 +98,6 @@ $(document).ready(function(){
     $(this).remove();
   }).on('ajax:error', function(e, data) {
     $('.photo-error').show().html(data.responseJSON.message)
-    // alert(data.responseJSON.message)
-    // alert(data.message)
   });
 
   $('.image-adder').on('ajax:success', function(xhr, photo) {
@@ -108,6 +106,8 @@ $(document).ready(function(){
     $(this).attr('href', '/photos?id=' + photo.id)
     $('#user-profile').append($(this));
     $(this).children().attr('class', 'profile-picture');
+  }).on('ajax:error', function(e, data) {
+    $('.photo-error').show().html(data.responseJSON.message)
   });
 
 

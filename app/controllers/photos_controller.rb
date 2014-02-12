@@ -6,11 +6,10 @@ class PhotosController < ApplicationController
     photo = current_user.photos.find_by image_url: params[:image_url]
     if user_photos.where(profile_picture: true).count < 5 && photo.profile_picture != true 
       photo.update_attributes( profile_picture: true ) 
+      render json: { status: 'success', id: photo.id }
     else
-      flash[:error] = "Sorry we cannot save that picture!"
-      raise[:error]
+      render json: { status: 'Error', message: "Sorry you can't have more than five profile pictures!" }, status: 401
     end
-    render json: { status: 'success', id: photo.id }
   end
 
   def destroy
@@ -21,8 +20,6 @@ class PhotosController < ApplicationController
       render json: { status: 'success' }
     else
       render json: { status: 'Error', message: "Sorry you must have more than one picture!" }, status: 401
-      # flash[:error] = "Sorry you must have more than one picture!"
-      # raise[:error]
     end
   end
 
