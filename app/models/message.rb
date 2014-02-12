@@ -6,8 +6,10 @@ class Message < ActiveRecord::Base
     Jbuilder.new do |json|
       json.body body
       json.created_at created_at.strftime('%-d %b %Y - %l:%M %P')
+      json.short_created_at created_at.strftime('%l:%M:%S %P %-d %b')
       json.from 'me'
       json.author_id author_id
+      json.recipient_id recipient_id
     end
   end
 

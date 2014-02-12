@@ -14,7 +14,9 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create message_params
-    WebsocketRails[:messages].trigger 'new', @message.as_json
+    @notme = [@message.recipient, @message.author].find { |u| u != current_user }
+
+    WebsocketRails[:messages].trigger 'new', @message.as_json.merge(notme_id: @notme.id)
     if !request.xhr?
       flash[:notice] = "Your message was sent" 
       redirect_to '/mixtapes'

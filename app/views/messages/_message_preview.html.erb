@@ -2,7 +2,9 @@
   <p> <%= message.body.truncate(90) %> </p>
 </div>
 <div class="row message-previewer">
-  <p class="message-time"> <%= message.created_at.strftime('%l:%M %P %-d %b')%>
+  <p class="message-time"> <%= message.created_at.strftime('%l:%M:%S %P %-d %b')%>
+</div>
+<div class="row message-previewer message-small-fonts">
   <%= link_to 'delete conversation', message_path(message), method: :delete, data: { confirm: "Are you sure?"} %></p>
 </div>
 

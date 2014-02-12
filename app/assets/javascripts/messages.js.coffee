@@ -22,17 +22,48 @@ $ ->
 
     $.post '/messages', $(this).serialize()
 
+  $('.conversation').tsort('.message-time', {order: 'desc'})
+  
+
   dispatcher = new WebSocketRails(window.location.host + '/websocket')
   channel = dispatcher.subscribe('messages')
   channel.bind 'new', (message) ->
-    # console.log('hi')
-    myId = $('.correspondent-message').data('my-id')
+    
+    myId = $('#user-id').data('my-id')
+    theirId = $('.message-area').data('user-id')
 
-    if message.author_id != myId
-      message.from = 'them'
+    return unless message.recipient_id == myId || message.author_id == myId
 
-    message = Mustache.render $("#single-message-template").html(), message
+    if $('.message-area').length
+      return unless message.recipient_id == theirId || message.author_id == theirId
 
-    $(".message-area").append(message)
-    $(".correspondent-message").animate(scrollTop: $('.correspondent-message')[0].scrollHeight)
+      if message.author_id != myId
+        message.from = 'them'
+
+      messageHTML = Mustache.render $("#single-message-template").html(), message
+
+      $(".message-area").append(messageHTML)
+      $(".correspondent-message").animate(scrollTop: $('.correspondent-message')[0].scrollHeight)
+
+      $('.selected-message').find('.message-time').text(message.short_created_at)
+      $('.conversation').tsort('.message-time', {order: 'desc'}).each (i, chatting) ->
+        # $(chatting).css({ position: 'absolute' })
+        # $(chatting).animate {top: i * window.lineHeight }, 20
+    else
+      $('.notification').addClass('badge')
+      # $('.notification').addClass('badge')
+      # $('.notification span').append("New")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
