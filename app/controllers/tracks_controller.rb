@@ -8,10 +8,15 @@ class TracksController < ApplicationController
 
   def create
     @mixtape = Mixtape.find params[:mixtape_id]
-    @track = Track.new(params[:track].permit(:artist, :song))
+    
+    @track = Track.find_or_create_by(echonest_song_id: params[:track][:echonest_song_id]) do |track|
+      track.artist = params[:track][:artist]
+      track.song = params[:track][:song]
+      track.echonest_song_id = params[:track][:echonest_song_id]
+    end
+
     @track.mixtapes << @mixtape
 
-    @track.save
     render json: @track.as_json.merge(mixtape_id: @mixtape.id)
   end
 
@@ -34,7 +39,7 @@ class TracksController < ApplicationController
 
   def update
     @mixtape = Mixtape.find params[:id]
-    @track = Track.new(params[:track].permit(:artist, :song))
+    @track = Track.new(params[:track].permit(:artist, :song, :echonest_song_id))
     @track.mixtapes << @mixtape
 
     @track.save

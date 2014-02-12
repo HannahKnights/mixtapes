@@ -38,9 +38,8 @@ $(document).ready ->
       console.log response
       songs = response.response.songs
       filtered = _.uniq songs, (song) ->
-        song.title
+        song.title.toLowerCase()
       $.each filtered, (index, value) ->
-        # console.log _.
         if value.tracks[0] is `undefined`
           # value.duration = duration(value.audio_summary.duration)
           # songDetailsWithoutPreview = Mustache.render($("#song-details-without-preview-template").html(), value)
@@ -75,7 +74,7 @@ $(document).ready ->
     trackHash.artist = $(this).parent().children('.artist-name').text()
     trackHash.song = $(this).parent().children('.track-title').text()
     trackHash.mixtape_id = $('#find-songs').data('mixtape-id')
-    # trackHash.echonest_id = 
+    trackHash.echonest_song_id = $(this).data('echonest-song-id')
 
     $.ajax(
       type: 'POST',
@@ -83,8 +82,9 @@ $(document).ready ->
       data: { 
         track: {
           artist: trackHash.artist,
-          song: trackHash.song
-          mixtape_id: $('#find-songs').data('mixtape-id')
+          song: trackHash.song,
+          mixtape_id: $('#find-songs').data('mixtape-id'),
+          echonest_song_id: trackHash.echonest_song_id
         }
       }
     ).done (response) ->
