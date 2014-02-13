@@ -18,62 +18,80 @@
   <% if mixtape.user && mixtape.user != current_user && !mixtape.blocked?(user_mix) %>
 
   <div class='matchee-profile'>
-  
     <div class='matchee-mix'>
 
      <div class='match-value'><%= user_mix.match_rate(mixtape.tracks) %></div>
 
-      <h2>
-      <%= mixtape.title %>
-      </h2>
-      <div class='link', data-id='<%= mixtape.user_id %>'>
-      <%= button_to 'Like me!', mixtape_likes_path( mixtape , like: true, block: false), remote:true %>
-      <%= button_to 'Dislike!', mixtape_likes_path( mixtape , block: true, like: false), remote: true %>
+    <h2>
+    <%= mixtape.title %>
+    </h2>
+    <div class='link', data-id='<%= mixtape.user_id %>'>
+    <%= button_to 'Like me!', mixtape_likes_path( mixtape , like: true, block: false), remote:true %>
+    <%= button_to 'Dislike!', mixtape_likes_path( mixtape , block: true, like: false), remote: true %>
+    </div>
+
+    <% mixtape.tracks.each do |track| %>
+
+      <h3><%= track.artist %></h3>
+
+      <h4><%= track.song %></h4>
+
+      <audio src="<%= track.preview_url %>" controls></audio>
+
+    <% end %>
+
+    </div>
+
+    <% user = User.find(mixtape.user_id) %>
+
+    <div id='mini-wrapper'>
+      <div id='mini-profile-container' data-attribute='<%= user.id %>'>
+        <div class='front'>
+          <div class='mini-info fa'>
+            <h4 class='profile-name' data-attribute='<%= user.gender %>'>
+            <%= "#{user.name.split[0]}"%>,  <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
+            <br/>
+            <%= user.location =%>
+            </h4>
+          </div>
+          <div class='mini-menu'>
+            <ul>
+              <li> <%= button_to mixtape_likes_path( mixtape , like: true, block: false), remote:true  do %>
+              <i class='fa fa-check'></i>
+              <% end %>
+              </li> 
+              <li> <%= button_to mixtape_likes_path( mixtape , block: true, like: false), remote:true  do %>
+              <i class='fa fa-times'></i>
+              <% end %>
+              </li>
+              <li> <%= link_to new_message_path(send_to: user) do %>
+               <i class='fa fa-envelope'></i>
+               <% end %>
+               </li>
+              <li class="photo"> <a href="#" class="fa fa-picture-o" ></a> </li>
+              <li> <a href="#" class="fa fa-volume-up flipper toback" ></a> </li>
+            </ul>
+          </div>
+          <div class='mini-profile-container'>
+            <div class='mini-profile-picture-holder' data-attribute='<%= user.id %>'>
+            <% user.photos.each do |photo| %>
+                <% if photo.profile_picture? %>
+                  <%= image_tag photo.image_url, class: 'mini-profile matchee' %> 
+                <% end %>
+              <% end %>      
+            </div>
+          </div>
+        </div>
+        <div class='back'>
+          <a href="#" class="flipper tofront">click here to go back</a>
+         <h1> I am the back ---> here are my tracks</h1>
+        </div>
       </div>
-
-      <% mixtape.tracks.each do |track| %>
-
-        <h3><%= track.artist %></h3>
-
-        <h4><%= track.song %></h4>
-
-        <audio src="<%= track.preview_url %>" controls></audio>
-
-      <% end %>
-
+    </div> 
+    <div class='profile-picture-holder' data-attribute='<%= user.id %>'>        
     </div>
-
-      <% user = User.find(mixtape.user_id) %>
-
-      <%= user.name %>
-
-      <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
-
-      <%= user.location %>
-
-      <div class='gender' data-attribute='<%= user.gender %>'><%= user.gender %></div>
-
-      <%= link_to "New Message", new_message_path(send_to: user) %>
-      
-      <div class='profile-picture-holder' data-attribute='<%= user.id %>'>
-      
-      <% user.photos.each do |photo| %>
-
-          <% if photo.profile_picture? %>
-
-            <%= image_tag photo.image_url, class: 'profile-picture matchee' %>
-
-            
-
-          <% end %>
-
-      <% end %>
-    </div>
-
   </div>
-
   <% end %>
-
 <% end %>
 
 
@@ -104,8 +122,8 @@
 
     $.each( matchee, function() {
       
-      var matcheeGender = $(this).children('.gender').attr('data-attribute');
-      var matcheeAge = $(this).children('.age').attr('data-attribute');
+      var matcheeGender = $(this).find('.profile-name').attr('data-attribute');
+      var matcheeAge = $(this).find('.age').attr('data-attribute');
 
       if ((matcheeGender == genderPreference) && (minAge <= matcheeAge && matcheeAge <= maxAge)) {
         $(this).show()
@@ -178,6 +196,20 @@
     });
   };
 
+  function orientate(image) {
+
+  console.log(image)
+  console.log(image.width() >= image.height())
+
+  if (image.width() >= image.height()) {
+    image.addClass('landscape')
+  }
+  else
+  {
+    image.addClass('portrait')
+  }
+}
+
 
 $(document).ready(function() {
 
@@ -241,8 +273,55 @@ $(document).ready(function() {
 
     });
   });
+
+  $('li.photo').click( function(event) {
+
+    event.preventDefault();
+    var match_id = $('li.photo').parentsUntil('#mini-wrapper').find('.mini-profile-picture-holder').attr('data-attribute');
+    var my_match = $('.mini-profile-picture-holder[data-attribute="' + match_id + '"]').children('img.mini-profile'); 
+    var length = my_match.length
+
+    my_match.each( function(index) {
+      if ( $(this).attr('style') !== "display: none;" ) {
+        $(this).hide()
+        var hidden = index
+        var parent = $(this).parent()
+        showNext( parent, index, length )
+        return false
+      };
+    });
+  });
+
+
+  $('.flipper').click(function(e) {
+    e.preventDefault()
+
+    var match_id = $(this).parentsUntil('#mini-wrapper').find('.mini-profile-picture-holder').attr('data-attribute');
+
+    $('#mini-profile-container[data-attribute="' + match_id + '"]').toggleClass('flipped');
+
+  });
   
 });
+
+$(window).load(function(){
+    $('.mini-profile-picture-holder').each( function() {
+
+    $(this).children('img').each( function(index) {
+
+      if ( index === 0 ) {
+        orientate($(this))
+        $(this).show()
+      }
+      else
+      {
+        orientate($(this))
+        $(this).hide()
+      }
+
+    });
+  });
+})
 
 
 

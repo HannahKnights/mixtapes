@@ -78,6 +78,7 @@
 
 
 
+
 <script>
 
 function showNext(parent, index, length) {
@@ -156,21 +157,6 @@ $(document).ready(function() {
     e.preventDefault()
     $('#mini-profile-container').toggleClass('flipped')
   });
-
-  // $('.flipper.tofront').click(function(e) {
-  //   e.preventDefault()
-  //   $('#mini-profile-container .front').show()
-  //   $('#mini-profile-container .back').css('-webkit-backface-visibility', 'hidden')
-
-  // });
-
-  // $('.flipper.toback').click(function(e) {
-  //   e.preventDefault()
-  //   $('#mini-profile-container .back').css('-webkit-backface-visibility', 'visible')
-  //   $('#mini-profile-container .front').hide()
-  // });
-
-
  
 });
 
@@ -180,6 +166,7 @@ $(window).load(function(){
     $(this).children('img').each( function(index) {
 
       if ( index === 0 ) {
+        console.log($(this))
         orientate($(this))
         $(this).show()
       }

@@ -165,7 +165,6 @@ div.ui-slider-range.ui-widget-header {
 #mini-wrapper {
   width: 400px;
   height: 330px;
-  margin-bottom: 100%;
   border-radius: 5px;
 
 }
@@ -320,8 +319,8 @@ a.fa-volume:hover {
 
 .mini-profile-picture-holder {
   display: inline-block;
-  width: 300px;
-  height: 100%;
+  width: 330px;
+  height: 330px;
   overflow: hidden;
   float: right;
 }
@@ -340,7 +339,7 @@ a.fa-volume:hover {
 
 .portrait {
   height: auto;
-  width: 300px;
+  width: 330px;
 }
 
 
