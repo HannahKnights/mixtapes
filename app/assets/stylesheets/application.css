@@ -121,3 +121,6 @@ div.ui-slider-range.ui-widget-header {
   display: inline-block;
 }
 
+audio {
+  width: 47px;
+}
