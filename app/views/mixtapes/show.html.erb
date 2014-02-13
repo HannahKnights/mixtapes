@@ -44,7 +44,7 @@
           <li> <a href="#" target="_blank" class="fa fa-times" ></a> </li>
           <li> <a href="#" target="_blank" class="fa fa-envelope" ></a> </li>
           <li class="photo"> <a href="#" class="fa fa-picture-o" ></a> </li>
-          <li> <a href="#" class="fa fa-volume-up flipper" ></a> </li>
+          <li> <a href="#" class="fa fa-volume-up flipper toback" ></a> </li>
         </ul>
       </div>
       <div class='mini-profile-container'>
@@ -58,18 +58,13 @@
       </div>
     </div>
     <div class='back'>
-      <a href="#" class="flipper">click here to go back</a>
-     <h1> I am the back </h1>
+      <a href="#" class="flipper tofront">click here to go back</a>
+     <h1> I am the back ---> here are my tracks</h1>
     </div>
   </div>
 </div>
 
 
-  
-
-  <script>
-    
-  </script>
 
 
 
@@ -174,10 +169,24 @@ $(document).ready(function() {
   });
 
   $('.flipper').click(function(e) {
-      e.preventDefault()
-      console.log('Flipped!!!')
-      $('#mini-profile-container').children.toggleClass('flipped')
+    e.preventDefault()
+    $('#mini-profile-container').toggleClass('flipped')
   });
+
+  $('.flipper.tofront').click(function(e) {
+    e.preventDefault()
+    $('#mini-profile-container .front').show()
+    $('#mini-profile-container .back').css('-webkit-backface-visibility', 'hidden')
+
+  });
+
+  $('.flipper.toback').click(function(e) {
+    e.preventDefault()
+    $('#mini-profile-container .back').css('-webkit-backface-visibility', 'visible')
+    $('#mini-profile-container .front').hide()
+  });
+
+
  
 });
 
