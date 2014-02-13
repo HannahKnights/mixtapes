@@ -14,29 +14,9 @@
   <% if mixtape.user && mixtape.user != current_user && !mixtape.blocked?(user_mix) %>
 
   <div class='matchee-profile'>
-    <div class='matchee-mix'>
 
      <div class='match-value'><%= user_mix.match_rate(mixtape.tracks) %></div>
 
-    <h2>
-    <%= mixtape.title %>
-    </h2>
-    <div class='link', data-id='<%= mixtape.user_id %>'>
-    <%= button_to 'Like me!', mixtape_likes_path( mixtape , like: true, block: false), remote:true %>
-    <%= button_to 'Dislike!', mixtape_likes_path( mixtape , block: true, like: false), remote: true %>
-    </div>
-
-    <% mixtape.tracks.each do |track| %>
-
-      <h3><%= track.artist %></h3>
-
-      <h4><%= track.song %></h4>
-
-      <audio src="<%= track.preview_url %>" controls></audio>
-
-    <% end %>
-
-    </div>
 
     <% user = User.find(mixtape.user_id) %>
 
@@ -81,7 +61,9 @@
         <div class='back'>
           <a href="#" class="flipper tofront">click here to go back</a>
           <ul>
-            <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="{{ preview_url }}" controls></audio><span>{{ artist }} - {{ song }}</span><a class="delete-track" href="/mixtapes/{{ mixtape_id }}/tracks/{{ id }}">Delete</a></li>
+            <% mixtape.tracks.each do |track| %>
+            <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="<%= track.preview_url %>" controls></audio><span> <%= track.artist %> - <%= track.song %></span></li>
+            <% end %>
             </ul>
         </div>
       </div>

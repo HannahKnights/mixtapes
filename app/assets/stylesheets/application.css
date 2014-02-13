@@ -134,6 +134,10 @@ i.fa.fa-check-square {
   font-size: 40px;
 }
 
+#slider {
+  width: 400px;
+}
+
 div.ui-slider-range.ui-widget-header {
     background: grey;
 }
@@ -168,10 +172,11 @@ div.ui-slider-range.ui-widget-header {
 /* HANNAH's Profile Minim flip */
 
 #mini-wrapper {
+  padding: 20px;
   width: 400px;
   height: 330px;
   border-radius: 5px;
-
+  display: inline-block;
 }
 
 /* Layer 1 */
@@ -208,6 +213,7 @@ div.ui-slider-range.ui-widget-header {
   transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
+  overflow: scroll;
 }
 
 #mini-profile-container.flipped .front {
@@ -345,6 +351,10 @@ a.fa-volume:hover {
 .portrait {
   height: auto;
   width: 330px;
+}
+
+.back {
+  overflow: scroll;
 }
 
 

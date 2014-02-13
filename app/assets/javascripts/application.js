@@ -31,4 +31,17 @@ if(window.opener) {
     window.close()
   }
 
+$(document).ready(function() {
+  $('a#fb-auth').click(function(e) {
+  var width = 600, height = 400;
+  var left = (screen.width / 2) - (width / 2);
+  var top = (screen.height / 2) - (2 * height / 3);
+  var features = 'modal=yes,location=yes,menubar=no,toolbar=no,status=no,width=' + width + ',height=' + height + ',toolbar=no,titlebar=no,left=' + left + ',top=' + top;
+  var loginWindow = window.open('/users/auth/facebook', '_blank', features);
+  loginWindow.focus();
+  e.preventDefault();
+  return false;
+  });
+});
+
 
