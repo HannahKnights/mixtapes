@@ -151,7 +151,31 @@ $(document).ready(function() {
     });
   });
 
-  $('.mini-profile-picture-holder').each( function() {
+
+  $('.flipper').click(function(e) {
+    e.preventDefault()
+    $('#mini-profile-container').toggleClass('flipped')
+  });
+
+  // $('.flipper.tofront').click(function(e) {
+  //   e.preventDefault()
+  //   $('#mini-profile-container .front').show()
+  //   $('#mini-profile-container .back').css('-webkit-backface-visibility', 'hidden')
+
+  // });
+
+  // $('.flipper.toback').click(function(e) {
+  //   e.preventDefault()
+  //   $('#mini-profile-container .back').css('-webkit-backface-visibility', 'visible')
+  //   $('#mini-profile-container .front').hide()
+  // });
+
+
+ 
+});
+
+$(window).load(function(){
+    $('.mini-profile-picture-holder').each( function() {
 
     $(this).children('img').each( function(index) {
 
@@ -167,27 +191,6 @@ $(document).ready(function() {
 
     });
   });
-
-  $('.flipper').click(function(e) {
-    e.preventDefault()
-    $('#mini-profile-container').toggleClass('flipped')
-  });
-
-  $('.flipper.tofront').click(function(e) {
-    e.preventDefault()
-    $('#mini-profile-container .front').show()
-    $('#mini-profile-container .back').css('-webkit-backface-visibility', 'hidden')
-
-  });
-
-  $('.flipper.toback').click(function(e) {
-    e.preventDefault()
-    $('#mini-profile-container .back').css('-webkit-backface-visibility', 'visible')
-    $('#mini-profile-container .front').hide()
-  });
-
-
- 
-});
+})
 
 </script>

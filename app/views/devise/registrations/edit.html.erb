@@ -1,6 +1,6 @@
 <div class='photo-error alert fade in alert-danger alert-dismissable'></div>
-<div class='photo-delete'><i class="fa fa-check-square"></i></div>
-<div class-'photo-add'><i class="fa fa-trash-o"></i></div>
+<div class='photo-add'><i class="fa fa-check-square"></i></div>
+<div class='photo-delete'><i class="fa fa-trash-o"></i></div>
 
 <div class="container">
   <h2>Edit <%= "#{current_user.name.split[0]}"%></h2>
@@ -41,6 +41,8 @@
           <%= link_to(photos_path(id: photo.id), method: :delete, :remote => true, class: 'image-deleter')  do %>
 
           <% if photo.profile_picture == true %>
+
+            <div class='photo-delete'><i class="fa fa-trash-o"></i></div>
           
             <%= image_tag photo.image_url, class: 'profile-picture' %>
 
@@ -130,11 +132,11 @@ $(document).ready(function(){
   });
 
   $('img.profile-picture').mouseenter( function() {
-    console.log('HELLO!')
+    $('.photo-delete').show()
   });
 
   $('img.profile-picture').mouseleave( function() {
-    console.log('Goodbye!')
+    $('.photo-delete').hide()
   });
 
 });
