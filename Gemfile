@@ -62,6 +62,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'mustache-js-rails'
 gem 'mustache'
 gem 'websocket-rails'
+gem 'font-awesome-rails'
 gem 'rails_12factor', group: :production
 
 group :development, :test do

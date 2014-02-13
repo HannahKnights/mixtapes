@@ -12,27 +12,6 @@
 
 <% end %>
 
-<% user = current_user %>
-
-<%= user.name %>
-
-<%= user.age %>
-
-<%= user.location %>
-
-<%= user.gender %>
-
-<% user.photos.each do |photo| %>
-
-    <% if photo.profile_picture? %>
-
-      <%= image_tag photo.image_url, class: 'profile-picture' %>
-
-    <% end %>
-
-<% end %>
-
-
 <% if current_user.matches.any? %>
 
 <h2> My Matches </h2>
@@ -44,3 +23,178 @@
   <% end %>
 
 <% end %>
+
+
+
+<% user = current_user %>
+
+<div id='mini-wrapper'>
+  <div id='mini-profile-container'>
+    <div class='front'>
+      <div class='mini-info fa'>
+        <h4 class='profile-name'>
+        <%= "#{user.name.split[0]}"%>, <%= user.age %>
+        <br/>
+        <%= "#{user.location.split(',')[0]}"%>
+        </h4>
+      </div>
+      <div class='mini-menu'>
+        <ul>
+          <li> <a href="#" class=" fa fa-check"></a> </li>
+          <li> <a href="#" target="_blank" class="fa fa-times" ></a> </li>
+          <li> <a href="#" target="_blank" class="fa fa-envelope" ></a> </li>
+          <li class="photo"> <a href="#" class="fa fa-picture-o" ></a> </li>
+          <li> <a href="#" class="fa fa-volume-up flipper" ></a> </li>
+        </ul>
+      </div>
+      <div class='mini-profile-container'>
+        <div class='mini-profile-picture-holder' data-attribute='<%= user.id %>'>
+        <% user.photos.each do |photo| %>
+            <% if photo.profile_picture? %>
+              <%= image_tag photo.image_url, class: 'mini-profile matchee' %> 
+            <% end %>
+          <% end %>      
+        </div>
+      </div>
+    </div>
+    <div class='back'>
+     <h1> I am the back </h1>
+    </div>
+  </div>
+</div>
+
+
+<div id="container">
+    <div id="card">
+      <div class="front">
+        <div class="menu">
+          <ul>
+            <li><a href="#"><i class="fa fa-check"></i></a></li>
+            <li><a href="#"><i class="fa fa-times"></i></a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="#"><i class="fa fa-picture-o"></i></a></li>
+            <li><a href="#" class="flipper"><i class="fa fa-volume-up"></i></a></li>
+          </ul>
+        </div>
+      </div> <!-- /.front -->
+      <div class="back">
+        <a href="#" class="flipper">click here to go back</a>
+      </div> <!-- /.back -->
+    </div> <!-- /.card -->
+  </div> <!-- /#container -->
+  <script>
+    $('.flipper').click(function() {
+      $('#card').toggleClass('flipped')
+    })
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+function showNext(parent, index, length) {
+  if ( index === length - 1 ) {
+    var next = 0
+  }
+  else
+  {
+    var next = index + 1
+  }
+  parent.children('img').each( function(i) {
+    if ( i === next ) {
+      $(this).show();
+      return false
+    }
+
+  });
+};
+
+// $(this).css({"width" : "300px" , "height" : "auto"}).show();
+
+// $(this).css({"width" : "300px" , "height" : "auto" , "display" : "inline"})
+
+
+function showPrevious(parent, index, length) {
+  if ( index === 0 ) {
+    var next = length - 1
+  }
+  else
+  {
+    var next = index - 1
+  }
+  parent.children('img').each( function(i) {
+    if ( i === next ) {
+      
+      $(this)
+      return false
+    }
+  });
+};
+
+function orientate(image) {
+
+  console.log(image)
+
+  if (image.width() >= image.height()) {
+    image.addClass('landscape')
+  }
+  else
+  {
+    image.addClass('portrait')
+  }
+};
+
+
+
+$(document).ready(function() {
+
+  $('li.photo').click( function(event) {
+
+    event.preventDefault();
+    var match_id = $('li.photo').parentsUntil('#mini-wrapper').find('.mini-profile-picture-holder').attr('data-attribute');
+    var my_match = $('.mini-profile-picture-holder[data-attribute="' + match_id + '"]').children('img.mini-profile'); 
+    var length = my_match.length
+
+    console.log(length)
+
+    my_match.each( function(index) {
+      if ( $(this).attr('style') !== "display: none;" ) {
+        $(this).hide()
+        var hidden = index
+        var parent = $(this).parent()
+        showNext( parent, index, length )
+        return false
+      };
+    });
+  });
+
+  $('.mini-profile-picture-holder').each( function() {
+
+    $(this).children('img').each( function(index) {
+
+      if ( index === 0 ) {
+        orientate($(this))
+        $(this).show()
+      }
+      else
+      {
+        orientate($(this))
+        $(this).hide()
+      }
+
+    });
+  });
+ 
+});
+
+</script>
