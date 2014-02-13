@@ -58,34 +58,17 @@
       </div>
     </div>
     <div class='back'>
+      <a href="#" class="flipper">click here to go back</a>
      <h1> I am the back </h1>
     </div>
   </div>
 </div>
 
 
-<div id="container">
-    <div id="card">
-      <div class="front">
-        <div class="menu">
-          <ul>
-            <li><a href="#"><i class="fa fa-check"></i></a></li>
-            <li><a href="#"><i class="fa fa-times"></i></a></li>
-            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-            <li><a href="#"><i class="fa fa-picture-o"></i></a></li>
-            <li><a href="#" class="flipper"><i class="fa fa-volume-up"></i></a></li>
-          </ul>
-        </div>
-      </div> <!-- /.front -->
-      <div class="back">
-        <a href="#" class="flipper">click here to go back</a>
-      </div> <!-- /.back -->
-    </div> <!-- /.card -->
-  </div> <!-- /#container -->
+  
+
   <script>
-    $('.flipper').click(function() {
-      $('#card').toggleClass('flipped')
-    })
+    
   </script>
 
 
@@ -119,10 +102,6 @@ function showNext(parent, index, length) {
   });
 };
 
-// $(this).css({"width" : "300px" , "height" : "auto"}).show();
-
-// $(this).css({"width" : "300px" , "height" : "auto" , "display" : "inline"})
-
 
 function showPrevious(parent, index, length) {
   if ( index === 0 ) {
@@ -144,6 +123,7 @@ function showPrevious(parent, index, length) {
 function orientate(image) {
 
   console.log(image)
+  console.log(image.width() >= image.height())
 
   if (image.width() >= image.height()) {
     image.addClass('landscape')
@@ -164,8 +144,6 @@ $(document).ready(function() {
     var match_id = $('li.photo').parentsUntil('#mini-wrapper').find('.mini-profile-picture-holder').attr('data-attribute');
     var my_match = $('.mini-profile-picture-holder[data-attribute="' + match_id + '"]').children('img.mini-profile'); 
     var length = my_match.length
-
-    console.log(length)
 
     my_match.each( function(index) {
       if ( $(this).attr('style') !== "display: none;" ) {
@@ -193,6 +171,12 @@ $(document).ready(function() {
       }
 
     });
+  });
+
+  $('.flipper').click(function(e) {
+      e.preventDefault()
+      console.log('Flipped!!!')
+      $('#mini-profile-container').children.toggleClass('flipped')
   });
  
 });
