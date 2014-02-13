@@ -124,3 +124,11 @@ li.cassette-track {
 a.delete-track {
   float: right;
 }
+
+.sticky {  
+  position: fixed;  
+  width: 555px;  
+  // left: 0;  
+  top: 81px;  
+  z-index: 100;
+}

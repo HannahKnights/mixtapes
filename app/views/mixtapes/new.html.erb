@@ -18,20 +18,21 @@
       </div>
     </div><!--column left -->
     <div class="col-md-6">
-      <div class="panel panel-default">
+      <div class="panel panel-default" id="user-mixtape-tracklist">
         <div class="panel-heading">
           <h2 class="panel-title">{{title}}</h2>
         </div>
         <div class="panel-body">
           <ul class="track-listing">
             <% @tracks.each do |track| %>
-                <%= render 'cassette_track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
+              <%= render 'cassette_track', mustache: track.as_json.merge(mixtape_id: @mixtape.id) %>
             <% end %>
           </ul>
-        </div>  
-    </div><!--column right -->
-  </div><!--row -->
-</div> <!--container -->
+        </div> <!-- .panel-body  -->
+      </div><!-- #tracklist-panel -->
+    </div><!-- col -->
+  </div><!-- row -->
+</div> <!-- container -->
 <script type='text/template' id='playlist-template'>
   <%= render 'cassette_track' %>
 </script>

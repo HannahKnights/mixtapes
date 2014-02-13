@@ -1,4 +1,14 @@
 $(document).ready ->
+
+  makePanelStick = ->
+    tracklistPosition = $("#user-mixtape-tracklist").offset().top
+    currentScrollPosition = $(window).scrollTop()
+    if currentScrollPosition > tracklistPosition
+      $("#user-mixtape-tracklist").addClass('sticky')
+
+  $(window).scroll ->
+    makePanelStick()
+
   currentMixtapeTrackList = ->
     tracks = []
     $.each $("li.cassette-track"), (index, value) ->
