@@ -1,5 +1,5 @@
 <div class="row message-previewer">
-  <p> <%= message.body.truncate(90) %> </p>
+  <p> <%= message.body.truncate(57) %> </p>
 </div>
 <div class="row message-previewer">
   <p class="message-time" data-timestamp="<%= message.created_at.to_i %>"> <%= message.created_at.strftime('%l:%M:%S %P %-d %b')%>
