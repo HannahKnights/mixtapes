@@ -1,7 +1,7 @@
 $(document).ready ->
   currentMixtapeTrackList = ->
     tracks = []
-    $.each $(".track"), (index, value) ->
+    $.each $("li.cassette-track"), (index, value) ->
       tracks.push $(this).data("echonest-song-id")
     return tracks
 
@@ -29,6 +29,7 @@ $(document).ready ->
     source: getArtistData
 
   $('#find-songs').click ->
+    $('.track-details').remove()
 
     console.log 'Finding songs...'
 
