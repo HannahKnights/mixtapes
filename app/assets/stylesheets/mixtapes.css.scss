@@ -75,3 +75,42 @@
 .tt-suggestion p {
   margin: 0;
 }
+
+/* Track with details */
+
+.track-details {
+  display: block;
+  margin: 20px auto;
+  width: 520px;
+  height: 200px;
+  background: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px 2px rgba(0,0,0,.3);
+  // position: relative;
+}
+
+.track-details img {
+  float: left;
+  border-radius: 5px 0 0 5px;
+}
+
+.track-details .track-text {
+  margin-left: 220px;
+  padding-top: 10px;
+}
+
+.track-details audio {
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.add-track {
+  position: relative;
+  border: 2px solid rgb(64, 64, 64);
+  padding: 10px;
+  margin-left: 220px;
+}
+
+.add-track, .add-track:hover {
+  color: rgb(64, 64, 64)
+}

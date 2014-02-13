@@ -1,9 +1,11 @@
 <script type="text/template" id="song-details-with-preview-template">
-  <div class="details">
+  <div class="track-details">
     <img src="{{ release_image }}">
-    <p class="artist-name">{{ artist_name }}</p>
-    <p class="track-title">{{ title }}</p>
-    <p>{{ duration.minutes }}:{{ duration.seconds }}</p>
+    <div class="track-text">
+      <p class="artist-name">{{ artist_name }}</p>
+      <p class="track-title">{{ title }}</p>
+      <p>{{ duration.minutes }}:{{ duration.seconds }}</p>
+    </div>
     <audio src="{{ preview_url }}" controls>
       <p>Your browser does not support the audio element.</p>
     </audio>

@@ -85,8 +85,8 @@ $(document).ready ->
       console.log 'Adding track to mixtape...'
 
       trackHash = {}
-      trackHash.artist = $(this).parent().children('.artist-name').text()
-      trackHash.song = $(this).parent().children('.track-title').text()
+      trackHash.artist = $(this).parent().children('.track-text').children('.artist-name').text()
+      trackHash.song = $(this).parent().children('.track-text').children('.track-title').text()
       trackHash.mixtape_id = $('#find-songs').data('mixtape-id')
       trackHash.echonest_song_id = $(this).data('echonest-song-id')
       trackHash.preview_url = $(this).parent().children('audio').attr('src')
