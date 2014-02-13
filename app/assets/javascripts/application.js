@@ -21,6 +21,7 @@
 //= require angular
 //= require jquery-ui.min
 //= require jquery.tinysort
+//= require websocket_rails/main
 //= require_tree .
 
 angular.module('mixtapes',[])
@@ -29,4 +30,5 @@ if(window.opener) {
     window.opener.location.reload(true);
     window.close()
   }
+
 

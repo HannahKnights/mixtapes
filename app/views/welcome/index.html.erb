@@ -1,12 +1,19 @@
 <div class="container-fluid">
   <div class="row col-md-1 col-md-offset-5 vertical-align">
 
-    <%= form_for( @mixtape, :url => new_mixtape_path, :welcome => { :action => :post }) do |form| %>
+    <%= form_for(@mixtape, :url => new_mixtape_path, :welcome => { :action => :post }, html: { id: 'update_name_homepage' })  do |form| %>
+      <%= form.text_field :title, 'ng-model' => 'title', 'ng-init' => "title='#{escape_javascript @mixtape.title}'" %>
 
-    <%= form.text_field :title %>
-
-    <%= form.submit 'Create Your Mixtape', :class => 'btn btn-primary btn-lg' %>
-
+      <%= form.submit 'Create Your Mixtape', :class => 'btn btn-primary btn-lg' %>
     <% end %>
   </div>
+
+
+  <div class="col-md-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">{{title}}</h2>
+        </div>
+      </div>
+    </div>
 </div>

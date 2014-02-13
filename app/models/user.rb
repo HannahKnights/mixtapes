@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :sent_messages, :class_name => "Message", :foreign_key => "author_id"
   has_many :received_messages, :class_name => "Message", :foreign_key => "recipient_id"
-  has_many :correspondents, -> { uniq }, through: :received_messages, class_name: "User", source: :author 
+  has_many :correspondents, -> { uniq }, through: :received_messages, class_name: "User", source: :author
+
+  def chatees
+    (correspondents + sent_messages.map(&:recipient)).uniq
+  end
 
 
   def self.find_for_facebook_oauth(auth)

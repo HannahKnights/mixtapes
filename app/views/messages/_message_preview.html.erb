@@ -1,4 +1,14 @@
-<p> <%= message.body %> </p>
-<div class="btn-group-xs">
-  <%= link_to 'Delete', message_path(message), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?"} %>
+<div class="row message-previewer">
+  <p> <%= message.body.truncate(90) %> </p>
 </div>
+<div class="row message-previewer">
+  <p class="message-time" data-timestamp="<%= message.created_at.to_i %>"> <%= message.created_at.strftime('%l:%M:%S %P %-d %b')%>
+</div>
+<div class="row message-previewer message-small-fonts">
+  <%= link_to 'delete conversation', message_path(message), method: :delete, data: { confirm: "Are you sure?"} %></p>
+</div>
+
+
+
+
+
