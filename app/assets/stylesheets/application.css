@@ -16,6 +16,10 @@
  *= require_tree .
  *= require_self
  */
+
+ a, a:hover {
+  text-decoration: none;
+ }
  
 @font-face {  
   font-family: 'hand1';  
