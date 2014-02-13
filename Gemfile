@@ -55,7 +55,9 @@ gem 'heroku_secrets', :git => 'https://github.com/alexpeattie/heroku_secrets'
 
 gem 'haml-rails'
 
-gem 'thin'
+# gem 'thin'
+gem 'unicorn'
+gem 'newrelic_rpm'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 
