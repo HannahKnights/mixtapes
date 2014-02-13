@@ -1,22 +1,19 @@
-  <!-- <div class="row">
-    <div class="col-md-8"> -->
+<%= form_for @message, html: { class: 'form-horizontal' } do |form| %>
+  <div class='form-group'>
+    <%= hidden_field_tag :recipient_id, @send_to.id %>
+  </div>
 
-    <%= form_for @message do |form| %>
-      <%= form.label :recipient, class: "col-sm-2 control-label" %>
-     
-
-        <%= hidden_field_tag :recipient_id, @send_to.id %>
-   
-      <%= form.label :body, class: "col-sm-2 control-label"%>
-     
-        <%= text_area_tag :body, '', class: "form-control", rows: "5", placeholder: "Enter your message here" %>
-  
-          <%= form.button 'Send', class: "btn btn-success"%>
-          <%= link_to "Back to my messages", messages_path, class: "btn btn-primary"%>
-        </div>
-      </div>
-    <% end %>
+  <div class='form-group'>
+    
+    <div class='col-sm-12'>
+      <%= text_area_tag :body, '', class: "form-control", rows: "5", placeholder: "Enter your message here" %>
     </div>
   </div>
-    <!-- </div>
-  </div> -->
+
+  <div = class='form-group'>
+    <div class='col-sm-10 col-sm-offset-8'>
+      <%= link_to "Cancel", mixtapes_path, class: "btn btn-primary"%>
+      <%= form.button 'Send', class: "btn btn-success"%>
+    </div>
+  </div>
+<% end %>

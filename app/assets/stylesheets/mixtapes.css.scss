@@ -75,3 +75,67 @@
 .tt-suggestion p {
   margin: 0;
 }
+
+/* Track with details */
+
+.track-details {
+  display: block;
+  margin: 20px auto;
+  width: 520px;
+  height: 200px;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+.track-details img {
+  float: left;
+  border-radius: 5px 0 0 5px;
+  width: 200px;
+  height: 200px;
+}
+
+.track-details .track-text {
+  margin-left: 220px;
+  padding-top: 10px;
+}
+
+.track-details audio {
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.add-track {
+  position: relative;
+  border: 2px solid rgb(64, 64, 64);
+  padding: 10px;
+  left: 160px;
+  top: 52px;
+}
+
+.add-track, .add-track:hover {
+  color: rgb(64, 64, 64)
+}
+
+/* Cassette track list */
+li.cassette-track {
+  list-style: none;
+  border-bottom: 1px dashed #f5f5f5;
+}
+
+.cassette-track span {
+  padding-left: 20px;
+  font-size: 20px;
+  font-family: 'hand2'
+}
+
+a.delete-track {
+  float: right;
+}
+
+.sticky {  
+  position: fixed;  
+  width: 555px;  
+  // left: 0;  
+  top: 81px;  
+  z-index: 100;
+}

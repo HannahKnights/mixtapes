@@ -17,6 +17,10 @@
  *= require_tree .
  *= require_self
  */
+
+ a, a:hover {
+  text-decoration: none;
+ }
  
 @font-face {  
   font-family: 'hand1';  
@@ -158,6 +162,7 @@ div.ui-slider-range.ui-widget-header {
 .photo-nav{
   display: inline-block;
 }
+
 
 
 /* HANNAH's Profile Minim flip */
@@ -343,10 +348,7 @@ a.fa-volume:hover {
 }
 
 
-/* Jeremy's code */
-
-
-
-
-
+audio {
+  width: 47px;
+}
 

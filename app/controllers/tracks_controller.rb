@@ -13,6 +13,7 @@ class TracksController < ApplicationController
       track.artist = params[:track][:artist]
       track.song = params[:track][:song]
       track.echonest_song_id = params[:track][:echonest_song_id]
+      track.preview_url = params[:track][:preview_url]
     end
 
     @track.mixtapes << @mixtape

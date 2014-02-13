@@ -1,6 +1,6 @@
 class MixtapesController < ApplicationController
 
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index]
   # before_action :mixtape_must_be_unique, only: [:new, :create]
 
   def new
@@ -23,7 +23,6 @@ class MixtapesController < ApplicationController
         session[:mixtape_id] = @mixtape.id 
       end      
     end
-    puts params[:mixtape]
     title = params[:mixtape][:title] if params[:mixtape]
     @mixtape.title = title if title
     @mixtape.save
