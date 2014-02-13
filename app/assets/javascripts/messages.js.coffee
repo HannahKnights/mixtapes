@@ -21,8 +21,11 @@ $ ->
     event.preventDefault()
 
     $.post '/messages', $(this).serialize()
+    $('#message-body').each ->
+      @reset()
+      return
 
-  $('.conversation').tsort('.message-time', {order: 'desc'})
+  $('.conversation').tsort('.message-time', {data: 'timestamp', order: 'desc'})
   
 
   dispatcher = new WebSocketRails(window.location.host + '/websocket')
@@ -45,14 +48,12 @@ $ ->
       $(".message-area").append(messageHTML)
       $(".correspondent-message").animate(scrollTop: $('.correspondent-message')[0].scrollHeight)
 
-      $('.selected-message').find('.message-time').text(message.short_created_at)
-      $('.conversation').tsort('.message-time', {order: 'desc'}).each (i, chatting) ->
-        # $(chatting).css({ position: 'absolute' })
-        # $(chatting).animate {top: i * window.lineHeight }, 20
+      $('.selected-message').find('.message-time').text(message.short_created_at).data('timestamp', message.timestamp)
+
+      $('.conversation').tsort('.message-time', {data: 'timestamp', order: 'desc'})
+    
     else
       $('.notification').addClass('badge')
-      # $('.notification').addClass('badge')
-      # $('.notification span').append("New")
 
 
 

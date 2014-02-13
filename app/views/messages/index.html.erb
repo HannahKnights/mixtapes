@@ -20,7 +20,7 @@
     
 
     <script type="text/template" id="message-template">
-      <div class='message-area' data-user-id="{{ notme_id }}">
+      <div class='message-area message-holder' data-user-id="{{ notme_id }}">
         {{#messages}}
           <p class="message-time message-time-main"> {{ created_at}} </p>
           <div class="{{ from }} message-holder">
@@ -29,9 +29,9 @@
         {{/messages}}
       </div>
       
-      <form action='/messages' class='new-message' method='post'>
+      <form id="message-body" action='/messages' class='new-message' method='post'>
         <input type='hidden' name='recipient_id' value='{{ notme_id }}'>
-        <input type='text' name='body'>
+        <input type='text' name='body' autocomplete="off">
         <button type='submit' class="btn btn-success">Send</button>
       </form>
     </script>

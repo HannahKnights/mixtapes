@@ -5,11 +5,19 @@
 .me {
   text-align: right;
   background-color: #0067e7;
+  min-height: 30px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .them {
   background-color: #b7b7b7;
   text-align: left;
+  min-height: 30px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .message-previewer {
@@ -39,7 +47,7 @@ p {
 
 .message-holder {
   min-height: 30px;
-  padding-top: 2px;
+  padding-top: 5px;
   padding-right: 5px;
   padding-left: 5px;
   text-wrap: surpress;

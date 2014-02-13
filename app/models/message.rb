@@ -10,6 +10,7 @@ class Message < ActiveRecord::Base
       json.from 'me'
       json.author_id author_id
       json.recipient_id recipient_id
+      json.timestamp created_at.to_i
     end
   end
 
