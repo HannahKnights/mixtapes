@@ -6,8 +6,39 @@
   =require twitter-bootstrap-static/fontawesome
   */
 
+  .navbar {
+    border-radius: 0px;
+    font-family: 'hand2';
+    font-size: 30px;
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 23px;
+    padding-bottom: 15px;
+  }
+
+  .dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 1.428571429;
+    color: #333333;
+    white-space: nowrap;
+  }
+
+  .panel-title {
+    font-size: 33px;
+    font-family: 'hand2';
+    text-align: center;
+  }
   .vertical-align {
     margin-top: 30%
+  }
+
+  .body {
+    background-color: #F7F7F3;
   }
 
   .tape {
@@ -33,6 +64,7 @@
     height: 55px;
     width: auto;
     opacity: 0.9;
+    height: 68px;
   }
 
   .header_tape:hover {
