@@ -1,19 +1,17 @@
-<div class='photo-error alert fade in alert-danger alert-dismissable'></div>
-<div class='photo-add'><i class="fa fa-check-square"></i></div>
-<div class='photo-delete'><i class="fa fa-trash-o"></i></div>
+
 
 <div class="container">
 
 <%= render 'mixtapes/show_user' %>
 
-<%= content_tag :a, "Edit my Profile", :href => "#modal", :class => 'add-track back-button', :data => {:toggle => 'modal'} %>
+<%= content_tag :a, "Edit my Profile", :href => "#modal", :class => 'add-track back-button edit-profile', :data => {:toggle => 'modal'} %>
 
 <%= modal_dialog :id => "modal",
          :header => { :show_close => true, :dismiss => 'modal', :title => 'Edit my Profile' },
-                 :body   => '' ,
-                 :footer => content_tag(:button, 'Save', :class => 'btn') %>
+                 :body   => '' %>
 
 <div id='edit-my-profile'>
+<div class='photo-error alert fade in alert-danger alert-dismissable'></div>
   <div class="row">
     <div class="col-md-4">
     <h3>Info</h3>
@@ -21,9 +19,6 @@
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
       <%= devise_error_messages! %>
-
-      <%= resource_name %>
-  <%= resource_name.inspect %>
 
 
       <div><%= f.label :name %><br />
@@ -41,7 +36,7 @@
       <div><%= f.label :email %><br />
       <%= f.text_field :email %></div>
 
-      <div><%= f.submit "Update" %></div>
+      <div class='submit'><%= f.submit "Update" , class: 'add-track back-button' %></div>
 
     </div>
     <div class="col-md-8">
@@ -57,7 +52,6 @@
 
           <% if photo.profile_picture == true %>
 
-            <div class='photo-delete'><i class="fa fa-trash-o"></i></div>
           
             <%= image_tag photo.image_url, class: 'profile-picture' %>
 
@@ -70,7 +64,7 @@
       <% end %>
 
       </div>
-      <button id='more_images'>Select from more images</button>
+      <button id='more_images' class='add-track back-button'>Select from more images</button>
       <% end %>
 
     </div>
@@ -100,14 +94,11 @@
     <% end %>
 
 
-   
+  <div class='account_cancelation'>  
 
-<h3>Cancel my account</h3>
+    <p>Unhappy with MixtapeDates? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
-
-<%= link_to "Back", :back %>
-
+  </div>
 </div>
 
 <script>
@@ -119,7 +110,7 @@ $(document).ready(function(){
 
   $('#more_images').click (function(event) {
     event.preventDefault();
-    $('.fb-selection').slideDown();
+    $('.modal-body').append($('.fb-selection').slideDown());
   });
 
   $('#user-profile').on('ajax:success', '.image-deleter', function() {
@@ -143,17 +134,14 @@ $(document).ready(function(){
   });
 
   $('img.profile-picture').mouseenter( function() {
-    $('.photo-delete').show()
   });
 
   $('img.profile-picture').mouseleave( function() {
-    $('.photo-delete').hide()
   });
 
   $('#edit-my-profile').hide()
 
   $('.modal-body').html($('#edit-my-profile').show())
-
 
 });
 

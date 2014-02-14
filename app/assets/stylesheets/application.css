@@ -161,7 +161,7 @@ div.ui-slider-range.ui-widget-header {
 .photo-error {
   display: none;
   position: absolute;
-  z-index: 10;
+  z-index: 1000;
   width: 90%;
 }
 
