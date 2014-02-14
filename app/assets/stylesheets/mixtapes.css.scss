@@ -132,6 +132,21 @@ a.delete-track {
   float: right;
 }
 
+.edit-mixtape-button {
+  position: initial;
+  background-color: #ffffff;
+}
+
+a.back-button.find-song-button {
+  position: initial;
+  background-color: #ffffff;
+  top: 0px;
+  position: relative;
+  border: 2px solid rgb(64, 64, 64);
+  padding: 10px;
+  color: #000000;
+}
+
 .sticky {  
   position: fixed;  
   width: 555px;  
