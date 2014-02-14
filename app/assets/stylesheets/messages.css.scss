@@ -2,23 +2,78 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.me {
-  text-align: right;
-  background-color: #0067e7;
-  min-height: 30px;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
+.panel-default > .panel-heading {
+  color: #ffffff;
+  background-color: #898889;
+  border-color: #dddddd;
 }
 
-.them {
-  background-color: #b7b7b7;
-  text-align: left;
-  min-height: 30px;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
+.message-container {
+  width: 425px
 }
+
+.me {
+  text-align: right;
+}
+
+.me .message-holder {
+  background-color: #0067e7;
+  margin: 5px 20px 5px 20px;
+  padding: 10px 10px 2px 10px;
+  min-height: 40px;
+  border-radius: 5px;
+  color: white;
+}
+
+.conversation img {
+  width: 50px;
+}
+
+// .message-copy {
+  
+//   text-align: right;
+//   background-color: #0067e7;
+//   display: -webkit-inline-box;
+//   margin: 5px, 20px, 5px, 20px;
+//   padding: 5px, 20px, 5px, 20px;
+//   min-height: 40px;
+//   border-radius: 5px;
+//   color: white;
+//   word-wrap: break-word;
+// }
+
+.them {
+  text-align: left;
+}
+
+.them .message-holder {
+  background-color: #D5C0A6;
+  margin: 5px 20px 5px 20px;
+  padding: 10px 10px 2px 10px;
+  min-height: 40px;
+  border-radius: 5px;
+}
+
+.message-holder {
+  padding: 10px 5px 5px 10px;
+  word-wrap: break-word;
+  display: inline-block;
+}
+
+.message-copy {
+  display: inline-block;
+}
+
+// .them.messageholder {
+//   background-color: #D5C0A6;
+//   text-align: left;
+//   display: block;
+//   // margin: 5px, 20px, 5px, 20px;
+//   // padding: 5px 20px 5px 20px;
+//   width: 328px;
+//   min-height: 40px;
+//   border-radius: 5px;
+// }
 
 .message-previewer {
   margin-top: 0px;
@@ -30,6 +85,7 @@
 p {
   margin-top: 0px;
   margin-bottom: 0px;
+  max-width: 340px;
 }
 
 .notification {
@@ -45,14 +101,6 @@ p {
   font-size: 11px;
 }
 
-.message-holder {
-  min-height: 30px;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
-  text-wrap: surpress;
-}
-
 .message-time-main {
   text-align: center;
   font-size: 11px;
@@ -63,24 +111,67 @@ p {
   font-size: 11px;
 }
 
-.me{
-  color: white;
+.interaction-list {
+  background-color: #dedede;
+  
+  margin-bottom: 20px;
+  width: 328px;
+  height: 110px;
+  border-radius: 5px;
+  word-wrap: break-word;
 }
 
+.interaction-list img {
+  float: left;
+  border-radius: 5px 0 0 5px;
+  height: 100%;
+  width: auto;
+ 
+}
+
+.message-image-holder {
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.message-test-holder {
+  width: 200px;
+  height:100px;
+  float: right;
+  display: inline;
+}
+
+
 .interaction-list:hover {
-  background-color: #fff6e5;
+  background-color: #bab8b8;
 }
 
 .selected-message {
-  background-color: #ffd27d;
+  background-color: #D5C0A6;
 }
 
 .selected-message:hover {
-  background-color: #ffd27d;
+  background-color: #D5C0A6;
 }
 
+
 .correspondent-message {
-  height: 500px;
+  height: 600px;
   overflow: scroll;
 }
+
+.message-header {
+  margin-left: 5px;
+}
+
+.btn-message {
+  float: right
+}
+
+.input-box-message {
+  width: 186%;
+}
+
 
