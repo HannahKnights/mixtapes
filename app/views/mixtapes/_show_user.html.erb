@@ -14,7 +14,7 @@
                       <h4 class='profile-name'>
                       <%= "#{user.name.split[0]}"%>, <%= user.age %>
                       <br/>
-                      <%= "#{user.location.split(',')[0]}"%>
+                      <%= "#{user.location.split(',')[0]}" if user.location %>
                       </h4>
                     </div>
                     <div class='mini-menu'>
