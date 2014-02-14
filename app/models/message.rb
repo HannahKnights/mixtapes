@@ -11,6 +11,7 @@ class Message < ActiveRecord::Base
       json.author_id author_id
       json.recipient_id recipient_id
       json.timestamp created_at.to_i
+      json.profile_pic_url author.photos.first.image_url
     end
   end
 

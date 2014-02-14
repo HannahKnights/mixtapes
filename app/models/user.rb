@@ -119,4 +119,12 @@ class User < ActiveRecord::Base
     matches
   end
 
+  def display_pic
+    if photos.any?
+      photos.first.image_url
+    else
+      'https://www.nextbritthing.com/MOD/UG/IMG/NoUserImageProfile.png'
+    end
+  end
+
 end
