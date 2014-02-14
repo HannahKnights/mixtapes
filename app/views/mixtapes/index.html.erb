@@ -6,6 +6,7 @@
 <%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
 
 
+
 <% user_mix = current_user.mixtape %>
 
 
@@ -32,11 +33,11 @@
           </div>
           <div class='mini-menu'>
             <ul>
-              <li> <%= button_to mixtape_likes_path( mixtape , like: true, block: false), remote:true  do %>
+              <li> <%= link_to mixtape_likes_path( mixtape , like: true, block: false), remote:true  do %>
               <i class='fa fa-check'></i>
               <% end %>
               </li> 
-              <li> <%= button_to mixtape_likes_path( mixtape , block: true, like: false), remote:true  do %>
+              <li> <%= link_to mixtape_likes_path( mixtape , block: true, like: false), remote:true  do %>
               <i class='fa fa-times'></i>
               <% end %>
               </li>
@@ -49,7 +50,9 @@
             </ul>
           </div>
           <div class='mini-profile-container'>
+          <%= image_tag "mixtapespinner.gif", class: 'spinner-gif' %>
             <div class='mini-profile-picture-holder' data-attribute='<%= user.id %>'>
+
             <% user.photos.each do |photo| %>
                 <% if photo.profile_picture? %>
                   <%= image_tag photo.image_url, class: 'mini-profile matchee' %> 
@@ -59,8 +62,10 @@
           </div>
         </div>
         <div class='back'>
-          <a href="#" class="flipper tofront">click here to go back</a>
-          <ul>
+          <a href='#' class='add-track back-button flipper'> Back </a>
+          <div class='mix-title'>
+          <%= mixtape.title %></div>
+          <ul class='mix-listing'>
             <% mixtape.tracks.each do |track| %>
             <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="<%= track.preview_url %>" controls></audio><span> <%= track.artist %> - <%= track.song %></span></li>
             <% end %>
@@ -281,11 +286,24 @@ $(document).ready(function() {
     $('#mini-profile-container[data-attribute="' + match_id + '"]').toggleClass('flipped');
 
   });
+
+
+  $('.mini-profile-picture-holder').each( function() {
+
+    $(this).children('img').each( function(index) {
+
+      $(this).hide()
+
+    });
+  });
+
+
+
   
 });
 
 $(window).load(function(){
-    $('.mini-profile-picture-holder').each( function() {
+  $('.mini-profile-picture-holder').each( function() {
 
     $(this).children('img').each( function(index) {
 
@@ -298,6 +316,8 @@ $(window).load(function(){
         orientate($(this))
         $(this).hide()
       }
+
+    $('.spinner-gif').hide()
 
     });
   });

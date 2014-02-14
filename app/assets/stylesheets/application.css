@@ -353,8 +353,40 @@ a.fa-volume:hover {
   width: 330px;
 }
 
+.spinner-gif {
+  width: 100px;
+  position: absolute;
+  z-index: 0;
+  top: 125px;
+  left: 170px;
+}
+
 .back {
   overflow: scroll;
+}
+
+.mix-title {
+  width: 300px;
+  display: inline-block;
+  float: right;
+  padding-top: 30px;
+  font-size: 30px;
+  font-family: "hand2";
+  text-decoration: underline;
+  padding-left: 40px;
+}
+
+ul.mix-listing {
+  margin-top:60px;
+}
+
+
+a.back-button {
+  position: relative;
+  border: 2px solid #404040;
+  padding: 10px;
+  left: 10px;
+  top: 20px;
 }
 
 
