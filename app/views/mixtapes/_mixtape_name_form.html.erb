@@ -1,10 +1,10 @@
-<%= form_for(@mixtape, html: { id: 'update_name' }) do |form| %>
- 
-  <%= form.label :title %>
-
-  <%= form.text_field :title, 'ng-model' => 'title', 'ng-init' => "title='#{escape_javascript @mixtape.title}'"%> 
-  <br>
-  <%= form.button button_text %>
 
 
+<%= form_for(@mixtape, html: { id: 'update_name', class: 'form-inline' }) do |form| %> 
+
+<div class='form-group'>
+  <%= form.label :title, class: "sr-only" %>
+  <%= form.text_field :title, class: "form-control", 'ng-model' => 'title', 'ng-init' => "title='#{escape_javascript @mixtape.title}'"%>   
+</div>
+  <%= form.button button_text, class: "add-track back-button edit-mixtape-button" %>
 <%end%>

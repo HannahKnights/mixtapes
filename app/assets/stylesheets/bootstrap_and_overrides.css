@@ -37,8 +37,14 @@
     margin-top: 30%
   }
 
-  .body {
-    background-color: #F7F7F3;
+  textarea.form-control {
+    height: auto;
+    font-size: 20px;
+    font-family: "hand2";
+  }
+  
+  body {
+    background-color: #f7f5f2;
   }
 
   .tape {

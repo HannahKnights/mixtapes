@@ -1,7 +1,17 @@
 <%= form_for [@mixtape, @track] do |form| %>
-  <%= form.text_field :artist, placeholder: 'Enter artist' %>
-  <%= link_to 'Find songs', '', id: 'find-songs', data: { :"mixtape-id" => session[:mixtape_id] } %>
-  <!-- <%= form.text_field :song, placeholder: 'Enter song' %> -->
 
-  <!-- <%= form.button 'Add Track to Mixtape' %> -->
+  <%= form.text_field :artist, placeholder: 'Enter artist' %>
+
+  <%= link_to 'Find songs', '', id: 'find-songs', class: "back-button find-song-button", data: { :"mixtape-id" => session[:mixtape_id] } %>
+
 <% end %>
+
+<!-- <%= form_for [@mixtape, @track], html: {class: 'form-inline' } do |form| %>
+
+<div class='form-group'>
+  <%= form.text_field :artist, placeholder: 'Enter artist', class: "form-control" %>
+</div>
+
+  <%= link_to 'Find songs', '', id: 'find-songs', data: { :"mixtape-id" => session[:mixtape_id] }, class: "add-track back-button find-song-button" %>
+ 
+<% end %> -->

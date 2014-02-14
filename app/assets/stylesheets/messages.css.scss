@@ -149,8 +149,25 @@ border: 2px solid #404040;
 background-color: #ffffff;;
 }
 
+a.back-button.btn-new-message {
+  float: initial;
+  left: 0px;
+  top: 0px;
+  height: 50px;
+}
+
+.btn-cancell {
+  margin-left: 263px
+}
+
+
 .input-box-message {
   width: 186%;
+}
+
+.new-message-recipient {
+  font-family: "hand2";
+  font-size: 33px;
 }
 
 
