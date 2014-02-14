@@ -1,0 +1,505 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *
+ *= require font-awesome
+ *= require bootstrap_and_overrides
+ *= require jquery-ui
+ *= require_tree .
+ *= require_self
+ */
+
+ a, a:hover {
+  text-decoration: none;
+ }
+ 
+@font-face {  
+  font-family: 'hand1';  
+  src: font-url('Moon Flower.ttf'); 
+} 
+
+@font-face {
+  font-family: 'hand2';  
+  src: font-url('Moon Flower Bold.ttf');   
+}
+
+@font-face {
+  font-family: 'hand3';  
+  src: font-url('DJHTRIAL.otf'),
+      font-url('DJHTRIAL.ttf') format('truetype');     
+}
+
+@font-face {
+  font-family: 'hand4';  
+  src: url('Notera_PersonalUseOnly.ttf');     
+}
+
+@font-face {
+  font-family: 'hand5';  
+  src: url('Signerica_Fat.ttf');     
+}
+
+@font-face {
+  font-family: 'hand6';  
+  src: url('Signerica_Thin.ttf');     
+}
+
+
+h2.cassette {
+  font-family: 'hand4';
+ }
+
+h3.cassette {
+  font-family: 'hand4';
+}
+
+.profile-picture-holder {
+  display: inline-block;
+  width: auto;
+  height: 250px;
+}
+
+.matchee {
+  
+}
+
+.profile-picture {
+  width: auto;
+  height: 250px;
+  padding: 20px;
+}
+
+.fb_picture {
+  float: left;
+  display: inline;
+  width: 300px;
+  height: auto;
+  padding: 20px;
+}
+
+.profile-pictures-container {
+  display: inline;
+  float: right;
+}
+
+.select-pictures-container {
+  width: 100%;
+  height: inherit;
+}
+
+.fb-selection {
+/*  padding: 20px;
+  background-color: white;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  position: fixed;
+  top: 20%;
+  left: 20%; 
+  z-index: 20;
+  width: 60%;
+  height: 60%;
+  overflow: scroll;*/
+}
+
+#slider { 
+  margin: 10px; 
+}
+
+.photo-delete {
+
+}
+
+
+.photo-add {
+  display: none;
+}
+
+i.fa.fa-trash-o {
+  color: red;
+  font-size: 40px;
+}
+
+i.fa.fa-check-square {
+  color: green;
+  font-size: 40px;
+}
+
+#slider {
+  width: 90%;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.ui-slider-handle {
+  cursor: pointer;
+}
+
+div.ui-slider-range.ui-widget-header {
+  background: grey;
+}
+
+.matchee-profile {
+  display: inline-block;
+  width: 50%;
+  padding-bottom: 80px;
+}
+
+#my-profile {
+  margin-left: 25%;
+}
+
+.matchee-profile-smaller {
+  display: inline-block;
+  width: 45%;
+  padding-left: 100px;
+}
+
+.match-value {
+  display: none;
+}
+
+.photo-error {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  width: 90%;
+}
+
+.photo-nav{
+  display: inline-block;
+}
+
+
+
+/* HANNAH's Profile Minim flip */
+
+#mini-wrapper {
+  width: 400px;
+  height: 330px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* Layer 1 */
+
+#mini-profile-container {
+  position: relative;
+  display: block;
+  width: 400px;
+  height: 330px;
+  /*background: #f5f5f5;*/
+  border-radius: inherit;
+  /*overflow: hidden;*/
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+
+}
+
+#mini-profile-container .front, #mini-profile-container .back {
+  border-radius: inherit;
+  background-color: #f5f5f5;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transition: -webkit-transform 1s ease;
+}
+
+#mini-profile-container .back {
+  transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  overflow: scroll;
+}
+
+#mini-profile-container.flipped .front {
+  transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+#mini-profile-container.flipped .back {
+  transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+}
+
+/* Info */
+
+.mini-info {
+  position: absolute;
+  z-index: 10;
+  color: #ffffff;
+  font-family: 'Arial';
+  font-weight: 400;
+  display: block;
+  text-align: center;
+  margin-left: 140px;
+  bottom: 20px;
+  width: 220px;
+}
+
+h4.profile-name {
+  line-height: 25px;
+}
+
+
+/* Menu */
+
+.mini-menu {
+  width: 100px;
+  height: 330px;
+  position: absolute;
+  z-index: 100;
+  background: #222222;
+  border-radius: 5px 0px 0 5px;
+  font-family: 'Icons';
+  font-size: 38px;
+  text-align: center;
+}
+
+i.fa-check:hover {
+  color: green;
+  text-decoration: none;
+}
+
+i.fa-times:hover {
+  color: red;
+  text-decoration: none;
+}
+
+a.fa-picture-o:hover {
+  text-decoration: none;
+}
+
+a.fa-envelop:hover {
+  text-decoration: none;
+}
+
+a.fa-volume:hover {
+  text-decoration: none;
+}
+
+
+
+
+
+.mini-menu ul {
+  list-style-type: none;
+  position: relative;
+  display: block;
+}
+
+.mini-menu ul li {
+  display: block;
+  width: 100px;
+  position: relative;
+  right: 40px;
+  line-height: 65px;
+  color: #d0ced1;
+  -webkit-transition: all .3s ease;
+  border-bottom: rgba(70,70,70,.2) 1px solid;
+}
+
+
+.mini-menu ul li:hover {
+  background: #191919;
+  border-radius: 5px 0 0 5px;
+  -webkit-transition: all .2s ease;
+}
+
+.mini-menu a {
+  border: 0;
+  color: #d0ced1;
+}
+
+/* Profile image */
+
+
+/* Container */
+
+.mini-profile-container {
+  float: right;
+  width: 100%;
+  height: 100%;
+}
+
+/* Image Container */
+
+.mini-profile-picture-holder {
+  display: inline-block;
+  width: 330px;
+  height: 330px;
+  overflow: hidden;
+  float: right;
+}
+
+/* Image */
+
+.mini-profile {
+  position: relative;
+  padding: 0px;
+}
+
+.landscape {
+  height: 330px;
+  width: auto;
+ }
+
+.portrait {
+  height: auto;
+  width: 330px;
+}
+
+.spinner-gif {
+  width: 100px;
+  position: absolute;
+  z-index: 0;
+  top: 125px;
+  left: 170px;
+}
+
+.back {
+  overflow: scroll;
+}
+
+.mix-title {
+  width: 300px;
+  display: inline-block;
+  float: right;
+  padding-top: 30px;
+  font-size: 30px;
+  font-family: "hand2";
+  text-decoration: underline;
+  padding-right: 40px;
+  text-align: center;
+}
+
+ul.mix-listing {
+  margin-top:60px;
+}
+
+#left-age {
+  width: 60%;
+  display:inline-block;
+  text-align: center;
+  height: 90px;
+}
+
+#right-gender {
+  width: 35%;
+  display:inline-block;
+  text-align: center;
+  height: 90px;
+  position: absolute;
+}
+
+.potential-profiles {
+  padding-top: 70px;
+}
+
+.back-button {
+  background-color: white;
+}
+
+
+a.back-button {
+  position: relative;
+  border: 2px solid #404040;
+  padding: 10px;
+  left: 10px;
+  top: 20px;
+}
+
+select#gender {
+  border-radius: 0px;
+  border: 2px solid #404040;
+  padding: 10px;
+  margin: 0;
+  /*-webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+  -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+  box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;*/
+  background: white;
+  color: #404040;
+  font-size: 14px;
+  outline: none;
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+label.gender {
+  position:relative;
+  display: initial;
+}
+label.gender:after {
+  content: '<>';
+  font: 12px "Consolas", monospace;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 8px;
+  top: 2px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #ddd;
+  position: absolute;
+}
+label.gender:before {
+  content: '';
+  right: 6px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  display: block;
+}
+
+#age-range {
+  display: inline-block;
+}
+
+.edit-update {
+  position: inherit;
+  margin-top: 20px;
+}
+
+label {
+  padding-top: 10px;
+}
+
+
+audio {
+  width: 47px;
+}
+
+.modal-body {
+  overflow: scroll;
+}
+
+div.modal-dialog {
+  width: 60%;
+}
+
+button#more_images {
+  margin-top: 20px;
+  left: 0px;
+  top: 0px;
+}
+
