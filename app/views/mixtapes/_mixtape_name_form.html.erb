@@ -6,5 +6,5 @@
   <%= form.label :title, class: "sr-only" %>
   <%= form.text_field :title, class: "form-control", 'ng-model' => 'title', 'ng-init' => "title='#{escape_javascript @mixtape.title}'"%>   
 </div>
-  <%= form.button button_text, class: "add-track back-button edit-mixtape-button" %>
+  <%= form.button button_text, class: "back-button edit-mixtape-button" %>
 <%end%>
