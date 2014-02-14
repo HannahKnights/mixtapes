@@ -1,9 +1,3 @@
-
-<% render 'devise/registrations/user_edit' %>
-
-
-
-
 <% if current_user.matches.any? %>
 
 <h2> My Matches </h2>
@@ -61,10 +55,11 @@
     </div>
     <div class='back'>
       <a href='#' class='add-track back-button flipper'> Back </a>
+      <% mixtape = user.mixtape %>
       <div class='mix-title'>
-      <%= @mixtape.title %></div>
+      <%= mixtape.title %></div>
       <ul class='mix-listing'>
-      <% @mixtape.tracks.each do |track| %>
+      <% mixtape.tracks.each do |track| %>
       <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="<%= track.preview_url %>" controls></audio><span> <%= track.artist %> - <%= track.song %></span></li>
       <% end %>
       </ul>
