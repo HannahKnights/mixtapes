@@ -22,5 +22,12 @@ class ApplicationController < ActionController::Base
     @devise_mapping.to
   end
 
-  
+  def after_sign_in_path_for resource
+    if resource.mixtape.nil?
+      new_mixtape_path
+    else
+      mixtapes_path
+    end
+  end
+
 end
