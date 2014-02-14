@@ -13,7 +13,7 @@
           </div>
           <div id='right-gender'>
             <div id='my_gender' data-attribute='<%= current_user.gender %>'></div>
-            <label>
+            <label class='gender'>
           <%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
           </label>
           </div>
