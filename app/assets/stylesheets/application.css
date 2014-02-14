@@ -88,6 +88,7 @@ h3.cassette {
 
 .profile-pictures-container {
   display: inline;
+  float: right;
 }
 
 .select-pictures-container {
@@ -152,6 +153,16 @@ div.ui-slider-range.ui-widget-header {
   display: inline-block;
   width: 50%;
   padding-bottom: 80px;
+}
+
+#my-profile {
+  margin-left: 25%;
+}
+
+.matchee-profile-smaller {
+  display: inline-block;
+  width: 45%;
+  padding-left: 100px;
 }
 
 .match-value {
@@ -403,6 +414,10 @@ ul.mix-listing {
   padding-top: 70px;
 }
 
+.back-button {
+  background-color: white;
+}
+
 
 a.back-button {
   position: relative;
@@ -430,11 +445,11 @@ select#gender {
   cursor: pointer;
 }
 
-label {
+label.gender {
   position:relative;
   display: initial;
 }
-label:after {
+label.gender:after {
   content: '<>';
   font: 12px "Consolas", monospace;
   -webkit-transform: rotate(90deg);
@@ -447,7 +462,7 @@ label:after {
   border-bottom: 1px solid #ddd;
   position: absolute;
 }
-label:before {
+label.gender:before {
   content: '';
   right: 6px;
   top: 0px;
@@ -461,8 +476,31 @@ label:before {
   display: inline-block;
 }
 
+.edit-update {
+  position: inherit;
+  margin-top: 20px;
+}
+
+label {
+  padding-top: 10px;
+}
+
 
 audio {
   width: 47px;
+}
+
+.modal-body {
+  overflow: scroll;
+}
+
+div.modal-dialog {
+  width: 60%;
+}
+
+button#more_images {
+  margin-top: 20px;
+  left: 0px;
+  top: 0px;
 }
 

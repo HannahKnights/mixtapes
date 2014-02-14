@@ -1,71 +1,148 @@
-<% if current_user.matches.any? %>
-
-<h2> My Matches </h2>
-
-  <% current_user.matches.each do |match| %>
-
-    <h3><%= match.name %></h3>
-
-  <% end %>
-
-<% end %>
-
-
-
-<% user = current_user %>
-
-<div id='mini-wrapper'>
-  <div id='mini-profile-container'>
-    <div class='front'>
-      <div class='mini-info fa'>
-        <h4 class='profile-name'>
-        <%= "#{user.name.split[0]}"%>, <%= user.age %>
-        <br/>
-        <%= "#{user.location.split(',')[0]}"%>
-        </h4>
-      </div>
-      <div class='mini-menu'>
-        <ul>
-          <li> 
-            <i class='fa fa-heart-o'></i>
-          </li>
-          <li>
-            <i class='fa fa-heart-o'></i>
-          </li>
-          <li>
-            <i class='fa fa-heart-o'></i>
-          </li>
-          <li class="photo">
-            <a href="#" class="fa fa-picture-o" ></a>
-          </li>
-          <li>
-            <a href="#" class="fa fa-music flipper toback" ></a>
-          </li>
-        </ul>
-      </div>
-      <div class='mini-profile-container'>
-        <div class='mini-profile-picture-holder' data-attribute='<%= user.id %>'>
-        <% user.photos.each do |photo| %>
-            <% if photo.profile_picture? %>
-              <%= image_tag photo.image_url, class: 'mini-profile matchee' %> 
-            <% end %>
-          <% end %>      
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 potential-profiles">
+      <% user = current_user %>
+      <div class="panel panel-default">
+        <div class='panel-heading '>
+        <h3 class="panel-title">My Profile</h3>
+        </div>
+          <div class="panel-body">
+            <div id='my-profile' class='matchee-profile'>
+              <div id='mini-wrapper'>
+                <div id='mini-profile-container'>
+                  <div class='front'>
+                    <div class='mini-info fa'>
+                      <h4 class='profile-name'>
+                      <%= "#{user.name.split[0]}"%>, <%= user.age %>
+                      <br/>
+                      <%= "#{user.location.split(',')[0]}"%>
+                      </h4>
+                    </div>
+                    <div class='mini-menu'>
+                      <ul>
+                        <li> 
+                          <i class='fa fa-heart-o'></i>
+                        </li>
+                        <li>
+                          <i class='fa fa-heart-o'></i>
+                        </li>
+                        <li>
+                          <i class='fa fa-heart-o'></i>
+                        </li>
+                        <li class="photo">
+                          <a href="#" class="fa fa-picture-o" ></a>
+                        </li>
+                        <li>
+                          <a href="#" class="fa fa-music flipperme toback" ></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class='mini-profile-container'>
+                      <div class='mini-profile-picture-holder' data-attribute='<%= user.id %>'>
+                      <% user.photos.each do |photo| %>
+                          <% if photo.profile_picture? %>
+                            <%= image_tag photo.image_url, class: 'mini-profile matchee' %> 
+                          <% end %>
+                        <% end %>      
+                      </div>
+                    </div>
+                  </div>
+                  <div class='back'>
+                    <a href='#' class='add-track back-button flipperme'> Back </a>
+                    <% mixtape = user.mixtape %>
+                    <div class='mix-title'>
+                    <%= mixtape.title %></div>
+                    <ul class='mix-listing'>
+                    <% mixtape.tracks.each do |track| %>
+                    <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="<%= track.preview_url %>" controls></audio><span> <%= track.artist %> - <%= track.song %></span></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%= content_tag :a, "Edit my Profile", :href => "#modal", :class => 'add-track back-button edit-profile', :data => {:toggle => 'modal'} %>
+          </div>
         </div>
       </div>
     </div>
-    <div class='back'>
-      <a href='#' class='add-track back-button flipper'> Back </a>
-      <% mixtape = user.mixtape %>
-      <div class='mix-title'>
-      <%= mixtape.title %></div>
-      <ul class='mix-listing'>
-      <% mixtape.tracks.each do |track| %>
-      <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="<%= track.preview_url %>" controls></audio><span> <%= track.artist %> - <%= track.song %></span></li>
+    <div class='row'>
+      <div class="col-md-12 potential-profiles">
+
+      <% if current_user.matches.any? %>
+
+      <div class="panel panel-default">
+        <div class='panel-heading '>
+        <h3 class="panel-title">My Mixtape Match's</h3>
+        </div>
+        <div class="panel-body">
+
+            <% current_user.matches.each do |match| %>
+
+          <div class='matchee-profile-smaller'>
+
+          <div id='mini-wrapper'>
+            <div id='mini-profile-container' data-attribute='<%= match.id %>'>
+              <div class='front'>
+                <div class='mini-info fa'>
+                  <h4 class='profile-name' data-attribute='<%= match.gender %>'>
+                  <%= "#{match.name.split[0]}"%>,  <div class='age' data-attribute='<%= match.age %>'><%= match.age %></div>
+                  <br/>
+                  <%= match.location =%>
+                  </h4>
+                </div>
+                <div class='mini-menu'>
+                  <ul>
+                    <li> <%= link_to mixtape_likes_path( mixtape , like: true, block: false), method: :post, remote: true  do %>
+                    <i class='fa fa-check'></i>
+                    <% end %>
+                    </li> 
+                    <li> <%= link_to mixtape_likes_path( mixtape , block: true, like: false), method: :post, remote:true  do %>
+                    <i class='fa fa-times'></i>
+                    <% end %>
+                    </li>
+                    <li> <%= link_to new_message_path(send_to: match) do %>
+                     <i class='fa fa-envelope'></i>
+                     <% end %>
+                     </li>
+                    <li class="photo"> <a href="#" class="fa fa-picture-o" ></a> </li>
+                    <li> <a href="#" class="fa fa-music flipper toback" ></a> </li>
+                  </ul>
+                </div>
+                <div class='mini-profile-container'>
+                <%= image_tag "mixtapespinner.gif", class: 'spinner-gif' %>
+                  <div class='mini-profile-picture-holder' data-attribute='<%= match.id %>'>
+
+                  <% match.photos.each do |photo| %>
+                      <% if photo.profile_picture? %>
+                        <%= image_tag photo.image_url, class: 'mini-profile matchee' %> 
+                      <% end %>
+                    <% end %>      
+                  </div>
+                </div>
+              </div>
+              <div class='back'>
+                <a href='#' class='add-track back-button flipper'> Back </a>
+                <div class='mix-title'>
+                <%= match.mixtape.title %></div>
+                <ul class='mix-listing'>
+                  <% match.mixtape.tracks.each do |track| %>
+                  <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="<%= track.preview_url %>" controls></audio><span> <%= track.artist %> - <%= track.song %></span></li>
+                  <% end %>
+                  </ul>
+              </div>
+            </div>
+          </div> 
+          <div class='profile-picture-holder' data-attribute='<%= match.id %>'>        
+          </div>
+        </div>
+        <% end %>
+
       <% end %>
-      </ul>
     </div>
   </div>
-</div>
+
+
+
 
 
 
@@ -156,9 +233,18 @@ $(document).ready(function() {
   });
 
 
-  $('.flipper').click(function(e) {
+  $('.flipperme').click(function(e) {
     e.preventDefault()
     $('#mini-profile-container').toggleClass('flipped')
+  });
+
+  $('.flipper').click(function(e) {
+  e.preventDefault()
+
+  var match_id = $(this).parentsUntil('#mini-wrapper').find('.mini-profile-picture-holder').attr('data-attribute');
+
+  $('#mini-profile-container[data-attribute="' + match_id + '"]').toggleClass('flipped');
+
   });
  
 });

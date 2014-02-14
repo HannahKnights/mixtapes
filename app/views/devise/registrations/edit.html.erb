@@ -4,17 +4,17 @@
 
 <%= render 'mixtapes/show_user' %>
 
-<%= content_tag :a, "Edit my Profile", :href => "#modal", :class => 'add-track back-button edit-profile', :data => {:toggle => 'modal'} %>
 
 <%= modal_dialog :id => "modal",
          :header => { :show_close => true, :dismiss => 'modal', :title => 'Edit my Profile' },
-                 :body   => '' %>
+                 :body   => '' 
+                 %>
 
 <div id='edit-my-profile'>
 <div class='photo-error alert fade in alert-danger alert-dismissable'></div>
   <div class="row">
-    <div class="col-md-4">
-    <h3>Info</h3>
+    <div class="col-md-3">
+    <h3 class="panel-title">Info</h3>
 
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
@@ -36,11 +36,13 @@
       <div><%= f.label :email %><br />
       <%= f.text_field :email %></div>
 
-      <div class='submit'><%= f.submit "Update" , class: 'add-track back-button' %></div>
+      <div class='submit'><%= f.submit "Update" , class: 'add-track back-button edit-update' %></div>
+
+      <button id='more_images' class='add-track back-button'>Select from more images</button>
 
     </div>
-    <div class="col-md-8">
-    <h3>Profile Pictures</h3>
+    <div class="col-md-9">
+    <h3 class="panel-title">Profile Pictures</h3>
 
       <div id='user-profile'>
 
@@ -59,15 +61,16 @@
         
         <% end %>
 
+
         </div>
 
       <% end %>
 
       </div>
-      <button id='more_images' class='add-track back-button'>Select from more images</button>
       <% end %>
 
     </div>
+  
   </div>
 
 
