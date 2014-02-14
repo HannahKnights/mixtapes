@@ -1,83 +1,103 @@
-<h1>My Mixtape Match's</h1>
-<div id="slider"></div>
-<div id="age-range"></div>
-<div id='my_gender' data-attribute='<%= current_user.gender %>'></div>
-
-<%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
-
-
-
-<% user_mix = current_user.mixtape %>
-
-
-<% @mixtapes.each do |mixtape| %>
-
-  <% if mixtape.user && mixtape.user != current_user && !mixtape.blocked?(user_mix) %>
-
-  <div class='matchee-profile'>
-
-     <div class='match-value'><%= user_mix.match_rate(mixtape.tracks) %></div>
-
-
-    <% user = User.find(mixtape.user_id) %>
-
-    <div id='mini-wrapper'>
-      <div id='mini-profile-container' data-attribute='<%= user.id %>'>
-        <div class='front'>
-          <div class='mini-info fa'>
-            <h4 class='profile-name' data-attribute='<%= user.gender %>'>
-            <%= "#{user.name.split[0]}"%>,  <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
-            <br/>
-            <%= user.location =%>
-            </h4>
-          </div>
-          <div class='mini-menu'>
-            <ul>
-              <li> <%= link_to mixtape_likes_path( mixtape , like: true, block: false), remote:true  do %>
-              <i class='fa fa-check'></i>
-              <% end %>
-              </li> 
-              <li> <%= link_to mixtape_likes_path( mixtape , block: true, like: false), remote:true  do %>
-              <i class='fa fa-times'></i>
-              <% end %>
-              </li>
-              <li> <%= link_to new_message_path(send_to: user) do %>
-               <i class='fa fa-envelope'></i>
-               <% end %>
-               </li>
-              <li class="photo"> <a href="#" class="fa fa-picture-o" ></a> </li>
-              <li> <a href="#" class="fa fa-volume-up flipper toback" ></a> </li>
-            </ul>
-          </div>
-          <div class='mini-profile-container'>
-          <%= image_tag "mixtapespinner.gif", class: 'spinner-gif' %>
-            <div class='mini-profile-picture-holder' data-attribute='<%= user.id %>'>
-
-            <% user.photos.each do |photo| %>
-                <% if photo.profile_picture? %>
-                  <%= image_tag photo.image_url, class: 'mini-profile matchee' %> 
-                <% end %>
-              <% end %>      
-            </div>
-          </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class='panel-heading '>
+        <h3 class="panel-title">Mixtape Match's</h3>
         </div>
-        <div class='back'>
-          <a href='#' class='add-track back-button flipper'> Back </a>
-          <div class='mix-title'>
-          <%= mixtape.title %></div>
-          <ul class='mix-listing'>
-            <% mixtape.tracks.each do |track| %>
-            <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="<%= track.preview_url %>" controls></audio><span> <%= track.artist %> - <%= track.song %></span></li>
-            <% end %>
-            </ul>
+        <div class="panel-body">
+          <div id='left-age'>
+            <div id="slider"></div>
+            <h3 class="panel-title">
+            <div id="age-range"></div> years old</h3>
+          </div>
+          <div id='right-gender'>
+            <div id='my_gender' data-attribute='<%= current_user.gender %>'></div>
+            <label>
+          <%= select_tag(:gender, options_for_select([['Female', 'Female'],['Male', 'Male']], :selected => params[:gender])) %>
+          </label>
+          </div>
         </div>
       </div>
-    </div> 
-    <div class='profile-picture-holder' data-attribute='<%= user.id %>'>        
     </div>
   </div>
-  <% end %>
-<% end %>
+  <div class='row'>
+    <div class="col-md-10 col-md-offset-1 potential-profiles">
+
+      <% user_mix = current_user.mixtape %>
+
+
+      <% @mixtapes.each do |mixtape| %>
+
+        <% if mixtape.user && mixtape.user != current_user && !mixtape.blocked?(user_mix) %>
+
+        <div class='matchee-profile'>
+
+           <div class='match-value'><%= user_mix.match_rate(mixtape.tracks) %></div>
+
+
+          <% user = User.find(mixtape.user_id) %>
+
+          <div id='mini-wrapper'>
+            <div id='mini-profile-container' data-attribute='<%= user.id %>'>
+              <div class='front'>
+                <div class='mini-info fa'>
+                  <h4 class='profile-name' data-attribute='<%= user.gender %>'>
+                  <%= "#{user.name.split[0]}"%>,  <div class='age' data-attribute='<%= user.age %>'><%= user.age %></div>
+                  <br/>
+                  <%= user.location =%>
+                  </h4>
+                </div>
+                <div class='mini-menu'>
+                  <ul>
+                    <li> <%= link_to mixtape_likes_path( mixtape , like: true, block: false), remote:true  do %>
+                    <i class='fa fa-check'></i>
+                    <% end %>
+                    </li> 
+                    <li> <%= link_to mixtape_likes_path( mixtape , block: true, like: false), remote:true  do %>
+                    <i class='fa fa-times'></i>
+                    <% end %>
+                    </li>
+                    <li> <%= link_to new_message_path(send_to: user) do %>
+                     <i class='fa fa-envelope'></i>
+                     <% end %>
+                     </li>
+                    <li class="photo"> <a href="#" class="fa fa-picture-o" ></a> </li>
+                    <li> <a href="#" class="fa fa-volume-up flipper toback" ></a> </li>
+                  </ul>
+                </div>
+                <div class='mini-profile-container'>
+                <%= image_tag "mixtapespinner.gif", class: 'spinner-gif' %>
+                  <div class='mini-profile-picture-holder' data-attribute='<%= user.id %>'>
+
+                  <% user.photos.each do |photo| %>
+                      <% if photo.profile_picture? %>
+                        <%= image_tag photo.image_url, class: 'mini-profile matchee' %> 
+                      <% end %>
+                    <% end %>      
+                  </div>
+                </div>
+              </div>
+              <div class='back'>
+                <a href='#' class='add-track back-button flipper'> Back </a>
+                <div class='mix-title'>
+                <%= mixtape.title %></div>
+                <ul class='mix-listing'>
+                  <% mixtape.tracks.each do |track| %>
+                  <li class="cassette-track" data-echonest-song-id="{{ echonest_song_id }}"><audio src="<%= track.preview_url %>" controls></audio><span> <%= track.artist %> - <%= track.song %></span></li>
+                  <% end %>
+                  </ul>
+              </div>
+            </div>
+          </div> 
+          <div class='profile-picture-holder' data-attribute='<%= user.id %>'>        
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 
 <script>
@@ -293,6 +313,7 @@ $(document).ready(function() {
     $(this).children('img').each( function(index) {
 
       $(this).hide()
+      $('.profile-name').hide()
 
     });
   });
@@ -317,6 +338,7 @@ $(window).load(function(){
         $(this).hide()
       }
 
+    $('.profile-name').show()
     $('.spinner-gif').hide()
 
     });

@@ -135,21 +135,23 @@ i.fa.fa-check-square {
 }
 
 #slider {
-  width: 400px;
+  width: 90%;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.ui-slider-handle {
+  cursor: pointer;
 }
 
 div.ui-slider-range.ui-widget-header {
-    background: grey;
+  background: grey;
 }
 
 .matchee-profile {
-  border-top-color: black;
-  border-top-style: solid;
-  border-top-width: 2px; 
-  border-bottom-color: black;
-  border-bottom-style: solid;
-  border-bottom-width: 2px; 
-  padding-bottom: 50px;
+  display: inline-block;
+  width: 50%;
+  padding-bottom: 80px;
 }
 
 .match-value {
@@ -172,7 +174,6 @@ div.ui-slider-range.ui-widget-header {
 /* HANNAH's Profile Minim flip */
 
 #mini-wrapper {
-  padding: 20px;
   width: 400px;
   height: 330px;
   border-radius: 5px;
@@ -262,12 +263,12 @@ h4.profile-name {
   text-align: center;
 }
 
-a.fa-check:hover {
+i.fa-check:hover {
   color: green;
   text-decoration: none;
 }
 
-a.fa-times:hover {
+i.fa-times:hover {
   color: red;
   text-decoration: none;
 }
@@ -373,11 +374,31 @@ a.fa-volume:hover {
   font-size: 30px;
   font-family: "hand2";
   text-decoration: underline;
-  padding-left: 40px;
+  padding-right: 40px;
+  text-align: center;
 }
 
 ul.mix-listing {
   margin-top:60px;
+}
+
+#left-age {
+  width: 60%;
+  display:inline-block;
+  text-align: center;
+  height: 90px;
+}
+
+#right-gender {
+  width: 35%;
+  display:inline-block;
+  text-align: center;
+  height: 90px;
+  position: absolute;
+}
+
+.potential-profiles {
+  padding-top: 70px;
 }
 
 
@@ -387,6 +408,55 @@ a.back-button {
   padding: 10px;
   left: 10px;
   top: 20px;
+}
+
+select#gender {
+  border-radius: 0px;
+  border: 2px solid #404040;
+  padding: 10px;
+  margin: 0;
+  /*-webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+  -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+  box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;*/
+  background: white;
+  color: #404040;
+  font-size: 14px;
+  outline: none;
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+label {
+  position:relative;
+  display: initial;
+}
+label:after {
+  content: '<>';
+  font: 12px "Consolas", monospace;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 8px;
+  top: 2px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #ddd;
+  position: absolute;
+}
+label:before {
+  content: '';
+  right: 6px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  display: block;
+}
+
+#age-range {
+  display: inline-block;
 }
 
 
