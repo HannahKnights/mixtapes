@@ -50,11 +50,11 @@
                 </div>
                 <div class='mini-menu'>
                   <ul>
-                    <li> <%= link_to mixtape_likes_path( mixtape , like: true, block: false), remote:true  do %>
+                    <li> <%= link_to mixtape_likes_path( mixtape , like: true, block: false), method: :post, remote: true  do %>
                     <i class='fa fa-check'></i>
                     <% end %>
                     </li> 
-                    <li> <%= link_to mixtape_likes_path( mixtape , block: true, like: false), remote:true  do %>
+                    <li> <%= link_to mixtape_likes_path( mixtape , block: true, like: false), method: :post, remote:true  do %>
                     <i class='fa fa-times'></i>
                     <% end %>
                     </li>

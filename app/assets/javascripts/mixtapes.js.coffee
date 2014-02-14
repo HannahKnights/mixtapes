@@ -7,7 +7,8 @@ $(document).ready ->
       $("#user-mixtape-tracklist").addClass('sticky')
 
   $(window).scroll ->
-    makePanelStick()
+    if $("#user-mixtape-tracklist").length
+      makePanelStick()
 
   currentMixtapeTrackList = ->
     tracks = []

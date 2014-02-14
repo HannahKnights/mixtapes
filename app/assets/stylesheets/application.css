@@ -97,7 +97,7 @@ h3.cassette {
 }
 
 .fb-selection {
-  padding: 20px;
+/*  padding: 20px;
   background-color: white;
   border-style: solid;
   border-width: thin;
@@ -108,7 +108,7 @@ h3.cassette {
   z-index: 20;
   width: 60%;
   height: 60%;
-  overflow: scroll;
+  overflow: scroll;*/
 }
 
 #slider { 
