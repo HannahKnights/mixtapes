@@ -24,18 +24,18 @@
  
 @font-face {  
   font-family: 'hand1';  
-  src: url('Moon Flower.ttf'); 
+  src: font-url('Moon Flower.ttf'); 
 } 
 
 @font-face {
   font-family: 'hand2';  
-  src: url('Moon Flower Bold.ttf');   
+  src: font-url('Moon Flower Bold.ttf');   
 }
 
 @font-face {
   font-family: 'hand3';  
-  src: url('DJHTRIAL.otf'),
-        url('DJHTRIAL.ttf') format('truetype');     
+  src: font-url('DJHTRIAL.otf'),
+      font-url('DJHTRIAL.ttf') format('truetype');     
 }
 
 @font-face {
