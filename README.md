@@ -6,7 +6,7 @@ Mixtape Dates
 
 [Mixtape Dates](http://mixtapedates.com) is a dating app that matches users by their mixtape music choices. User's sign in via Facebook, create a mixtape and can then message and 'like' their potential mathces.
 
-A final project for the [Makers Academy](http://www.makersacademy.com) course 'Mixtape Dates' was coded by [Hannah Knights](https://github.com/hannahknights), [Jeremy Marer](https://github.com/jemboh) and [Kennerdeigh Scott]. The team's 10 day project was built through Test Driven Devlopment and Agile methodologies, carried through with some furious coding.
+A final project for the [Makers Academy](http://www.makersacademy.com) course 'Mixtape Dates' was coded by [Hannah Knights](https://github.com/hannahknights), [Jeremy Marer](https://github.com/jemboh) and [Kennerdeigh Scott](https://github.com/kenmasco). The team's 10 day project was built through Test Driven Devlopment and Agile methodologies, carried through with some furious coding.
 
 
 #### How to Use
